@@ -1,0 +1,533 @@
+/* Abroad Education Page Styles */
+
+.abroad-education {
+  width: 100%;
+  background-color: #f5f5f7;
+}
+
+/* Hero Section */
+.abroad-hero {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+}
+
+.abroad-hero__content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.abroad-hero__text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.abroad-hero__title {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #1f2937;
+  margin: 0;
+}
+
+.abroad-hero__subtitle {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: #4b5563;
+  margin: 0;
+}
+
+.abroad-hero__image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.abroad-hero__placeholder {
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 4/3;
+  background: linear-gradient(135deg, #e5e7eb, #d1d5db);
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  font-size: 1rem;
+}
+
+/* Container for content sections */
+.abroad-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Section Titles */
+.abroad-section__title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  text-align: center;
+  color: #1f2937;
+  margin: 0 0 3rem 0;
+  position: relative;
+}
+
+.abroad-section__title::after {
+  content: '';
+  position: absolute;
+  bottom: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4rem;
+  height: 0.25rem;
+  background: linear-gradient(90deg, #2563eb, #7c3aed);
+  border-radius: 0.125rem;
+}
+
+/* Process Steps */
+.abroad-process {
+  padding: 5rem 0;
+  background: #ffffff;
+}
+
+.abroad-process__timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+}
+
+.process-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 2rem;
+  background: #f9fafb;
+  border-radius: 1rem;
+  border: 1px solid #e5e7eb;
+  position: relative;
+}
+
+.process-step__number {
+  width: 3rem;
+  height: 3rem;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.process-step__content {
+  flex: 1;
+}
+
+.process-step__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 1rem 0;
+}
+
+.process-step__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.process-step__list li {
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.process-step__list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #10b981;
+  font-weight: 600;
+}
+
+.process-step__list li:last-child {
+  margin-bottom: 0;
+}
+
+/* Destinations */
+.abroad-destinations {
+  padding: 5rem 0;
+  background: #f8fafc;
+}
+
+.abroad-destinations__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.destination-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  padding: 2rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.destination-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border-color: #d1d5db;
+}
+
+.destination-card__flag {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid #e5e7eb;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.destination-card__flag img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Fallback for missing flag images */
+.flag-fallback {
+  background: linear-gradient(135deg, #e5e7eb, #d1d5db);
+}
+
+.destination-card__content {
+  flex: 1;
+  min-width: 0; /* Prevent text overflow */
+}
+
+.destination-card__name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 0.75rem 0;
+}
+
+.destination-card__description {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Note section */
+.abroad-note {
+  margin-top: 2rem;
+}
+
+.abroad-note__content {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.abroad-note__content p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #4b5563;
+  margin: 0;
+}
+
+/* Audience */
+.abroad-audience {
+  padding: 5rem 0;
+  background: #ffffff;
+}
+
+.abroad-audience__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.audience-item {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.audience-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-color: #d1d5db;
+}
+
+.audience-item__icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.audience-item__title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* FAQ */
+.abroad-faq {
+  padding: 5rem 0;
+  background: #f8fafc;
+}
+
+.abroad-faq__list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.faq-item:last-child {
+  margin-bottom: 0;
+}
+
+.faq-question {
+  width: 100%;
+  padding: 1.5rem 2rem;
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #1f2937;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.faq-question:hover,
+.faq-question--open {
+  background: rgba(37, 99, 235, 0.05);
+  color: #2563eb;
+}
+
+.faq-question__text {
+  flex: 1;
+}
+
+.faq-icon {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #6b7280;
+  transition: transform 0.2s ease;
+}
+
+.faq-question--open .faq-icon {
+  color: #2563eb;
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  background: #f9fafb;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  border-top: 1px solid #e5e7eb;
+}
+
+.faq-answer--open {
+  max-height: 200px;
+  padding: 0 2rem 1.5rem;
+}
+
+.faq-answer p {
+  margin: 1rem 0 0 0;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .abroad-hero__content {
+    gap: 3rem;
+  }
+
+  .abroad-hero__title {
+    font-size: 2.5rem;
+  }
+
+  .abroad-section__title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .abroad-hero {
+    padding: 3rem 0;
+  }
+
+  .abroad-hero__content {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    text-align: center;
+  }
+
+  .abroad-hero__title {
+    font-size: 2rem;
+  }
+
+  .abroad-hero__subtitle {
+    font-size: 1rem;
+  }
+
+  .abroad-process {
+    padding: 4rem 0;
+  }
+
+  .process-step {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .process-step__number {
+    align-self: center;
+  }
+
+  .abroad-destinations {
+    padding: 4rem 0;
+  }
+
+  .abroad-destinations__grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .destination-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .destination-card__flag {
+    align-self: center;
+  }
+
+  .abroad-audience {
+    padding: 4rem 0;
+  }
+
+  .abroad-audience__grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .abroad-faq {
+    padding: 4rem 0;
+  }
+
+  .abroad-section__title {
+    font-size: 1.75rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .abroad-hero {
+    padding: 2rem 0;
+  }
+
+  .abroad-hero__title {
+    font-size: 1.75rem;
+  }
+
+  .abroad-hero__subtitle {
+    font-size: 0.95rem;
+  }
+
+  .abroad-container {
+    padding: 0 1.5rem;
+  }
+
+  .abroad-hero__content {
+    padding: 0 1.5rem;
+  }
+
+  .process-step {
+    padding: 1.5rem;
+  }
+
+  .process-step__title {
+    font-size: 1.125rem;
+  }
+
+  .destination-card {
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+
+  .destination-card__flag {
+    width: 48px;
+    height: 48px;
+  }
+
+  .audience-item {
+    padding: 1.5rem;
+  }
+
+  .abroad-note__content {
+    padding: 1.5rem;
+  }
+
+  .faq-question {
+    padding: 1.25rem 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .faq-answer--open {
+    padding: 0 1.5rem 1.25rem;
+  }
+
+  .abroad-section__title {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+}
