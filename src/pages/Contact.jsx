@@ -1,43 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import './ContactPage.css'
-
-const CONTACT_FAQ_ITEMS = [
-  {
-    question: "Kurslara qeydiyyat necə həyata keçirilir?",
-    answer: "Kurslara qeydiyyat üçün veb saytımız vasitəsilə onlayn müraciət edə bilərsiniz. Əlaqə məlumatlarımızı istifadə edərək bizimlə əlaqə saxlaya və detallı məlumat ala bilərsiniz."
-  },
-  {
-    question: "Məsləhət sessiyaları necə təşkil olunur?",
-    answer: "Məsləhət sessiyaları üçün WhatsApp və ya telefon vasitəsilə bizimlə əlaqə saxlaya bilərsiniz. Onlayn və ya oflayn görüş variantları mövcuddur."
-  },
-  {
-    question: "Xaricdə təhsil üçün konsultasiya xidmətləri hansılardır?",
-    answer: "Xaricdə təhsil konsultasiyası universitet seçimi, sənəd hazırlığı, viza prosesi, qəbul strategiyası və maliyyə planlaması daxil olmaqla tam dəstək xidmətləri təqdim edirik."
-  },
-  {
-    question: "Fərdi dərslər mümkündürmü?",
-    answer: "Bəli, fərdi dərslər tələbənin səviyyəsi və vaxt imkanlarına uyğun olaraq təşkil olunur. Qiymətlər və qrafik barədə məlumat üçün bizimlə əlaqə saxlayın."
-  },
-  {
-    question: "Dərs qrafiki necə tənzimlənir?",
-    answer: "Dərs qrafiki tələbənin mövcud proqramı nəzərə alınaraq fərdi şəkildə tərtib olunur. Həftə sonları və axşam saatlarında dərslər təşkil etmək mümkündür."
-  },
-  {
-    question: "Əlaqə formasından istifadə etdikdən sonra nə olur?",
-    answer: "Əlaqə formasını göndərdikdən sonra 24 saat ərzində sizinlə əlaqə saxlayacağıq. Bütün məlumatlar məxfi saxlanılır və yalnız konsultasiya məqsədi ilə istifadə olunur."
-  },
-  {
-    question: "Ofisə şəxsən müraciət etmək mümkündürmü?",
-    answer: "Bəli, ofisimizə şəxsən müraciət edə bilərsiniz. Ünvan məlumatları səhifənin yuxarı hissəsində göstərilib. Əvvəlcədən zəng edərək görüş təyin etməyinizi tövsiyə edirik."
-  },
-  {
-    question: "Xaricdə təhsil proqramları üçün qiymətlər nə qədərdir?",
-    answer: "Xaricdə təhsil xidmətlərinin qiymətləri seçdiyiniz universitet, proqram və xidmət paketindən asılı olaraq dəyişir. Ətraflı məlumat üçün bizimlə əlaqə saxlayın."
-  }
-]
+import Breadcrumb from '../components/ui/Breadcrumb'
+import ScrollReveal from '../components/ui/ScrollReveal'
+import { useLanguage } from '../i18n/LanguageProvider'
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xdakqggz" // <-- öz endpoint-in
 
 function Contact() {
-  const [openFaq, setOpenFaq] = useState(null)
+  const { t } = useLanguage()
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -47,10 +16,7 @@ function Contact() {
   })
   const [errors, setErrors] = useState({})
   const [toast, setToast] = useState(null)
-
-  const toggleFaq = (index) => {
-    setOpenFaq(openFaq === index ? null : index)
-  }
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -72,53 +38,84 @@ function Contact() {
     const newErrors = {}
 
     if (!formData.fullName.trim()) {
-      newErrors.fullName = 'Ad və soyad tələb olunur'
+      newErrors.fullName = t('contact.form.fullName.error')
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = 'Email tələb olunur'
+      newErrors.email = t('contact.form.email.error')
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Düzgün email formatı daxil edin'
+      newErrors.email = t('contact.form.email.invalid')
     }
 
     if (!formData.message.trim()) {
-      newErrors.message = 'Mesaj tələb olunur'
+      newErrors.message = t('contact.form.message.error')
     }
 
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (!validateForm()) {
-      return
+    if (!validateForm()) return
+    if (isSubmitting) return
+
+    setIsSubmitting(true)
+
+    try {
+      const payload = new FormData()
+      payload.append("fullName", formData.fullName)
+      payload.append("email", formData.email)
+      payload.append("phone", formData.phone)
+      payload.append("subject", formData.subject)
+      payload.append("message", formData.message)
+
+      // Email subject (Formspree dəstəkləyir)
+      payload.append("_subject", `EGE Dershane — Contact: ${formData.subject || "no-subject"}`)
+
+      // Honeypot (spam) — formda input kimi də verəcəyik
+      payload.append("_gotcha", "")
+
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        body: payload,
+        headers: {
+          Accept: "application/json",
+        },
+      })
+
+      if (res.ok) {
+        setToast({ type: "success", message: t("contact.form.success") })
+
+        setFormData({
+          fullName: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+        })
+      } else {
+        // Formspree JSON error formatı ola bilər
+        let errMsg = t("contact.form.error") || "Mesaj göndərilə bilmədi. Zəhmət olmasa yenidən cəhd edin."
+        try {
+          const data = await res.json()
+          if (data?.errors?.length) errMsg = data.errors[0].message
+        } catch { }
+
+        setToast({ type: "error", message: errMsg })
+      }
+    } catch (error) {
+      setToast({
+        type: "error",
+        message: t("contact.form.errorNetwork") || "Şəbəkə xətası. Zəhmət olmasa yenidən cəhd edin.",
+      })
+    } finally {
+      setTimeout(() => setToast(null), 5000)
+      setIsSubmitting(false)
     }
-
-    // Mock form submission
-    console.log('Form submitted:', formData)
-
-    // Show success toast
-    setToast({
-      type: 'success',
-      message: 'Mesajınız uğurla göndərildi! Qısa zamanda sizinlə əlaqə saxlayacağıq.'
-    })
-
-    // Reset form
-    setFormData({
-      fullName: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: ''
-    })
-
-    // Hide toast after 5 seconds
-    setTimeout(() => {
-      setToast(null)
-    }, 5000)
   }
+
 
   // Clear toast on unmount
   useEffect(() => {
@@ -129,191 +126,220 @@ function Contact() {
 
   return (
     <main className="container page">
+      <ScrollReveal
+        baseOpacity={0}
+        enableBlur={true}
+        baseRotation={0}
+        blurStrength={10}
+      >
+        <Breadcrumb
+          items={[
+            { href: '/', label: t('contact.breadcrumb.home') },
+            { label: t('contact.breadcrumb.contact') }
+          ]}
+        />
+      </ScrollReveal>
       <div className="pageContentContact">
         {/* Hero Section */}
-        <header className="pageHeader">
-          <h1>Əlaqə</h1>
-          <p className="pageIntro">
-            Bizimlə əlaqə saxlamaq üçün aşağıdakı məlumatlardan istifadə edə bilərsiniz. Sualınız varsa, bizimlə WhatsApp və ya email vasitəsilə əlaqə saxlaya bilərsiniz.
-          </p>
-        </header>
-
+        <ScrollReveal
+          baseOpacity={0}
+          enableBlur={true}
+          baseRotation={0}
+          blurStrength={10}
+        >
+          <header className="pageHeader">
+            <h1>{t('contact.page.title')}</h1>
+            <p className="pageIntro">
+              {t('contact.page.intro')}
+            </p>
+          </header>
+        </ScrollReveal>
         {/* Contact Form + Info Section */}
-        <section className="contactFormInfoSection contentSection">
-          <div className="contactFormInfoContainer">
-            {/* Left Column: Contact Info */}
-            <div className="contactInfoColumn">
-              <h2>Contact with us</h2>
-              <div className="contactInfoRows">
-                <div className="contactInfoRow">
-                  <div className="contactInfoIcon">
-                    <img src="/photos/contact_icons/phone.png" alt="Phone" />
+        <ScrollReveal
+          baseOpacity={0}
+          enableBlur={true}
+          baseRotation={0}
+          blurStrength={10}
+        >
+          <section className="contactFormInfoSection contentSection">
+            <div className="contactFormInfoContainer">
+              {/* Left Column: Contact Info */}
+              <div className="contactInfoColumn">
+                <h2>{t('contact.info.title')}</h2>
+                <div className="contactInfoRows">
+                  <div className="contactInfoRow">
+                    <div className="contactInfoIcon">
+                      <img src="/photos/contact_icons/phone.png" alt="Phone" />
+                    </div>
+                    <div className="contactInfoContent">
+                      <h3>{t('contact.info.phone.label')}</h3>
+                      <p><a href="tel:+994501234567" className="contactLink">{t('contact.info.phone.number')}</a></p>
+                    </div>
                   </div>
-                  <div className="contactInfoContent">
-                    <h3>Telephone Number</h3>
-                    <p><a href="tel:+994501234567" className="contactLink">+994 50 123 45 67</a></p>
-                  </div>
-                </div>
 
-                <div className="contactInfoRow">
-                  <div className="contactInfoIcon">
-                    <img src="/photos/contact_icons/email.png" alt="Email" />
+                  <div className="contactInfoRow">
+                    <div className="contactInfoIcon">
+                      <img src="/photos/contact_icons/email.png" alt="Email" />
+                    </div>
+                    <div className="contactInfoContent">
+                      <h3>{t('contact.info.email.label')}</h3>
+                      <p><a href="mailto:info@egedershane.az" className="contactLink">{t('contact.info.email.address')}</a></p>
+                    </div>
                   </div>
-                  <div className="contactInfoContent">
-                    <h3>Email Address</h3>
-                    <p><a href="mailto:info@egedershane.az" className="contactLink">info@egedershane.az</a></p>
-                  </div>
-                </div>
 
-                <div className="contactInfoRow">
-                  <div className="contactInfoIcon">
-                    <img src="/photos/contact_icons/location.png" alt="Location" />
-                  </div>
-                  <div className="contactInfoContent">
-                    <h3>Office Location Address</h3>
-                    <p>Bakı şəhəri, Nərimanov rayonu<br />Azadlıq prospekti 123</p>
+                  <div className="contactInfoRow">
+                    <div className="contactInfoIcon">
+                      <img src="/photos/contact_icons/location.png" alt="Location" />
+                    </div>
+                    <div className="contactInfoContent">
+                      <h3>{t('contact.info.location.label')}</h3>
+                      <p>{t('contact.info.location.address')}</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* Right Column: Contact Form */}
-            <div className="contactFormColumn">
-              <form onSubmit={handleSubmit} className="newContactForm">
-                {/* Row 1: First Name + Your Email */}
-                <div className="formRow">
-                  <div className="formGroup">
+              {/* Right Column: Contact Form */}
+              <div className="contactFormColumn">
+                <form onSubmit={handleSubmit} className="newContactForm">
                   <input
                     type="text"
-                    id="fullName"
-                    name="fullName"
-                    className="formInput"
-                    placeholder="First Name"
-                    value={formData.fullName}
-                    onChange={handleInputChange}
-                    required
-                    aria-describedby={errors.fullName ? "fullName-error" : undefined}
+                    name="_gotcha"
+                    tabIndex="-1"
+                    autoComplete="off"
+                    style={{ display: "none" }}
                   />
-                    {errors.fullName && (
-                      <span id="fullName-error" className="error" style={{color: '#dc2626', fontSize: '0.875rem', marginTop: '0.25rem'}}>
-                        {errors.fullName}
-                      </span>
-                    )}
+
+                  {/* Row 1: First Name + Your Email */}
+                  <div className="formRow">
+                    <div className="formGroup">
+                      <input
+                        type="text"
+                        id="fullName"
+                        name="fullName"
+                        className="formInput"
+                        placeholder={t('contact.form.fullName.placeholder')}
+                        value={formData.fullName}
+                        onChange={handleInputChange}
+                        required
+                        aria-describedby={errors.fullName ? "fullName-error" : undefined}
+                      />
+                      {errors.fullName && (
+                        <span id="fullName-error" className="error" style={{ color: '#dc2626', fontSize: '0.875rem', marginTop: '0.25rem' }}>
+                          {errors.fullName}
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="formGroup">
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        className="formInput"
+                        placeholder={t('contact.form.email.placeholder')}
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        required
+                        aria-describedby={errors.email ? "email-error" : undefined}
+                      />
+                      {errors.email && (
+                        <span id="email-error" className="error" style={{ color: '#dc2626', fontSize: '0.875rem', marginTop: '0.25rem' }}>
+                          {errors.email}
+                        </span>
+                      )}
+                    </div>
                   </div>
 
-                  <div className="formGroup">
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    className="formInput"
-                    placeholder="Your Email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    aria-describedby={errors.email ? "email-error" : undefined}
-                  />
-                    {errors.email && (
-                      <span id="email-error" className="error" style={{color: '#dc2626', fontSize: '0.875rem', marginTop: '0.25rem'}}>
-                        {errors.email}
-                      </span>
-                    )}
-                  </div>
-                </div>
+                  {/* Row 2: Phone Number + Your Subject */}
+                  <div className="formRow">
+                    <div className="formGroup">
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        className="formInput"
+                        placeholder={t('contact.form.phone.placeholder')}
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                      />
+                    </div>
 
-                {/* Row 2: Phone Number + Your Subject */}
-                <div className="formRow">
+                    <div className="formGroup">
+                      <select
+                        id="subject"
+                        name="subject"
+                        className="formSelect"
+                        value={formData.subject}
+                        onChange={handleInputChange}
+                      >
+                        <option value="">{t('contact.form.subject.placeholder')}</option>
+                        <option value="course-registration">{t('contact.form.subject.options.courseRegistration')}</option>
+                        <option value="consultation">{t('contact.form.subject.options.consultation')}</option>
+                        <option value="study-abroad">{t('contact.form.subject.options.studyAbroad')}</option>
+                        <option value="pricing">{t('contact.form.subject.options.pricing')}</option>
+                        <option value="schedule">{t('contact.form.subject.options.schedule')}</option>
+                        <option value="other">{t('contact.form.subject.options.other')}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Row 3: Write A Message */}
                   <div className="formGroup">
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      className="formInput"
-                      placeholder="Phone Number"
-                      value={formData.phone}
+                    <textarea
+                      id="message"
+                      name="message"
+                      className="formTextarea"
+                      rows="6"
+                      placeholder={t('contact.form.message.placeholder')}
+                      value={formData.message}
                       onChange={handleInputChange}
+                      required
+                      aria-describedby={errors.message ? "message-error" : undefined}
                     />
+                    {errors.message && (
+                      <span id="message-error" className="error" style={{ color: '#dc2626', fontSize: '0.875rem', marginTop: '0.25rem' }}>
+                        {errors.message}
+                      </span>
+                    )}
                   </div>
 
-                  <div className="formGroup">
-                    <select
-                      id="subject"
-                      name="subject"
-                      className="formSelect"
-                      value={formData.subject}
-                      onChange={handleInputChange}
-                    >
-                      <option value="">Your Subject</option>
-                      <option value="course-registration">Course Registration</option>
-                      <option value="consultation">Consultation</option>
-                      <option value="study-abroad">Study Abroad</option>
-                      <option value="pricing">Pricing</option>
-                      <option value="schedule">Schedule</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-                </div>
+                  {/* Send Message Button */}
+                  <button type="submit" className="sendMessageBtn" disabled={isSubmitting}>
+                    {isSubmitting ? (t('contact.form.submitting') || "Göndərilir...") : t('contact.form.submit')}
+                  </button>
 
-                {/* Row 3: Write A Message */}
-                <div className="formGroup">
-                  <textarea
-                    id="message"
-                    name="message"
-                    className="formTextarea"
-                    rows="6"
-                    placeholder="Write A Message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    required
-                    aria-describedby={errors.message ? "message-error" : undefined}
-                  />
-                  {errors.message && (
-                    <span id="message-error" className="error" style={{color: '#dc2626', fontSize: '0.875rem', marginTop: '0.25rem'}}>
-                      {errors.message}
-                    </span>
-                  )}
-                </div>
-
-                {/* Send Message Button */}
-                <button type="submit" className="sendMessageBtn">
-                  Send Message
-                </button>
-              </form>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section id="faq" className="contentSection">
-          <h2>Tez-tez verilən suallar</h2>
-          <p>
-            Kurslar, ödənişlər və xidmətlərimizlə bağlı ən çox verilən sualların cavabları.
-          </p>
-          <div className="faqAccordion">
-            {CONTACT_FAQ_ITEMS.map((item, index) => (
-              <div key={index} className="faqItem">
-                <button
-                  className={`faqQuestion ${openFaq === index ? 'faqQuestion--open' : ''}`}
-                  onClick={() => toggleFaq(index)}
-                  aria-expanded={openFaq === index}
-                  aria-controls={`faq-answer-${index}`}
-                >
-                  <span>{item.question}</span>
-                  <span className="faqIcon" aria-hidden="true">
-                    {openFaq === index ? '−' : '+'}
-                  </span>
-                </button>
-                <div
-                  id={`faq-answer-${index}`}
-                  className={`faqAnswer ${openFaq === index ? 'faqAnswer--open' : ''}`}
-                  aria-hidden={openFaq !== index}
-                >
-                  <p>{item.answer}</p>
-                </div>
+                </form>
               </div>
-            ))}
-          </div>
-        </section>
+            </div>
+          </section>
+        </ScrollReveal>
+        {/* Map Section */}
+        <ScrollReveal
+          baseOpacity={0}
+          enableBlur={true}
+          baseRotation={0}
+          blurStrength={10}
+        >
+          <section className="mapSection contentSection">
+            <h2>{t('contact.map.title')}</h2>
+            <p>
+              {t('contact.map.description')}
+            </p>
+            <div className="mapContainer">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d409.53295679861367!2d49.87523016905223!3d40.40504457518375!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d4798fdca67%3A0x7d7fd1d6cef8d6e8!2sEGE%20DERSHANELER%C4%B0!5e0!3m2!1sen!2saz!4v1767608397013!5m2!1sen!2saz"
+                width="100%"
+                height="400"
+                style={{ border: 0, borderRadius: '8px' }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Ofis yeri - Baku, Azerbaijan"
+              ></iframe>
+            </div>
+          </section>
+        </ScrollReveal>
       </div>
 
       {/* Toast Notification */}

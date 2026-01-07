@@ -1,6 +1,11 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
+// Disable automatic scroll restoration
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual'
+}
+
 function ScrollToTop() {
   const { pathname, hash } = useLocation()
 
@@ -14,21 +19,30 @@ function ScrollToTop() {
           // Use setTimeout to ensure DOM is fully rendered
           setTimeout(() => {
             element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-          }, 0)
+          }, 100)
         } else {
           // If element doesn't exist, scroll to top
-          window.scrollTo(0, 0)
+          scrollToTop()
         }
       } else {
-        // No hash, scroll to top
-        window.scrollTo(0, 0)
+        // No hash, scroll to top immediately
+        scrollToTop()
       }
     }
 
-    // Use requestAnimationFrame to ensure DOM is ready
-    requestAnimationFrame(() => {
+    const scrollToTop = () => {
+      // Force scroll to top with multiple methods for reliability
+      window.scrollTo(0, 0)
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
+    }
+
+    // Small delay to ensure DOM is fully updated
+    const timer = setTimeout(() => {
       handleScroll()
-    })
+    }, 50)
+
+    return () => clearTimeout(timer)
   }, [pathname, hash])
 
   return null

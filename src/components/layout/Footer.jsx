@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useLanguage } from '../../i18n/LanguageProvider'
 
 const Footer = () => {
+  const { t } = useLanguage()
   const currentYear = new Date().getFullYear()
 
   const scrollToTop = () => {
@@ -20,12 +22,12 @@ const Footer = () => {
                 <span className="footerBrandText">EGE Dershane</span>
               </Link>
               <p className="footerBrandDesc">
-                Xaricdə təhsil və imtahan hazırlığı üzrə peşəkar tədris mərkəzi.
+                {t('footer.brand.description')}
               </p>
             </div>
 
             <div className="footerSocial">
-              <h4 className="footerHeading">Bizi izləyin</h4>
+              <h4 className="footerHeading">{t('footer.social.followUs')}</h4>
               <div className="footerSocialLinks">
                 <a
                   href="#"
@@ -54,42 +56,42 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="footerColumn">
-            <h4 className="footerHeading">Tez keçidlər</h4>
+            <h4 className="footerHeading">{t('footer.quickLinks')}</h4>
             <nav className="footerNav">
               <ul className="footerNavList">
                 <li>
                   <Link to="/" className="footerNavLink">
-                    Ana səhifə
+                    {t('nav.home')}
                   </Link>
                 </li>
                 <li>
                   <Link to="/courses" className="footerNavLink">
-                    Kurslar
+                    {t('nav.courses')}
                   </Link>
                 </li>
                 <li>
                   <Link to="/teachers" className="footerNavLink">
-                    Müəllim heyəti
+                    {t('nav.teachers')}
                   </Link>
                 </li>
                 <li>
                   <Link to="/study-abroad" className="footerNavLink">
-                    Xaricdə Təhsil
+                    {t('nav.studyAbroad')}
                   </Link>
                 </li>
                 <li>
                   <Link to="/achievements" className="footerNavLink">
-                    Nailiyyətlərimiz
+                    {t('nav.achievements')}
                   </Link>
                 </li>
                 <li>
                   <Link to="/blog" className="footerNavLink">
-                    Bloq
+                    {t('nav.blog')}
                   </Link>
                 </li>
                 <li>
                   <Link to="/contact" className="footerNavLink">
-                    Əlaqə
+                    {t('nav.contact')}
                   </Link>
                 </li>
               </ul>
@@ -98,37 +100,37 @@ const Footer = () => {
 
           {/* Courses */}
           <div className="footerColumn">
-            <h4 className="footerHeading">Kurslar</h4>
+            <h4 className="footerHeading">{t('footer.courses')}</h4>
             <nav className="footerNav">
               <ul className="footerNavList">
                 <li>
                   <Link to="/courses/sat" className="footerNavLink">
-                    SAT
+                    {t('nav.sat')}
                   </Link>
                 </li>
                 <li>
                   <Link to="/courses/yos-tys" className="footerNavLink">
-                    YÖS / TYS
+                    {t('nav.yosTys')}
                   </Link>
                 </li>
                 <li>
                   <Link to="/courses/ielts" className="footerNavLink">
-                    IELTS
+                    {t('nav.ielts')}
                   </Link>
                 </li>
                 <li>
                   <Link to="/courses/toefl" className="footerNavLink">
-                    TOEFL
+                    {t('nav.toefl')}
                   </Link>
                 </li>
                 <li>
                   <Link to="/courses/general-english" className="footerNavLink">
-                    General English
+                    {t('nav.generalEnglish')}
                   </Link>
                 </li>
                 <li>
                   <Link to="/courses/olympiad/math" className="footerNavLink">
-                    Olimpiada hazırlığı
+                    {t('nav.olympiadPrep')}
                   </Link>
                 </li>
               </ul>
@@ -137,7 +139,7 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div className="footerColumn">
-            <h4 className="footerHeading">Əlaqə məlumatları</h4>
+            <h4 className="footerHeading">{t('footer.contactInfo')}</h4>
             <div className="footerContact">
               <div className="footerContactItem">
                 <span className="footerContactIcon" aria-hidden="true">📞</span>
@@ -158,7 +160,7 @@ const Footer = () => {
                 </address>
               </div>
               <div className="footerContactHours">
-                Həftə içi: 10:00–19:00
+                {t('footer.hours')}
               </div>
             </div>
           </div>
@@ -168,9 +170,9 @@ const Footer = () => {
         <div className="footerBottom">
           <div className="footerBottomContent">
             <div className="footerCopyright">
-              <p>© 2025 EGE Dershane. Bütün hüquqlar qorunur.</p>
+              <p>{t('footer.copyright')}</p>
               <p className="footerDeveloper">
-                Developed by{' '}
+                {t('footer.developedBy')}{' '}
                 <a
                   href="https://www.linkedin.com/in/ayan-qafarlı"
                   target="_blank"
@@ -183,10 +185,10 @@ const Footer = () => {
             </div>
             <nav className="footerBottomNav">
               <Link to="/privacy-policy" className="footerBottomLink">
-                Məxfilik siyasəti
+                {t('footer.privacyPolicy')}
               </Link>
               <Link to="/terms-of-service" className="footerBottomLink">
-                İstifadə şərtləri
+                {t('footer.termsOfService')}
               </Link>
             </nav>
           </div>
@@ -195,7 +197,7 @@ const Footer = () => {
           <button
             onClick={scrollToTop}
             className="scrollToTop"
-            aria-label="Yuxarı sürüşdür"
+            aria-label={t('footer.scrollToTop')}
             type="button"
           >
             <span aria-hidden="true">↑</span>

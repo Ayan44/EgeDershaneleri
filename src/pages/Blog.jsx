@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import Modal from '../components/ui/Modal'
+import Breadcrumb from '../components/ui/Breadcrumb'
 import { getBlogPosts, getBlogPostBySlug, getBlogCategories } from '../services/contentService'
-
+import ScrollReveal from '../components/ui/ScrollReveal'
 export default function Blog() {
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
@@ -35,10 +36,10 @@ export default function Blog() {
   const filteredPosts = useMemo(() => {
     return allPosts.filter(post => {
       const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          post.excerpt.toLowerCase().includes(searchTerm.toLowerCase())
+        post.excerpt.toLowerCase().includes(searchTerm.toLowerCase())
 
       const matchesCategory = selectedCategory === 'Bütün kateqoriyalar' ||
-                            post.category === selectedCategory
+        post.category === selectedCategory
 
       return matchesSearch && matchesCategory
     })
@@ -65,16 +66,41 @@ export default function Blog() {
 
   return (
     <main className="container page">
+      <ScrollReveal
+        baseOpacity={0}
+        enableBlur={true}
+        baseRotation={0}
+        blurStrength={10}
+      >
+        <Breadcrumb
+          items={[
+            { href: '/', label: 'Ana səhifə' },
+            { label: 'Bloq' }
+          ]}
+        />
+      </ScrollReveal>
       <div className="pageContentAbout">
-        <header className="pageHeader">
-          <h1>Bloq</h1>
-          <p className="pageIntro">
-            Təhsil sahəsində ən son xəbərlər, məsləhətlər və uğur hekayələrimizlə tanış olun.
-          </p>
-        </header>
-
+        <ScrollReveal
+          baseOpacity={0}
+          enableBlur={true}
+          baseRotation={0}
+          blurStrength={10}
+        >
+          <header className="pageHeader">
+            <h1>Bloq</h1>
+            <p className="pageIntro">
+              Təhsil sahəsində ən son xəbərlər, məsləhətlər və uğur hekayələrimizlə tanış olun.
+            </p>
+          </header>
+        </ScrollReveal>
         <div className="pageBody">
           {/* Search and Filter Controls */}
+          <ScrollReveal
+            baseOpacity={0}
+            enableBlur={true}
+            baseRotation={0}
+            blurStrength={10}
+          >
           <div className="blog-controls">
             <div className="blog-search">
               <input
@@ -107,8 +133,14 @@ export default function Blog() {
               </button>
             )}
           </div>
-
+            </ScrollReveal>
           {/* Blog Grid */}
+          <ScrollReveal
+            baseOpacity={0}
+            enableBlur={true}
+            baseRotation={0}
+            blurStrength={10}
+          >
           <section className="blog-grid">
             {filteredPosts.length > 0 ? (
               filteredPosts.map(post => (
@@ -166,10 +198,16 @@ export default function Blog() {
                 </button>
               </div>
             )}
-          </section>
+            </section>
+            </ScrollReveal>
         </div>
       </div>
-
+      <ScrollReveal
+        baseOpacity={0}
+        enableBlur={true}
+        baseRotation={0}
+        blurStrength={10}
+      >
       {/* Blog Modal */}
       <Modal
         isOpen={isModalOpen}
@@ -210,7 +248,8 @@ export default function Blog() {
             />
           </div>
         )}
-      </Modal>
+        </Modal>
+        </ScrollReveal>
     </main>
   )
 }

@@ -6,7 +6,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import ProfileCard from "../ui/ProfileCard";
 import { getFeaturedTeachers } from "../../services/contentService";
-
+import ScrollReveal from "../ui/ScrollReveal";
 export default function Teachers() {
   const navigate = useNavigate();
   const teachers = getFeaturedTeachers();
@@ -22,6 +22,12 @@ export default function Teachers() {
   };
 
   return (
+    <ScrollReveal
+      baseOpacity={0}
+      enableBlur={true}
+      baseRotation={0}
+      blurStrength={10}
+    >
     <section className="teachers" id="teachers">
       <div className="container teachers__inner">
         <header className="sectionHeader">
@@ -81,6 +87,7 @@ export default function Teachers() {
           </Swiper>
         </div>
       </div>
-    </section>
+      </section>
+      </ScrollReveal>
   );
 }

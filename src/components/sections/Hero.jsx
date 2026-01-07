@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'
+import SplitText from '../ui/SplitText'
+import { useLanguage } from '../../i18n/LanguageProvider'
 
 function Hero() {
+  const { t } = useLanguage()
   return (
     <section className="hero">
       <div className="hero__bg" aria-hidden="true">
@@ -18,27 +21,38 @@ function Hero() {
 
       <div className="hero__inner">
         <div className="container hero__content">
-          <h1 className="hero__title">
-            Gələcəyini bu gündən qur<span className="hero__title-accent">.</span>
-          </h1>
+          <SplitText
+            tag="h1"
+            text={t('hero.title')}
+            className="hero__title"
+            delay={100}
+            duration={1.5}
+            ease="power3.out"
+            splitType="chars"
+            from={{ opacity: 0, y: 24 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.2}
+            rootMargin="-80px"
+            textAlign="left"
+          />
+
           <p className="hero__subtitle">
-            SAT, YÖS, IELTS və daha çoxu üçün nəticəyönümlü hazırlıq proqramları ilə
-            tələbələri hədəflədikləri universitetlərə aparırıq.
+            {t('hero.subtitle')}
           </p>
 
           <div className="hero__actions">
             <Link to="/contact" className="btn btn--primary">
-              Əlaqə
+              {t('hero.contact')}
             </Link>
             <Link to="/about" className="btn btn--secondary">
-              Haqqımızda
+              {t('hero.about')}
             </Link>
           </div>
 
           <ul className="hero__chips">
-            <li className="chip">SAT / YÖS / IELTS</li>
-            <li className="chip">Peşəkar müəllim heyəti</li>
-            <li className="chip">Nəticəyönümlü proqram</li>
+            <li className="chip">{t('hero.chips.exams')}</li>
+            <li className="chip">{t('hero.chips.teachers')}</li>
+            <li className="chip">{t('hero.chips.results')}</li>
           </ul>
         </div>
       </div>

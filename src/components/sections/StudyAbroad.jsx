@@ -1,33 +1,39 @@
 import { Link } from 'react-router-dom'
-
+import ScrollReveal from '../ui/ScrollReveal'
+import { useLanguage } from '../../i18n/LanguageProvider'
 function StudyAbroad() {
+  const { t } = useLanguage()
   return (
+        <ScrollReveal
+      baseOpacity={0}
+      enableBlur={true}
+      baseRotation={0}
+      blurStrength={10}
+    >
     <section className="studyAbroad" id="study-abroad">
       <div className="container studyAbroad__inner">
         <div className="studyAbroad__copy">
-          <p className="studyAbroad__eyebrow">Xaricdə Təhsil</p>
-          <h2 className="studyAbroad__title">Dünyanın ən yaxşı universitetlərində təhsil</h2>
+          <p className="studyAbroad__eyebrow">{t('studyAbroadComponent.eyebrow')}</p>
+          <h2 className="studyAbroad__title">{t('studyAbroadComponent.title')}</h2>
           <p className="studyAbroad__subtitle">
-            Xaricdə təhsil arzunuzu gerçəkləşdirmək üçün peşəkar məsləhət və tam dəstək
-            xidmətlərimizlə yanınızdayıq. Avropa, Amerika və digər ölkələrdəki
-            universitetlərə qəbul prosesini sadələşdiririk.
+            {t('studyAbroadComponent.subtitle')}
           </p>
 
           <ul className="studyAbroad__list">
-            <li>Universitet seçimi və uyğunluq analizi</li>
-            <li>Sənəd hazırlığı və müraciət prosesi</li>
-            <li>Təqaüd və qəbul strategiyası</li>
-            <li>Viza istiqamətləndirilməsi</li>
-            <li>Təhsil planı və yol xəritəsi</li>
-            <li>Davamlı dəstək və monitorinq</li>
+            <li>{t('studyAbroadComponent.services.universitySelection')}</li>
+            <li>{t('studyAbroadComponent.services.documentPreparation')}</li>
+            <li>{t('studyAbroadComponent.services.scholarships')}</li>
+            <li>{t('studyAbroadComponent.services.visaGuidance')}</li>
+            <li>{t('studyAbroadComponent.services.educationPlan')}</li>
+            <li>{t('studyAbroadComponent.services.ongoingSupport')}</li>
           </ul>
 
           <div className="studyAbroad__actions">
             <Link to="/contact" className="btn btn--primary">
-              Məsləhət al
+              {t('studyAbroadComponent.buttons.getConsultation')}
             </Link>
             <Link to="/study-abroad" className="btn btn--secondary">
-              Ətraflı
+              {t('studyAbroadComponent.buttons.learnMore')}
             </Link>
           </div>
         </div>
@@ -40,11 +46,12 @@ function StudyAbroad() {
           />
 
           <div className="studyAbroad__highlight">
-            <span className="studyAbroad__highlight-text">Pulsuz ilkin konsultasiya</span>
+            <span className="studyAbroad__highlight-text">{t('studyAbroadComponent.highlight')}</span>
           </div>
         </div>
       </div>
-    </section>
+      </section>
+      </ScrollReveal>
   )
 }
 

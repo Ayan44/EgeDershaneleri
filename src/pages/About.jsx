@@ -1,47 +1,52 @@
 import React, { useState } from 'react'
 import { GALLERY_ITEMS } from '../data/gallery'
-import DomeGallery from '../components/sections/DomeGallery';
-const FAQ_ITEMS = [
-  {
-    question: "Kurslara qeydiyyat necə həyata keçirilir?",
-    answer: "Kurslara qeydiyyat üçün veb saytımız vasitəsilə onlayn müraciət edə bilərsiniz. Əlaqə məlumatlarımızı istifadə edərək bizimlə əlaqə saxlaya və detallı məlumat ala bilərsiniz."
-  },
-  {
-    question: "Dərslər hansı formada keçirilir?",
-    answer: "Dərslərimiz həm onlayn, həm də oflayn formada keçirilir. Onlayn dərslər üçün interaktiv platforma təqdim edirik, oflayn dərslər isə müasir avadanlıqla təchiz olunmuş siniflərdə aparılır."
-  },
-  {
-    question: "Kursların müddəti nə qədərdir?",
-    answer: "Kursların müddəti imtahan növündən və tələbənin hazırlıq səviyyəsindən asılı olaraq dəyişir. SAT və IELTS kursları adətən 3-6 ay arası davam edir, lakin fərdi yanaşma ilə müddət tənzimlənə bilər."
-  },
-  {
-    question: "Tədris haqları nə qədərdir?",
-    answer: "Tədris haqları kurs növündən, müddətindən və tədris formasından (onlayn/oflayn) asılı olaraq dəyişir. Ətraflı məlumat üçün bizimlə əlaqə saxlayın."
-  },
-  {
-    question: "Xaricdə təhsil xidmətləri hansılardır?",
-    answer: "Xaricdə təhsil xidmətlərimiz universitet seçimi, sənəd hazırlığı, viza prosesi, qəbul strategiyası və təhsil planı hazırlığını əhatə edir."
-  },
-  {
-    question: "Nailiyyət göstəricilərimiz necədir?",
-    answer: "Tələbələrimizin əksəriyyəti hədəf imtahanlarında yüksək nəticələr göstərir. Konkret statistikalar üçün Nailiyyətlərimiz səhifəsinə baxa bilərsiniz."
-  },
-  {
-    question: "Dərs cədvəli necə tərtib olunur?",
-    answer: "Dərs cədvəli tələbənin mövcud proqramı və vaxt imkanları nəzərə alınaraq fərdi şəkildə tərtib olunur. Həftə sonları və axşam saatlarında dərslər təşkil etmək mümkündür."
-  },
-  {
-    question: "Ödəniş şərtləri necədir?",
-    answer: "Ödənişlər hissə-hissə həyata keçirilə bilər. İlkin ödənişdən sonra qalan məbləği kurs müddəti ərzində ayırmaq mümkündür."
-  }
-]
+import DomeGallery from '../components/sections/DomeGallery'
+import Breadcrumb from '../components/ui/Breadcrumb'
+import ScrollReveal from '../components/ui/ScrollReveal'
+import { useLanguage } from '../i18n/LanguageProvider'
 
 function About() {
+  const { t } = useLanguage()
   const [openFaq, setOpenFaq] = useState(null)
 
   const toggleFaq = (index) => {
     setOpenFaq(openFaq === index ? null : index)
   }
+
+  const faqItems = [
+    {
+      question: t('about.faq.questions.registration.question'),
+      answer: t('about.faq.questions.registration.answer')
+    },
+    {
+      question: t('about.faq.questions.format.question'),
+      answer: t('about.faq.questions.format.answer')
+    },
+    {
+      question: t('about.faq.questions.duration.question'),
+      answer: t('about.faq.questions.duration.answer')
+    },
+    {
+      question: t('about.faq.questions.pricing.question'),
+      answer: t('about.faq.questions.pricing.answer')
+    },
+    {
+      question: t('about.faq.questions.studyAbroad.question'),
+      answer: t('about.faq.questions.studyAbroad.answer')
+    },
+    {
+      question: t('about.faq.questions.achievements.question'),
+      answer: t('about.faq.questions.achievements.answer')
+    },
+    {
+      question: t('about.faq.questions.schedule.question'),
+      answer: t('about.faq.questions.schedule.answer')
+    },
+    {
+      question: t('about.faq.questions.payment.question'),
+      answer: t('about.faq.questions.payment.answer')
+    }
+  ]
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId)
@@ -52,105 +57,151 @@ function About() {
 
   return (
     <main className="container page">
+      <ScrollReveal
+        baseOpacity={0}
+        enableBlur={true}
+        baseRotation={0}
+        blurStrength={10}
+      >
+        <Breadcrumb
+          items={[
+            { href: '/', label: t('about.breadcrumb.home') },
+            { label: t('about.breadcrumb.about') }
+          ]}
+        />
+      </ScrollReveal>
       <div className="pageContentAbout">
-        <header className="pageHeader">
-          <h1>Haqqımızda</h1>
-          <p className="pageIntro">
-            EGE Dershane haqqında ətraflı məlumat, müəllim heyətimiz və tez-tez verilən suallar.
-          </p>
-        </header>
-
+        <ScrollReveal
+          baseOpacity={0}
+          enableBlur={true}
+          baseRotation={0}
+          blurStrength={10}
+        >
+          <header className="pageHeader">
+            <h1>{t('about.page.title')}</h1>
+            <p className="pageIntro">
+              {t('about.page.intro')}
+            </p>
+          </header>
+        </ScrollReveal>
         {/* In-page navigation */}
-        <nav className="aboutNav" aria-label="Səhifə naviqasiyası">
-          <div className="aboutNavButtons">
-            <button
-              onClick={() => scrollToSection('company')}
-              className="aboutNavButton"
-            >
-              EGE haqqında
-            </button>
-            <button
-              onClick={() => scrollToSection('gallery')}
-              className="aboutNavButton"
-            >
-              Qalereya
-            </button>
-            <button
-              onClick={() => scrollToSection('faq')}
-              className="aboutNavButton"
-            >
-              FAQ
-            </button>
-          </div>
-        </nav>
+        <ScrollReveal
+          baseOpacity={0}
+          enableBlur={true}
+          baseRotation={0}
+          blurStrength={10}
+        >
+          <nav className="aboutNav" aria-label="Səhifə naviqasiyası">
+            <div className="aboutNavButtons">
+              <button
+                onClick={() => scrollToSection('company')}
+                className="aboutNavButton"
+              >
+                {t('about.navigation.company')}
+              </button>
+              <button
+                onClick={() => scrollToSection('gallery')}
+                className="aboutNavButton"
+              >
+                {t('about.navigation.gallery')}
+              </button>
+              <button
+                onClick={() => scrollToSection('faq')}
+                className="aboutNavButton"
+              >
+                {t('about.navigation.faq')}
+              </button>
+            </div>
+          </nav>
+        </ScrollReveal>
 
         <div className="pageBody">
           {/* Company Section */}
-          <section id="company" className="contentSection">
-            <h2>EGE Dershane haqqında</h2>
-            <p>
-              EGE Dershane xaricdə təhsil və imtahan hazırlığı sahəsində Azərbaycanın qabaqcıl təhsil mərkəzlərindən biridir.
-              2020-ci ildən fəaliyyət göstərən mərkəzimiz yüzlərlə tələbəyə keyfiyyətli təhsil xidmətləri təqdim edir.
-            </p>
-            <div className="companyHighlights">
-              <div className="highlightItem">
-                <h3>Missiyamız</h3>
-                <p>Tələbələrimizə yüksək keyfiyyətli təhsil verərək onların xaricdə təhsil arzularını gerçəkləşdirmək.</p>
+          <ScrollReveal
+            baseOpacity={0}
+            enableBlur={true}
+            baseRotation={0}
+            blurStrength={10}
+          >
+            <section id="company" className="contentSection">
+              <h2>{t('about.company.title')}</h2>
+              <p>
+                {t('about.company.description')}
+              </p>
+              <div className="companyHighlights">
+                <div className="highlightItem">
+                  <h3>{t('about.company.mission.title')}</h3>
+                  <p>{t('about.company.mission.description')}</p>
+                </div>
+                <div className="highlightItem">
+                  <h3>{t('about.company.approach.title')}</h3>
+                  <p>{t('about.company.approach.description')}</p>
+                </div>
+                <div className="highlightItem">
+                  <h3>{t('about.company.results.title')}</h3>
+                  <p>{t('about.company.results.description')}</p>
+                </div>
               </div>
-              <div className="highlightItem">
-                <h3>Yanaşmamız</h3>
-                <p>Fərdi yanaşma, praktiki metodlar və müasir texnologiyalarla təhsil prosesini effektivləşdirmək.</p>
-              </div>
-              <div className="highlightItem">
-                <h3>Nəticələrimiz</h3>
-                <p>Tələbələrimizin əksəriyyəti hədəf imtahanlarında yüksək ballar toplayaraq arzuladıqları universitetlərə qəbul olunur.</p>
-              </div>
-            </div>
-          </section>
+            </section>
+          </ScrollReveal>
 
           {/* Gallery Section */}
-          <section id="gallery" className="contentSection">
-            <h2>Qalereya</h2>
-            <p>
-              EGE Dershane-nin fəaliyyəti, tədbirləri və tələbə uğurlarımızdan fotolar.
-            </p>
-            {/* Gallery content will be implemented later */}
-            <div style={{width:'100%',height:'70vh'}}>
-              <DomeGallery grayscale={false} fit={1} maxVerticalRotationDeg={0} overlayBlurColor='transparent' />
-            </div>
-          </section>
+          <ScrollReveal
+            baseOpacity={0}
+            enableBlur={true}
+            baseRotation={0}
+            blurStrength={10}
+          >
+            <section id="gallery" className="contentSection">
+              <h2>{t('about.gallery.title')}</h2>
+              <p>
+                {t('about.gallery.description')}
+              </p>
+              {/* Gallery content will be implemented later */}
+              <div style={{ width: '100%', height: '70vh' }}>
+                <DomeGallery grayscale={false} fit={1} maxVerticalRotationDeg={0} overlayBlurColor='transparent' />
+              </div>
+            </section>
+          </ScrollReveal>
 
           {/* FAQ Section */}
-          <section id="faq" className="contentSection">
-            <h2>Tez-tez verilən suallar</h2>
-            <p>
-              Kurslar, ödənişlər və xidmətlərimizlə bağlı ən çox verilən sualların cavabları.
-            </p>
-            <div className="faqAccordion">
-              {FAQ_ITEMS.map((item, index) => (
-                <div key={index} className="faqItem">
-                  <button
-                    className={`faqQuestion ${openFaq === index ? 'faqQuestion--open' : ''}`}
-                    onClick={() => toggleFaq(index)}
-                    aria-expanded={openFaq === index}
-                    aria-controls={`faq-answer-${index}`}
-                  >
-                    <span>{item.question}</span>
-                    <span className="faqIcon" aria-hidden="true">
-                      {openFaq === index ? '−' : '+'}
-                    </span>
-                  </button>
-                  <div
-                    id={`faq-answer-${index}`}
-                    className={`faqAnswer ${openFaq === index ? 'faqAnswer--open' : ''}`}
-                    aria-hidden={openFaq !== index}
-                  >
-                    <p>{item.answer}</p>
+          <ScrollReveal
+            baseOpacity={0}
+            enableBlur={true}
+            baseRotation={0}
+            blurStrength={10}
+          >
+            <section id="faq" className="contentSection">
+              <h2>{t('about.faq.title')}</h2>
+              <p>
+                {t('about.faq.description')}
+              </p>
+              <div className="faqAccordion">
+                {faqItems.map((item, index) => (
+                  <div key={index} className="faqItem">
+                    <button
+                      className={`faqQuestion ${openFaq === index ? 'faqQuestion--open' : ''}`}
+                      onClick={() => toggleFaq(index)}
+                      aria-expanded={openFaq === index}
+                      aria-controls={`faq-answer-${index}`}
+                    >
+                      <span>{item.question}</span>
+                      <span className="faqIcon" aria-hidden="true">
+                        {openFaq === index ? '−' : '+'}
+                      </span>
+                    </button>
+                    <div
+                      id={`faq-answer-${index}`}
+                      className={`faqAnswer ${openFaq === index ? 'faqAnswer--open' : ''}`}
+                      aria-hidden={openFaq !== index}
+                    >
+                      <p>{item.answer}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </section>
+                ))}
+              </div>
+            </section>
+          </ScrollReveal>
         </div>
       </div>
     </main>

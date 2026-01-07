@@ -6,7 +6,8 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js'
-
+import Breadcrumb from '../components/ui/Breadcrumb'
+import ScrollReveal from '../components/ui/ScrollReveal'
 ChartJS.register(ArcElement, Tooltip, Legend)
 
 // Placeholder data - can be easily replaced with real data later
@@ -67,7 +68,7 @@ const CHART_OPTIONS = {
       bodyColor: '#ffffff',
       cornerRadius: 8,
       callbacks: {
-        label: function(context) {
+        label: function (context) {
           return context.label + ': ' + context.raw + '%'
         }
       }
@@ -148,7 +149,7 @@ const SUCCESS_STORIES_DATA = [
     photo: '/photos/students/student.jpg',
     beforeAfter: 'İngilis dili biliyi zəif → IELTS 8.5',
     story: 'Zeynəb bizim hazırlıq proqramımıza qoşulduqda ingilis dili biliyi çox zəif idi. 6 ay intensiv təlimdən sonra IELTS imtahanında 8.5 bal topladı. Hazırda ABŞ-da magistratura təhsili alır.',
-    highlights: ['6 ay', 'IELTS hazırlığı',   'Intensiv proqram'],
+    highlights: ['6 ay', 'IELTS hazırlığı', 'Intensiv proqram'],
     imageLeft: true
   },
   {
@@ -290,127 +291,170 @@ function Achievements() {
 
   return (
     <main className="container page">
+      <ScrollReveal
+        baseOpacity={0}
+        enableBlur={true}
+        baseRotation={0}
+        blurStrength={10}
+      >
+        <Breadcrumb
+          items={[
+            { href: '/', label: 'Ana səhifə' },
+            { label: 'Nailiyyətlərimiz' }
+          ]}
+        />
+      </ScrollReveal>
       <div className="pageContentAbout">
-        <header className="pageHeader">
-          <h1>Nailiyyətlərimiz</h1>
-          <p className="pageIntro">
-            Tələbələrimizin real nəticələri və uğur hekayələri ilə akademik
-            hazırlıq sahəsindəki nailiyyətlərimizi təqdim edirik.
-          </p>
-        </header>
-
+        <ScrollReveal
+          baseOpacity={0}
+          enableBlur={true}
+          baseRotation={0}
+          blurStrength={10}
+        >
+          <header className="pageHeader">
+            <h1>Nailiyyətlərimiz</h1>
+            <p className="pageIntro">
+              Tələbələrimizin real nəticələri və uğur hekayələri ilə akademik
+              hazırlıq sahəsindəki nailiyyətlərimizi təqdim edirik.
+            </p>
+          </header>
+        </ScrollReveal>
         <div className="pageBody">
 
-      {/* SECTION 2 — Statistics */}
-      <section className="achievements-stats" ref={sectionRef}>
-        <div className="container">
-          <h2 className="achievements-section__title">Statistik göstəricilər</h2>
-          <div className="achievements-stats__content">
-            <div className="achievements-stats__grid">
-              {parsedStats.map((stat, index) => (
-                <div key={stat.label} className="achievements-stat-card">
-                  <div className="achievements-stat-card__value">
-                    {values[index]}{stat.suffix}
+          {/* SECTION 2 — Statistics */}
+          <ScrollReveal
+            baseOpacity={0}
+            enableBlur={true}
+            baseRotation={0}
+            blurStrength={10}
+          >
+            <section className="achievements-stats" ref={sectionRef}>
+              <div className="container">
+                <h2 className="achievements-section__title">Statistik göstəricilər</h2>
+                <div className="achievements-stats__content">
+                  <div className="achievements-stats__grid">
+                    {parsedStats.map((stat, index) => (
+                      <div key={stat.label} className="achievements-stat-card">
+                        <div className="achievements-stat-card__value">
+                          {values[index]}{stat.suffix}
+                        </div>
+                        <div className="achievements-stat-card__label">{stat.label}</div>
+                      </div>
+                    ))}
                   </div>
-                  <div className="achievements-stat-card__label">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-            <div className="achievements-stats__chart">
-              <div className="achievements-chart__container">
-                <Pie data={CHART_DATA} options={CHART_OPTIONS} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 3 — Student Results */}
-      <section className="achievements-results">
-        <div className="container">
-          <h2 className="achievements-section__title">Real tələbə nəticələri</h2>
-          <div className="achievements-results__grid">
-            {STUDENT_RESULTS_DATA.map((student) => (
-              <div key={student.id} className="student-result-card">
-                <div className="student-result-card__photo">
-                  <img
-                    src={student.photo}
-                    alt={student.name}
-                    loading="lazy"
-                  />
-                </div>
-                <div className="student-result-card__content">
-                  <h3 className="student-result-card__name">{student.name}</h3>
-                  <div className="student-result-card__exam">
-                    <span className="student-result-card__exam-type">{student.examType}</span>
-                    <span className="student-result-card__score">{student.score}</span>
-                  </div>
-                  <div className="student-result-card__acceptance">
-                    <span className="student-result-card__country">{student.acceptedCountry}</span>
-                    <span className="student-result-card__university">{student.acceptedUniversity}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 4 — Accepted Countries */}
-      <section className="achievements-countries">
-        <div className="container">
-          <h2 className="achievements-section__title">Qəbul olunan ölkələr</h2>
-          <div className="achievements-countries__grid">
-            {COUNTRIES_DATA.map((country) => (
-              <div key={country.name} className="country-card">
-                <div className="country-card__flag">
-                  <img
-                    src={country.flag}
-                    alt={`${country.name} bayrağı`}
-                    loading="lazy"
-                  />
-                </div>
-                <div className="country-card__name">{country.name}</div>
-                <div className="country-card__count">{country.students}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 5 — Success Stories */}
-      <section className="achievements-stories">
-        <div className="container">
-          <h2 className="achievements-section__title">Uğur hekayələri</h2>
-          <div className="achievements-stories__list">
-            {SUCCESS_STORIES_DATA.map((story) => (
-              <div key={story.id} className="success-story">
-                <div className={`success-story__inner ${story.imageLeft ? '' : 'success-story__inner--reversed'}`}>
-                  <div className="success-story__image">
-                    <img
-                      src={story.photo}
-                      alt={story.name}
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="success-story__content">
-                    <h3 className="success-story__name">{story.name}</h3>
-                    <div className="success-story__result">{story.beforeAfter}</div>
-                    <p className="success-story__text">{story.story}</p>
-                    <div className="success-story__highlights">
-                      {story.highlights.map((highlight, index) => (
-                        <span key={index} className="success-story__highlight">
-                          {highlight}
-                        </span>
-                      ))}
+                  <div className="achievements-stats__chart">
+                    <div className="achievements-chart__container">
+                      <Pie data={CHART_DATA} options={CHART_OPTIONS} />
                     </div>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            </section>
+          </ScrollReveal>
+          {/* SECTION 3 — Student Results */}
+          <ScrollReveal
+            baseOpacity={0}
+            enableBlur={true}
+            baseRotation={0}
+            blurStrength={10}
+          >
+            <section className="achievements-results">
+              <div className="container">
+                <h2 className="achievements-section__title">Real tələbə nəticələri</h2>
+                <div className="achievements-results__grid">
+                  {STUDENT_RESULTS_DATA.map((student) => (
+                    <div key={student.id} className="student-result-card">
+                      <div className="student-result-card__photo">
+                        <img
+                          src={student.photo}
+                          alt={student.name}
+                          loading="lazy"
+                        />
+                      </div>
+                      <div className="student-result-card__content">
+                        <h3 className="student-result-card__name">{student.name}</h3>
+                        <div className="student-result-card__exam">
+                          <span className="student-result-card__exam-type">{student.examType}</span>
+                          <span className="student-result-card__score">{student.score}</span>
+                        </div>
+                        <div className="student-result-card__acceptance">
+                          <span className="student-result-card__country">{student.acceptedCountry}</span>
+                          <span className="student-result-card__university">{student.acceptedUniversity}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          </ScrollReveal>
+          {/* SECTION 4 — Accepted Countries */}
+          <ScrollReveal
+            baseOpacity={0}
+            enableBlur={true}
+            baseRotation={0}
+            blurStrength={10}
+          >
+            <section className="achievements-countries">
+              <div className="container">
+                <h2 className="achievements-section__title">Qəbul olunan ölkələr</h2>
+                <div className="achievements-countries__grid">
+                  {COUNTRIES_DATA.map((country) => (
+                    <div key={country.name} className="country-card">
+                      <div className="country-card__flag">
+                        <img
+                          src={country.flag}
+                          alt={`${country.name} bayrağı`}
+                          loading="lazy"
+                        />
+                      </div>
+                      <div className="country-card__name">{country.name}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          </ScrollReveal>
+          {/* SECTION 5 — Success Stories */}
+          <ScrollReveal
+            baseOpacity={0}
+            enableBlur={true}
+            baseRotation={0}
+            blurStrength={10}
+          >
+            <section className="achievements-stories">
+              <div className="container">
+                <h2 className="achievements-section__title">Uğur hekayələri</h2>
+                <div className="achievements-stories__list">
+                  {SUCCESS_STORIES_DATA.map((story) => (
+                    <div key={story.id} className="success-story">
+                      <div className={`success-story__inner ${story.imageLeft ? '' : 'success-story__inner--reversed'}`}>
+                        <div className="success-story__image">
+                          <img
+                            src={story.photo}
+                            alt={story.name}
+                            loading="lazy"
+                          />
+                        </div>
+                        <div className="success-story__content">
+                          <h3 className="success-story__name">{story.name}</h3>
+                          <div className="success-story__result">{story.beforeAfter}</div>
+                          <p className="success-story__text">{story.story}</p>
+                          <div className="success-story__highlights">
+                            {story.highlights.map((highlight, index) => (
+                              <span key={index} className="success-story__highlight">
+                                {highlight}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          </ScrollReveal>
         </div>
       </div>
     </main>

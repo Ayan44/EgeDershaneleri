@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
 import ScrollToTop from './components/ui/ScrollToTop'
+import FloatingControls from './components/ui/FloatingControls'
 import Home from './pages/Home'
 import Courses from './pages/Courses'
 import CoursePage from './pages/CoursePage'
@@ -14,6 +15,7 @@ import Blog from './pages/Blog'
 import Contact from './pages/Contact'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import TermsOfService from './pages/TermsOfService'
+import NotFound from './pages/NotFound'
 import './styles/globals.css'
 
 function App() {
@@ -21,6 +23,7 @@ function App() {
     <BrowserRouter>
       <ScrollToTop />
       <Header />
+      <FloatingControls />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/courses" element={<Courses />} />
@@ -36,6 +39,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-of-service" element={<TermsOfService />} />
+        {/* Catch-all route for 404 page */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </BrowserRouter>

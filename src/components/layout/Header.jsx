@@ -1,26 +1,31 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
+import { useLanguage } from '../../i18n/LanguageProvider'
 
 const PHONE_NUMBER = '+994501234567'
 const WHATSAPP_NUMBER = '994501234567'
 
-const navItems = [
-  { type: 'link', label: 'Ana səhifə', to: '/' },
-  { type: 'link', label: 'Kurslar', to: '/courses' },
-  { type: 'link', label: 'Müəllim heyəti', to: '/teachers' },
-  { type: 'link', label: 'Xaricdə Təhsil', to: '/study-abroad' },
-  { type: 'link', label: 'Nailiyyətlərimiz', to: '/achievements' },
-  { type: 'link', label: 'Haqqımızda', to: '/about' },
-  { type: 'link', label: 'Bloq', to: '/blog' },
-]
-
 function Header() {
+  const { t } = useLanguage()
   const [menuOpen, setMenuOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState(null)
   const [openMobileDropdowns, setOpenMobileDropdowns] = useState({})
+  const [navbarHidden, setNavbarHidden] = useState(false)
   const navRef = useRef(null)
   const location = useLocation()
+  const lastScrollY = useRef(0)
+  const scrollThreshold = useRef(10)
+
+  const navItems = [
+    { type: 'link', label: t('nav.home'), to: '/' },
+    { type: 'link', label: t('nav.courses'), to: '/courses' },
+    { type: 'link', label: t('nav.teachers'), to: '/teachers' },
+    { type: 'link', label: t('nav.studyAbroad'), to: '/study-abroad' },
+    { type: 'link', label: t('nav.achievements'), to: '/achievements' },
+    { type: 'link', label: t('nav.about'), to: '/about' },
+    { type: 'link', label: t('nav.blog'), to: '/blog' },
+  ]
 
   const isMobile =
     typeof window !== 'undefined' && window.matchMedia
@@ -150,13 +155,48 @@ function Header() {
     }
   }, [openDropdown])
 
+  // Auto-hide navbar on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+
+      // Don't hide navbar if mobile menu is open
+      if (menuOpen) {
+        setNavbarHidden(false)
+        return
+      }
+
+      // Always show navbar when at the very top
+      if (currentScrollY <= 0) {
+        setNavbarHidden(false)
+        lastScrollY.current = currentScrollY
+        return
+      }
+
+      // Check scroll direction with threshold to avoid jitter
+      const scrollDifference = Math.abs(currentScrollY - lastScrollY.current)
+
+      if (scrollDifference >= scrollThreshold.current) {
+        const isScrollingDown = currentScrollY > lastScrollY.current
+        setNavbarHidden(isScrollingDown)
+        lastScrollY.current = currentScrollY
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [menuOpen])
+
   return (
-    <header className="site-header">
+    <header className={`site-header ${navbarHidden ? 'navbar--hidden' : ''}`}>
       <div className="container nav" ref={navRef}>
         <div className="nav__brand">
           <NavLink to="/" className="nav__brand-link" onClick={handleLinkClick}>
             <img
-              src="/photos/logo.jpeg"
+              src="/photos/logo.png"
               alt="EGE Dershane Logo"
               className="nav__brand-logo"
             />
@@ -233,9 +273,8 @@ function Header() {
 
                     <div
                       id={dropdownId}
-                      className={`nav__dropdown ${
-                        dropdownOpen ? 'nav__dropdown--open' : ''
-                      } ${item.id === 'courses' ? 'nav__dropdown--mega' : ''}`}
+                      className={`nav__dropdown ${dropdownOpen ? 'nav__dropdown--open' : ''
+                        } ${item.id === 'courses' ? 'nav__dropdown--mega' : ''}`}
                     >
                       {item.id === 'courses' ? (
                         <div className="nav__dropdown-grid">
@@ -303,7 +342,7 @@ function Header() {
             className="button button--primary nav__cta"
             onClick={handleLinkClick}
           >
-            Əlaqə
+            {t('nav.contact')}
           </NavLink>
         </nav>
       </div>
