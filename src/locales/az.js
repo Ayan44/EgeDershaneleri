@@ -31,11 +31,11 @@ export const az = {
       followUs: 'Bizi izləyin',
       instagram: 'Instagram',
       whatsapp: 'WhatsApp',
-      youtube: 'YouTube',
+      tiktok: 'TikTok',
       ariaLabels: {
         instagram: 'Instagram səhifəmizə keçin',
         whatsapp: 'WhatsApp ilə əlaqə saxlayın',
-        youtube: 'YouTube kanalımıza baxın',
+        tiktok: 'TikTok səhifəmizə baxın',
       },
     },
     address: 'Bakı, Azərbaycan',
@@ -80,7 +80,7 @@ export const az = {
       title: 'Bizimlə əlaqə',
       phone: {
         label: 'Telefon nömrəsi',
-        number: '+994 50 123 45 67',
+        number: '+994 77 744 07 45',
       },
       email: {
         label: 'Email ünvanı',
@@ -532,7 +532,7 @@ export const az = {
       title: 'Hazırsan? Qeydiyyatdan keç və gələcəyini qur!',
       subtitle: 'İndi müraciət et və kursumuza qoşul. Sənin uğurun bizim prioritetimizdir.',
       applyNow: 'İndi müraciət et',
-      phone: '📞 +994 50 123 45 67',
+      phone: '📞 +994 77 744 07 45',
     },
     data: {
       sat: {

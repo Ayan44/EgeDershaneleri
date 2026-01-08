@@ -6328,6 +6328,32 @@ main {
   background: transparent;
 }
 
+/* Chart.js legend labels in dark theme */
+.dark .achievements-chart__container canvas + div {
+  color: #ffffff !important;
+}
+
+.dark .achievements-chart__container ul {
+  color: #ffffff !important;
+}
+
+.dark .achievements-chart__container li {
+  color: #ffffff !important;
+}
+
+.dark .achievements-chart__container span {
+  color: #ffffff !important;
+}
+
+/* Chart.js legend text color override */
+.dark .achievements-stats__chart .chartjs-legend li span {
+  color: #ffffff !important;
+}
+
+.dark .achievements-stats__chart .chartjs-legend li {
+  color: #ffffff !important;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
   .achievements-intro__title {

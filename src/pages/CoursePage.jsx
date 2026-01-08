@@ -217,7 +217,7 @@ function CoursePage() {
                     <Link to="/contact" className="btn btn--primary btn--large">
                       {t('courseDetails.finalCta.applyNow')}
                     </Link>
-                    <a href="tel:+994501234567" className="btn btn--secondary">
+                    <a href="tel:+994777440745" className="btn btn--secondary">
                       {t('courseDetails.finalCta.phone')}
                     </a>
                   </div>

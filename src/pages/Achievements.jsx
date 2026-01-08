@@ -9,6 +9,7 @@ import {
 import Breadcrumb from '../components/ui/Breadcrumb'
 import ScrollReveal from '../components/ui/ScrollReveal'
 import { useLanguage } from '../i18n/LanguageProvider'
+import { useTheme } from '../components/ui/ThemeProvider'
 ChartJS.register(ArcElement, Tooltip, Legend)
 
 // Count-up animation hook for statistics
@@ -120,6 +121,7 @@ function parseStatValue(raw) {
 
 function Achievements() {
   const { t, lang } = useLanguage()
+  const { theme } = useTheme()
 
   // Statistics data with translations
   const STATISTICS_DATA = useMemo(() => [
@@ -176,7 +178,7 @@ function Achievements() {
             family: 'Inter, system-ui, sans-serif',
             weight: '500',
           },
-          color: '#374151',
+          color: theme === 'dark' ? '#ffffff' : '#374151',
         },
       },
       tooltip: {
@@ -191,7 +193,7 @@ function Achievements() {
         }
       },
     },
-  }), [t, lang])
+  }), [t, lang, theme])
 
   // Student results data
   const STUDENT_RESULTS_DATA = useMemo(() => [

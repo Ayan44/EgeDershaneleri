@@ -173,7 +173,7 @@ function Contact() {
                     </div>
                     <div className="contactInfoContent">
                       <h3>{t('contact.info.phone.label')}</h3>
-                      <p><a href="tel:+994501234567" className="contactLink">{t('contact.info.phone.number')}</a></p>
+                      <p><a href="tel:+994777440745" className="contactLink">{t('contact.info.phone.number')}</a></p>
                     </div>
                   </div>
 

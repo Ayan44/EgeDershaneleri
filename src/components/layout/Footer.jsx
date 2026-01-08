@@ -26,25 +26,31 @@ const Footer = () => {
               <h4 className="footerHeading">{t('footer.social.followUs')}</h4>
               <div className="footerSocialLinks">
                 <a
-                  href="#"
+                  href="https://www.instagram.com/ege_dershaneleri?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="footerSocialLink"
                   aria-label={t('footer.social.ariaLabels.instagram')}
                 >
                   {t('footer.social.instagram')}
                 </a>
                 <a
-                  href="#"
+                  href="https://wa.me/994777440745"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="footerSocialLink"
                   aria-label={t('footer.social.ariaLabels.whatsapp')}
                 >
                   {t('footer.social.whatsapp')}
                 </a>
                 <a
-                  href="#"
+                  href="https://www.tiktok.com/@ege_dershaneleri"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="footerSocialLink"
-                  aria-label={t('footer.social.ariaLabels.youtube')}
+                  aria-label={t('footer.social.ariaLabels.tiktok')}
                 >
-                  {t('footer.social.youtube')}
+                  {t('footer.social.tiktok')}
                 </a>
               </div>
             </div>
@@ -139,8 +145,8 @@ const Footer = () => {
             <div className="footerContact">
               <div className="footerContactItem">
                 <span className="footerContactIcon" aria-hidden="true">📞</span>
-                <a href="tel:+994501234567" className="footerContactLink">
-                  +994 50 123 45 67
+                <a href="tel:+994777440745" className="footerContactLink">
+                  +994 77 744 07 45
                 </a>
               </div>
               <div className="footerContactItem">

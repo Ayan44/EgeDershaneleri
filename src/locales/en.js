@@ -31,11 +31,11 @@ export const en = {
       followUs: 'Follow us',
       instagram: 'Instagram',
       whatsapp: 'WhatsApp',
-      youtube: 'YouTube',
+      tiktok: 'TikTok',
       ariaLabels: {
         instagram: 'Visit our Instagram page',
         whatsapp: 'Contact us via WhatsApp',
-        youtube: 'View our YouTube channel',
+        tiktok: 'View our TikTok page',
       },
     },
     address: 'Baku, Azerbaijan',
@@ -80,7 +80,7 @@ export const en = {
       title: 'Contact with us',
       phone: {
         label: 'Telephone Number',
-        number: '+994 50 123 45 67',
+        number: '+994 77 744 07 45',
       },
       email: {
         label: 'Email Address',
@@ -532,7 +532,7 @@ export const en = {
       title: 'Ready? Register and build your future!',
       subtitle: 'Apply now and join our course. Your success is our priority.',
       applyNow: 'Apply Now',
-      phone: '📞 +994 50 123 45 67',
+      phone: '📞 +994 77 744 07 45',
     },
     data: {
       sat: {

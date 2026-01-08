@@ -3,8 +3,8 @@ import { NavLink, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { useLanguage } from '../../i18n/LanguageProvider'
 
-const PHONE_NUMBER = '+994501234567'
-const WHATSAPP_NUMBER = '994501234567'
+const PHONE_NUMBER = '+994777440745'
+const WHATSAPP_NUMBER = '994777440745'
 
 function Header() {
   const { t } = useLanguage()
