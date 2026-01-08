@@ -90,6 +90,14 @@ export const az = {
         label: 'Ofis ünvanı',
         address: 'Bakı şəhəri, Nərimanov rayonu\nAzadlıq prospekti 123',
       },
+      instagram: {
+        label: 'Instagram',
+        handle: '@ege_dershaneleri',
+      },
+      whatsapp: {
+        label: 'WhatsApp',
+        number: '+994 77 744 07 45',
+      },
     },
     form: {
       fullName: {

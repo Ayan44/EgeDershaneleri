@@ -196,6 +196,44 @@ function Contact() {
                       <p>{t('contact.info.location.address')}</p>
                     </div>
                   </div>
+
+                  <div className="contactInfoRow">
+                    <div className="contactInfoIcon">
+                      <img src="/photos/contact_icons/instagram.png" alt={t('contact.info.instagram.label')} />
+                    </div>
+                    <div className="contactInfoContent">
+                      <h3>{t('contact.info.instagram.label')}</h3>
+                      <p>
+                        <a
+                          href="https://www.instagram.com/ege_dershaneleri?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="contactLink"
+                        >
+                          {t('contact.info.instagram.handle')}
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="contactInfoRow">
+                    <div className="contactInfoIcon">
+                      <img src="/photos/contact_icons/whatsapp.png" alt={t('contact.info.whatsapp.label')} />
+                    </div>
+                    <div className="contactInfoContent">
+                      <h3>{t('contact.info.whatsapp.label')}</h3>
+                      <p>
+                        <a
+                          href="https://wa.me/994777440745"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="contactLink"
+                        >
+                          {t('contact.info.whatsapp.number')}
+                        </a>
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
 

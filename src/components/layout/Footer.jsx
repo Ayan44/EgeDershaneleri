@@ -35,15 +35,6 @@ const Footer = () => {
                   {t('footer.social.instagram')}
                 </a>
                 <a
-                  href="https://wa.me/994777440745"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="footerSocialLink"
-                  aria-label={t('footer.social.ariaLabels.whatsapp')}
-                >
-                  {t('footer.social.whatsapp')}
-                </a>
-                <a
                   href="https://www.tiktok.com/@ege_dershaneleri"
                   target="_blank"
                   rel="noopener noreferrer"

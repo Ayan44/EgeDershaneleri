@@ -90,6 +90,14 @@ export const en = {
         label: 'Office Location',
         address: 'Baku city, Narimanov district\nAzadlig Avenue 123',
       },
+      instagram: {
+        label: 'Instagram',
+        handle: '@ege_dershaneleri',
+      },
+      whatsapp: {
+        label: 'WhatsApp',
+        number: '+994 77 744 07 45',
+      },
     },
     form: {
       fullName: {
