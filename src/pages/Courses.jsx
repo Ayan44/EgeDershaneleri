@@ -3,22 +3,37 @@ import { getCourses, COURSE_CATEGORIES } from '../data/courses'
 import ScrollReveal from '../components/ui/ScrollReveal'
 import Breadcrumb from '../components/ui/Breadcrumb'
 import { useLanguage } from '../i18n/LanguageProvider'
+import { useMemo } from 'react'
 function Courses() {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
   const allCourses = getCourses()
-  const coursesByCategory = allCourses.reduce((grouped, course) => {
-    const category = course.category
-    if (!grouped[category]) {
-      grouped[category] = []
-    }
-    grouped[category].push({
-      ...course,
-      href: course.slug.startsWith('olympiad-')
-        ? `/courses/olympiad/${course.slug.replace('olympiad-', '')}`
-        : `/courses/${course.slug}`
-    })
-    return grouped
-  }, {})
+
+  // Map category keys to translated names
+  const categoryTranslationMap = useMemo(() => ({
+    [COURSE_CATEGORIES.IMTAHAN]: t('courses.categories.imtahan'),
+    [COURSE_CATEGORIES.DIL]: t('courses.categories.dil'),
+    [COURSE_CATEGORIES.OLIMPIADA]: t('courses.categories.olimpiada'),
+  }), [t, lang])
+
+  const coursesByCategory = useMemo(() => {
+    return allCourses.reduce((grouped, course) => {
+      const category = course.category
+      const translatedCategory = categoryTranslationMap[category] || category
+      if (!grouped[translatedCategory]) {
+        grouped[translatedCategory] = []
+      }
+      const courseSlug = course.slug || course.id
+      grouped[translatedCategory].push({
+        ...course,
+        title: t(`courseDetails.data.${courseSlug}.title`) || course.title,
+        shortDescription: t(`courseDetails.data.${courseSlug}.shortDescription`) || course.shortDescription,
+        href: courseSlug.startsWith('olympiad-')
+          ? `/courses/olympiad/${courseSlug.replace('olympiad-', '')}`
+          : `/courses/${courseSlug}`
+      })
+      return grouped
+    }, {})
+  }, [allCourses, categoryTranslationMap, t, lang])
 
   return (
     <ScrollReveal

@@ -2,18 +2,24 @@ import { Link } from 'react-router-dom'
 import { COURSES_DATA } from '../../data/courses'
 import ScrollReveal from '../ui/ScrollReveal'
 import { useLanguage } from '../../i18n/LanguageProvider'
+import { useMemo } from 'react'
 function Services() {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
 
   // Transform the centralized course data into the format needed for the grid
-  const coursesForGrid = Object.values(COURSES_DATA).map(course => ({
-    title: course.title,
-    description: course.shortDescription,
-    thumbnailUrl: course.thumbnailUrl,
-    href: course.id.startsWith('olympiad-')
-      ? `/courses/olympiad/${course.id.replace('olympiad-', '')}`
-      : `/courses/${course.id}`
-  }))
+  const coursesForGrid = useMemo(() => {
+    return COURSES_DATA.map(course => {
+      const courseSlug = course.slug || course.id
+      return {
+        title: t(`courseDetails.data.${courseSlug}.title`) || course.title,
+        description: t(`courseDetails.data.${courseSlug}.shortDescription`) || course.shortDescription,
+        thumbnailUrl: course.thumbnailUrl,
+        href: courseSlug.startsWith('olympiad-')
+          ? `/courses/olympiad/${courseSlug.replace('olympiad-', '')}`
+          : `/courses/${courseSlug}`
+      }
+    })
+  }, [t, lang])
 
   return (
     <ScrollReveal
@@ -38,7 +44,7 @@ function Services() {
                 <div className="courseCard__media">
                   <img
                     src={course.thumbnailUrl}
-                    alt={`${course.title} kursu`}
+                    alt={`${course.title} ${t('services.courseAlt')}`}
                     loading="lazy"
                   />
                 </div>

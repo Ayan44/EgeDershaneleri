@@ -1,6 +1,9 @@
 import React from 'react'
 import ScrollReveal from '../components/ui/ScrollReveal'
+import { useLanguage } from '../i18n/LanguageProvider'
+
 function PrivacyPolicy() {
+  const { t } = useLanguage()
   return (
     <main className="container page">
       <div className="pageContent">
@@ -11,9 +14,9 @@ function PrivacyPolicy() {
           blurStrength={10}
         >
           <header className="pageHeader">
-            <h1>Məxfilik Siyasəti</h1>
+            <h1>{t('privacyPolicy.title')}</h1>
             <p className="pageIntro">
-              EGE Dershane olaraq istifadəçilərimizin məxfiliyinə hörmətlə yanaşır və şəxsi məlumatların qorunmasını prioritet hesab edirik.
+              {t('privacyPolicy.intro')}
             </p>
           </header>
         </ScrollReveal>
@@ -24,64 +27,11 @@ function PrivacyPolicy() {
             baseRotation={0}
             blurStrength={10}
           >
-          <section className="contentSection">
-            <p>
-              Bu Məxfilik Siyasəti veb saytımızdan istifadə zamanı toplanan məlumatların hansı məqsədlərlə istifadə edildiyini izah edir.
-            </p>
-          </section>
-          </ScrollReveal>
-          <ScrollReveal
-            baseOpacity={0}
-            enableBlur={true}
-            baseRotation={0}
-            blurStrength={10}
-          >
-          <section className="contentSection">
-            <h2>Toplanan məlumatlar</h2>
-            <p>
-              Veb saytımız üzərindən yalnız əlaqə məqsədilə aşağıdakı minimal məlumatlar toplana bilər:
-            </p>
-            <ul>
-              <li>Ad və soyad</li>
-              <li>Telefon nömrəsi</li>
-              <li>Elektron poçt (email) ünvanı</li>
-            </ul>
-            <p>
-              Bu məlumatlar istifadəçi tərəfindən könüllü şəkildə təqdim edilir.
-            </p>
-          </section>
-          </ScrollReveal>
-          <ScrollReveal
-            baseOpacity={0}
-            enableBlur={true}
-            baseRotation={0}
-            blurStrength={10}
-          >
-          <section className="contentSection">
-            <h2>Məlumatların istifadə məqsədi</h2>
-            <p>
-              Toplanan məlumatlar aşağıdakı məqsədlərlə istifadə olunur:
-            </p>
-            <ul>
-              <li>İstifadəçilərlə əlaqə saxlamaq</li>
-              <li>Kurslar və xidmətlər haqqında məlumat vermək</li>
-              <li>İstifadəçi sorğularını cavablandırmaq</li>
-              <li>Xidmət keyfiyyətini artırmaq</li>
-            </ul>
+            <section className="contentSection">
+              <p>
+                {t('privacyPolicy.introduction')}
+              </p>
             </section>
-            </ScrollReveal>
-          <ScrollReveal
-            baseOpacity={0}
-            enableBlur={true}
-            baseRotation={0}
-            blurStrength={10}
-          >
-          <section className="contentSection">
-            <h2>Məlumatların paylaşılması</h2>
-            <p>
-              İstifadəçilərə aid şəxsi məlumatlar üçüncü şəxslərlə paylaşılmır. Yalnız qanunvericiliyin tələblərinə uyğun olaraq rəsmi qurumların sorğusu əsasında açıqlana bilər.
-            </p>
-          </section>
           </ScrollReveal>
           <ScrollReveal
             baseOpacity={0}
@@ -89,46 +39,99 @@ function PrivacyPolicy() {
             baseRotation={0}
             blurStrength={10}
           >
-          <section className="contentSection">
-            <h2>Məlumatların qorunması</h2>
-            <p>
-              Şəxsi məlumatların təhlükəsizliyini təmin etmək üçün texniki və inzibati tədbirlər görülür. Məlumatlara yalnız səlahiyyətli şəxslər tərəfindən giriş mümkündür.
-            </p>
-          </section>
-          </ScrollReveal>
-          <ScrollReveal
-            baseOpacity={0}
-            enableBlur={true}
-            baseRotation={0}
-            blurStrength={10}
-          >
-          <section className="contentSection">
-            <h2>İstifadəçi hüquqları</h2>
-            <p>
-              İstifadəçilər:
-            </p>
-            <ul>
-              <li>Öz şəxsi məlumatları haqqında məlumat almaq</li>
-              <li>Məlumatların yenilənməsini və ya silinməsini tələb etmək hüququna malikdirlər</li>
-            </ul>
-            <p>
-              Bu məqsədlə bizimlə əlaqə saxlaya bilərlər.
-            </p>
-          </section>
-          </ScrollReveal>
-          <ScrollReveal
-            baseOpacity={0}
-            enableBlur={true}
-            baseRotation={0}
-            blurStrength={10}
-          >
-          <section className="contentSection">
-            <h2>Dəyişikliklər</h2>
-            <p>
-              EGE Dershane bu Məxfilik Siyasətinə istənilən vaxt dəyişiklik etmək hüququnu özündə saxlayır. Yenilənmiş versiya veb saytda dərc edildiyi andan qüvvəyə minir.
-            </p>
+            <section className="contentSection">
+              <h2>{t('privacyPolicy.sections.dataCollection.title')}</h2>
+              <p>
+                {t('privacyPolicy.sections.dataCollection.intro')}
+              </p>
+              <ul>
+                <li>{t('privacyPolicy.sections.dataCollection.items.fullName')}</li>
+                <li>{t('privacyPolicy.sections.dataCollection.items.phone')}</li>
+                <li>{t('privacyPolicy.sections.dataCollection.items.email')}</li>
+              </ul>
+              <p>
+                {t('privacyPolicy.sections.dataCollection.note')}
+              </p>
             </section>
-            </ScrollReveal>
+          </ScrollReveal>
+          <ScrollReveal
+            baseOpacity={0}
+            enableBlur={true}
+            baseRotation={0}
+            blurStrength={10}
+          >
+            <section className="contentSection">
+              <h2>{t('privacyPolicy.sections.dataUsage.title')}</h2>
+              <p>
+                {t('privacyPolicy.sections.dataUsage.intro')}
+              </p>
+              <ul>
+                <li>{t('privacyPolicy.sections.dataUsage.items.contact')}</li>
+                <li>{t('privacyPolicy.sections.dataUsage.items.information')}</li>
+                <li>{t('privacyPolicy.sections.dataUsage.items.inquiries')}</li>
+                <li>{t('privacyPolicy.sections.dataUsage.items.quality')}</li>
+              </ul>
+            </section>
+          </ScrollReveal>
+          <ScrollReveal
+            baseOpacity={0}
+            enableBlur={true}
+            baseRotation={0}
+            blurStrength={10}
+          >
+            <section className="contentSection">
+              <h2>{t('privacyPolicy.sections.dataSharing.title')}</h2>
+              <p>
+                {t('privacyPolicy.sections.dataSharing.content')}
+              </p>
+            </section>
+          </ScrollReveal>
+          <ScrollReveal
+            baseOpacity={0}
+            enableBlur={true}
+            baseRotation={0}
+            blurStrength={10}
+          >
+            <section className="contentSection">
+              <h2>{t('privacyPolicy.sections.dataProtection.title')}</h2>
+              <p>
+                {t('privacyPolicy.sections.dataProtection.content')}
+              </p>
+            </section>
+          </ScrollReveal>
+          <ScrollReveal
+            baseOpacity={0}
+            enableBlur={true}
+            baseRotation={0}
+            blurStrength={10}
+          >
+            <section className="contentSection">
+              <h2>{t('privacyPolicy.sections.userRights.title')}</h2>
+              <p>
+                {t('privacyPolicy.sections.userRights.intro')}
+              </p>
+              <ul>
+                <li>{t('privacyPolicy.sections.userRights.items.access')}</li>
+                <li>{t('privacyPolicy.sections.userRights.items.update')}</li>
+              </ul>
+              <p>
+                {t('privacyPolicy.sections.userRights.note')}
+              </p>
+            </section>
+          </ScrollReveal>
+          <ScrollReveal
+            baseOpacity={0}
+            enableBlur={true}
+            baseRotation={0}
+            blurStrength={10}
+          >
+            <section className="contentSection">
+              <h2>{t('privacyPolicy.sections.changes.title')}</h2>
+              <p>
+                {t('privacyPolicy.sections.changes.content')}
+              </p>
+            </section>
+          </ScrollReveal>
         </div>
       </div>
     </main>

@@ -16,6 +16,10 @@ export const en = {
     toefl: 'TOEFL',
     generalEnglish: 'General English',
     olympiadPrep: 'Olympiad Preparation',
+    ariaLabels: {
+      openMenu: 'Open navigation menu',
+      closeMenu: 'Close navigation menu',
+    },
   },
 
   // Footer
@@ -28,7 +32,13 @@ export const en = {
       instagram: 'Instagram',
       whatsapp: 'WhatsApp',
       youtube: 'YouTube',
+      ariaLabels: {
+        instagram: 'Visit our Instagram page',
+        whatsapp: 'Contact us via WhatsApp',
+        youtube: 'View our YouTube channel',
+      },
     },
+    address: 'Baku, Azerbaijan',
     quickLinks: 'Quick Links',
     courses: 'Courses',
     contactInfo: 'Contact Information',
@@ -110,7 +120,10 @@ export const en = {
         error: 'Message is required',
       },
       submit: 'Send Message',
+      submitting: 'Sending...',
       success: 'Your message has been sent successfully! We will contact you shortly.',
+      error: 'Message could not be sent. Please try again.',
+      errorNetwork: 'Network error. Please try again.',
     },
     map: {
       title: 'Our office location',
@@ -199,6 +212,7 @@ export const en = {
     title: 'Preparation courses and programs',
     subtitle: 'Support your students with professional courses and individual support services for international and local exam preparation.',
     viewDetails: 'View details',
+    courseAlt: 'course',
   },
 
   // Courses Page
@@ -212,6 +226,11 @@ export const en = {
       intro: 'Support your students with our professional course programs for international and local exam preparation. Each course is designed specifically for your needs.',
     },
     viewDetails: 'View details',
+    categories: {
+      imtahan: 'Exam',
+      dil: 'Language',
+      olimpiada: 'Olympiad',
+    },
   },
 
   // Study Abroad Page
@@ -344,6 +363,56 @@ export const en = {
       specialtiesTitle: 'Specialties',
       coursesTitle: 'Courses',
     },
+    data: {
+      'malik-memmedov': {
+        fullName: 'Malik Mammadov',
+        role: 'Founder & Mathematics Expert',
+        bio: 'Malik Mammadov is the founder and head teacher of EGE Dershane. He is considered the pioneer of practical mathematics in Azerbaijan. With more than 15 years of experience, he has helped thousands of students develop a love for mathematics. He specializes in SAT, YÖS/TYS and olympiad preparation. He plays an important role in hundreds of students achieving high results every year. He also prepares and organizes training programs for teachers.',
+        specialties: ['SAT Mathematics', 'YÖS/TYS Mathematics', 'Olympiad Mathematics', 'Private Lessons'],
+      },
+      'ayla-memmedova': {
+        fullName: 'Ayla Mammadova',
+        role: 'SAT / IELTS Teacher',
+        bio: 'Ayla Mammadova is a professional teacher specializing in SAT and IELTS preparation. She received higher education in the USA and England and has deep knowledge of international exam systems. With more than 10 years of experience, she has helped thousands of students get admitted to foreign universities. 95% of students who achieve high scores on the SAT are her students. She also shows an average of 7.0+ results in IELTS. She is famous for her individual approach and practical methods.',
+        specialties: ['SAT Preparation', 'IELTS Speaking', 'TOEFL Writing', 'Study Abroad Consultation'],
+      },
+      'resul-quliyev': {
+        fullName: 'Rasul Guliyev',
+        role: 'YÖS / TYS Preparation',
+        bio: 'Rasul Guliyev is a teacher specializing in admission to Turkey\'s top universities. He received education at Istanbul and Ankara universities. He knows the YÖS/TYS exam system perfectly and provides a practical approach to his students. 85% of his students are admitted to Turkey\'s best universities. He has high knowledge in Turkish language and literature as well as mathematics topics. He realizes each student\'s potential to the maximum with individual preparation plans.',
+        specialties: ['YÖS Mathematics', 'TYS Turkish Language', 'Turkish Universities', 'Visa Process'],
+      },
+      'leyla-huseynova': {
+        fullName: 'Leyla Huseynova',
+        role: 'Olympiad Mathematics',
+        bio: 'Leyla Huseynova is an experienced teacher who has participated in international mathematics olympiads and won awards. She knows all the intricacies of mathematics olympiads and helps reveal young talents. Her students take high places in international olympiads every year. She has special expertise in combinatorics, geometry and probability theory. She not only provides theoretical knowledge to her students, but also tries to instill creative thinking skills. In addition to olympiad preparation, she also helps with SAT and YÖS preparation.',
+        specialties: ['Olympiad Mathematics', 'Combinatorics', 'Geometry', 'Logic Problems'],
+      },
+      'eli-hesenov': {
+        fullName: 'Ali Hasanov',
+        role: 'General English',
+        bio: 'Ali Hasanov is an experienced teacher specializing in teaching English from scratch. He received language education in England and has experience in communication methods. Most of his students can communicate freely in a short time. He uses language learning methods in real-life situations. He is experienced in travel, business English and academic English. He increases students\' enthusiasm for learning languages with his individual approach and motivation techniques.',
+        specialties: ['General English', 'Business English', 'Travel English', 'Conversation Practice'],
+      },
+      'nigar-ibrahimova': {
+        fullName: 'Nigar Ibrahimova',
+        role: 'TOEFL / IELTS Expert',
+        bio: 'Nigar Ibrahimova is an expert teacher specializing in achieving high results in TOEFL and IELTS exams. She received higher education in Canada and knows international exam systems perfectly. Her students\' average TOEFL result is 100+, and they achieve 7.0+ scores in IELTS. She develops each of the Listening, Reading, Writing and Speaking skills separately. She prepares students for the real exam through practical exercises and mock exams. She also provides consultation in foreign university admission processes.',
+        specialties: ['TOEFL iBT', 'IELTS Writing', 'Academic English', 'Test Strategies'],
+      },
+      'emin-veliyev': {
+        fullName: 'Amin Valiyev',
+        role: 'Olympiad Logic and IQ',
+        bio: 'Amin Valiyev prepares special preparation programs for young people participating in IQ and logic olympiads. He has experience winning awards in international olympiads. He is considered an expert in pattern recognition, analytical thinking and logic problem solving. He not only gives ready-made questions to his students, but also teaches the ability to create new problems. His students take high places in international IQ competitions. Psychological preparation and stress management techniques are also included in the curriculum.',
+        specialties: ['IQ Olympiads', 'Logic Problems', 'Pattern Recognition', 'Psychological Preparation'],
+      },
+      'gunel-karimova': {
+        fullName: 'Gunel Karimova',
+        role: 'English Language Olympiad',
+        bio: 'Gunel Karimova teaches academic writing and communication skills to young people participating in English language olympiads. She received language education in England and knows international olympiad formats perfectly. She has special expertise in essay writing, debate and presentation skills. Many of her students win awards in international English language olympiads. She has deep knowledge in academic vocabulary, grammar and text analysis. She develops creative writing and literary criticism skills.',
+        specialties: ['Olympiad English', 'Essay Writing', 'Debate Skills', 'Creative Writing'],
+      },
+    },
   },
 
   // Stats Component
@@ -351,6 +420,7 @@ export const en = {
     eyebrow: 'Statistics',
     title: 'We are proud of our graduates\' results.',
     subtitle: 'With our preparation programs, hundreds of students have achieved high results in international exams and have been accepted to selected universities.',
+    imageAlt: 'Statistics and results',
     items: {
       students: 'Students',
       internationalAdmissions: 'International admissions',
@@ -372,6 +442,33 @@ export const en = {
     label: 'Students\' opinions',
     title: 'Our graduates\' impressions',
     description: 'Real opinions and experiences of students who participated in our courses.',
+    data: {
+      1: {
+        studentName: 'Ayla Mammadova',
+        text: 'The preparation process at EGE was very systematic. Thanks to the exercises and explanations, my confidence increased and I achieved results.',
+        scoreOrResult: 'SAT 1450',
+      },
+      2: {
+        studentName: 'Rasul Guliyev',
+        text: 'The individual approach and planned program during SAT preparation helped a lot. Mock exams prepared me for the real exam.',
+        scoreOrResult: 'SAT 1380',
+      },
+      3: {
+        studentName: 'Leyla Huseynova',
+        text: 'They provided practical tasks and the right methodology for olympiad mathematics preparation. I saw progress in a short time.',
+        scoreOrResult: 'Olympiad Winner',
+      },
+      4: {
+        studentName: 'Ali Hasanov',
+        text: 'I applied for YÖS/TYS preparation. The exam strategy and problem-solving techniques were very helpful.',
+        scoreOrResult: 'YÖS 450',
+      },
+      5: {
+        studentName: 'Nigar Ibrahimova',
+        text: 'I received very concrete feedback for IELTS in both speaking and writing. The impact on the result was directly felt.',
+        scoreOrResult: 'IELTS 7.5',
+      },
+    },
   },
 
   // BlogPreview Component
@@ -401,5 +498,614 @@ export const en = {
       learnMore: 'Learn more',
     },
     highlight: 'Free initial consultation',
+  },
+
+  // Teachers Section (Home Page)
+  teachersSection: {
+    label: 'Teaching Staff',
+    title: 'Our Professional Teachers',
+    description: 'With our team of experienced and professional teachers, we provide you with the best educational experience.',
+    contact: 'Contact',
+    status: 'Online',
+  },
+
+  // Course Details Page
+  courseDetails: {
+    breadcrumb: {
+      home: 'Home',
+      courses: 'Courses',
+      notFound: 'Course Not Found',
+    },
+    notFound: {
+      title: 'Course Not Found',
+      message: 'The course you are looking for does not exist. Please select from the course list.',
+      viewAll: 'View All Courses',
+    },
+    applyForRegistration: 'Apply for Registration',
+    audience: {
+      title: 'Who is this course suitable for?',
+    },
+    learningOutcomes: {
+      title: 'What you will learn',
+    },
+    finalCta: {
+      title: 'Ready? Register and build your future!',
+      subtitle: 'Apply now and join our course. Your success is our priority.',
+      applyNow: 'Apply Now',
+      phone: '📞 +994 50 123 45 67',
+    },
+    data: {
+      sat: {
+        title: 'SAT Preparation',
+        shortDescription: 'Intensive preparation program to achieve high results on the SAT exam. An important step for admission to American universities.',
+        level: 'Intermediate level',
+        format: 'Online',
+        audience: [
+          'High school graduates and graduates',
+          'Those applying to American universities',
+          'Those targeting high academic results',
+          'Those who want to complete the school program'
+        ],
+        program: [
+          'Reading: text comprehension and analysis skills',
+          'Writing: essay writing and grammar',
+          'Math: algebra and geometry topics',
+          'Practical tests and mock exams',
+          'Individual consultations and progress tracking',
+          'Learning strategies and time management',
+          'Weekly assessment tests'
+        ],
+      },
+      'yos-tys': {
+        title: 'YÖS / TYS Preparation',
+        shortDescription: 'Professional preparation for YÖS and TYS exams for admission to Turkish universities. Increase your chances of admission to Turkey\'s best universities.',
+        level: 'Intermediate level',
+        format: 'Online',
+        audience: [
+          'Those applying to Turkish universities',
+          'High school graduates preparing for YÖS/TYS exam',
+          'Those who want to get acquainted with the Turkish education system',
+          'Those targeting education abroad'
+        ],
+        program: [
+          'YÖS: Mathematics, Physics, Chemistry, Biology',
+          'TYS: Turkish language and literature, Mathematics, History',
+          'Practical tests and topic reviews',
+          'Information about Turkish universities',
+          'Individual preparation plan and tracking',
+          'Mock exams and performance analysis',
+          'Motivation and stress management'
+        ],
+      },
+      ielts: {
+        title: 'IELTS Preparation',
+        shortDescription: 'Professional preparation course for the international English language exam. The most widely accepted English language certificate in the world.',
+        level: 'All levels',
+        format: 'Online',
+        audience: [
+          'Those targeting education abroad',
+          'Those who need an English language certificate for work',
+          'Those who want to use English at a professional level',
+          'Those seeking academic and professional development'
+        ],
+        program: [
+          'Listening: various accents and situations',
+          'Reading: academic and general texts',
+          'Writing: academic essay and letter writing',
+          'Speaking: presentation and discussion skills',
+          'Mock exams and performance evaluation',
+          'Strengthening individual weaknesses',
+          'English grammar and vocabulary expansion'
+        ],
+      },
+      toefl: {
+        title: 'TOEFL Preparation',
+        shortDescription: 'Intensive preparation program to achieve high results on the TOEFL iBT exam. Ideal for American and Canadian universities.',
+        level: 'Intermediate level',
+        format: 'Online',
+        audience: [
+          'Those applying to American and Canadian universities',
+          'Those who want to develop academic English skills',
+          'Those applying to programs requiring TOEFL certificate',
+          'Those targeting international education'
+        ],
+        program: [
+          'Reading: fast reading of academic texts',
+          'Listening: lectures and conversations',
+          'Speaking: academic discussions and presentations',
+          'Writing: academic essay and writing skills',
+          'Familiarity with computer-based test interface',
+          'Time management and strategies',
+          'Mock exams and detailed feedback'
+        ],
+      },
+      'general-english': {
+        title: 'General English',
+        shortDescription: 'Intensive course program designed to develop general English language skills.',
+        level: 'Beginner level',
+        format: 'Online',
+        audience: [
+          'Those who want to learn English from scratch',
+          'Those who want to develop general communication skills',
+          'Those who want to learn English for travel and work',
+          'Language skills for communication with family and friends'
+        ],
+        program: [
+          'Basic grammar rules and usage',
+          'Vocabulary expansion and word stock',
+          'Speaking skills and pronunciation',
+          'Reading and writing skills',
+          'Listening comprehension and communication',
+          'Practice in real-life situations',
+          'Culture and language connections'
+        ],
+      },
+      'olympiad-math': {
+        title: 'Olympiad Mathematics',
+        shortDescription: 'Specialized preparation program for mathematics olympiads. For those who want to participate in international mathematics competitions.',
+        level: 'Advanced level',
+        format: 'Online',
+        audience: [
+          'Students who want to participate in mathematics olympiads',
+          'Those who want to develop high mathematics skills',
+          'Those preparing for international competitions',
+          'Those who want to strengthen logic and analytical thinking skills'
+        ],
+        program: [
+          'Combinatorics and probability theory',
+          'Geometry and coordinate system',
+          'Algebra and functions',
+          'Logic problem solving strategies',
+          'International olympiad experiences',
+          'Individual practice programs',
+          'Performance monitoring and development analysis'
+        ],
+      },
+      'olympiad-iq': {
+        title: 'IQ Olympiad Preparation',
+        shortDescription: 'Special preparation program for IQ and logic olympiads. Ideal preparation for participating in international IQ competitions.',
+        level: 'Intermediate level',
+        format: 'Online',
+        audience: [
+          'Students who want to participate in IQ olympiads',
+          'Those who want to develop logic and thinking skills',
+          'Those preparing for international competitions',
+          'Those who want to strengthen analytical thinking skills'
+        ],
+        program: [
+          'Logic problem solving strategies',
+          'Pattern recognition and analytical thinking',
+          'Mathematical logic and combinatorics',
+          'Time management and strategies',
+          'International IQ test practice',
+          'Performance analysis and strengthening weaknesses',
+          'Psychological preparation and stress management'
+        ],
+      },
+      'olympiad-english': {
+        title: 'English Language Olympiad Preparation',
+        shortDescription: 'High-level preparation program for English language olympiads. Professional support for participating in international language competitions.',
+        level: 'Advanced level',
+        format: 'Online',
+        audience: [
+          'Students who want to participate in English language olympiads',
+          'Those who want to develop high-level language skills',
+          'Those preparing for international language competitions',
+          'Those who want to strengthen academic English skills'
+        ],
+        program: [
+          'Academic vocabulary and expressions',
+          'Essay writing and creative writing skills',
+          'Language rules and grammar',
+          'Presentation and debate skills',
+          'International olympiad formats',
+          'Text analysis and literary criticism',
+          'Time management and strategies'
+        ],
+      },
+    },
+  },
+
+  // Blog Page
+  blog: {
+    breadcrumb: {
+      home: 'Home',
+      blog: 'Blog',
+    },
+    page: {
+      title: 'Blog',
+      intro: 'Get acquainted with the latest news, tips and success stories in the field of education.',
+    },
+    search: {
+      placeholder: 'Search blog...',
+    },
+    filter: {
+      allCategories: 'All Categories',
+    },
+    reset: 'Reset',
+    empty: {
+      title: 'No results found',
+      message: 'No blog post found matching your search criteria.',
+      showAll: 'Show all posts',
+    },
+    data: {
+      'sat-strategy-2025': {
+        title: 'SAT 2025: Effective Preparation Strategies',
+        excerpt: 'Detailed guide on the most effective methods and strategies to be used in the SAT exam preparation process. Special tips for Reading, Writing and Math sections.',
+        category: 'SAT',
+        date: 'December 15, 2024',
+        readTime: '5 min',
+        content: `
+          <p>The SAT exam is one of the most widely accepted academic tests worldwide. It is possible to achieve high results with preparation strategies for 2025.</p>
+
+          <h2>Reading Section Preparation</h2>
+          <p>It is important to develop text comprehension skills for success in the Reading section. Reading texts on various topics every day and answering questions helps gain experience.</p>
+
+          <h2>Writing Section</h2>
+          <p>Regular practice is needed for essay writing skills. Topic analysis, proper construction of theses and application of grammatical rules are important.</p>
+
+          <h2>Math Section</h2>
+          <p>The Math section covers algebra, geometry and statistics topics. Memorizing formulas and solving practical tasks is important.</p>
+
+          <p>Overall, it is possible to achieve high results on the SAT with regular preparation and the right strategy.</p>
+        `,
+      },
+      'ielts-speaking-tips': {
+        title: 'IELTS Speaking: Practical Tips for High Score',
+        excerpt: 'Basic rules and practical tips you need to know to achieve a high score on the IELTS Speaking test. About pronunciation, grammar and topic development.',
+        category: 'IELTS',
+        date: 'December 12, 2024',
+        readTime: '4 min',
+        content: `
+          <p>The IELTS Speaking test evaluates English speaking skills. Regular practice and the right approach are needed for a high score.</p>
+
+          <h2>Pronunciation and Clarity</h2>
+          <p>It is very important that your pronunciation is clear. Try to pronounce each sound correctly and speak at a normal speed.</p>
+
+          <h2>Vocabulary</h2>
+          <p>It is necessary to have a wide vocabulary on various topics. Use synonyms and construct complex sentences.</p>
+
+          <h2>Topic Development</h2>
+          <p>When answering questions, fully develop the topic. Give examples and justify your thoughts.</p>
+
+          <p>It is possible to achieve a high score in IELTS Speaking with regular practice.</p>
+        `,
+      },
+      'study-abroad-guide': {
+        title: 'Education in American Universities: Admission Process and Scholarship Opportunities',
+        excerpt: 'Detailed information about bachelor\'s and master\'s programs in American universities, admission process and scholarship opportunities.',
+        category: 'Study Abroad',
+        date: 'December 10, 2024',
+        readTime: '6 min',
+        content: `
+          <p>Getting an education at American universities is one of the most prestigious educational opportunities worldwide. It is possible to get admitted and win scholarships with proper preparation.</p>
+
+          <h2>Admission Process</h2>
+          <p>SAT/GRE exams, essay writing, recommendation letters and interviews are the main stages of the admission process.</p>
+
+          <h2>Scholarship Opportunities</h2>
+          <p>Merit-based and need-based scholarships are available. Academic achievements, sports skills and social activities help win scholarships.</p>
+
+          <h2>University Selection</h2>
+          <p>It is important to choose a university that suits your goals. Rankings, programs and graduates\' successes should be considered.</p>
+
+          <p>Increase your chances of getting an education at American universities with professional consultation.</p>
+        `,
+      },
+      'toefl-preparation': {
+        title: 'TOEFL iBT: Preparation for Computer-Based Test',
+        excerpt: 'Effective preparation strategies for the TOEFL iBT exam. Familiarity with computer interface and time management skills.',
+        category: 'TOEFL',
+        date: 'December 8, 2024',
+        readTime: '7 min',
+        content: `
+          <p>TOEFL iBT is a computer-based English language exam. It is an important certificate for American and Canadian universities.</p>
+
+          <h2>Reading Section</h2>
+          <p>Skills in fast reading and understanding of academic texts are needed. Practice on various topics.</p>
+
+          <h2>Listening Section</h2>
+          <p>Listening skills for lectures and conversations should be developed. Taking notes and catching key points is important.</p>
+
+          <h2>Speaking Section</h2>
+          <p>Skills in expressing thoughts by speaking to the computer are needed. Clear pronunciation and logical answers are important.</p>
+
+          <h2>Writing Section</h2>
+          <p>Essay writing skills should be developed. Topic analysis and structured writing are important.</p>
+
+          <p>It is possible to achieve high results on TOEFL with regular practice.</p>
+        `,
+      },
+      'olympiad-success': {
+        title: 'Strategies for Success in Mathematics Olympiads',
+        excerpt: 'Preparation strategies and practical tips for success in international mathematics olympiads.',
+        category: 'Olympiad',
+        date: 'December 5, 2024',
+        readTime: '5 min',
+        content: `
+          <p>Mathematics olympiads are one of the most prestigious competitions for talented young people. It is possible to achieve high success with proper preparation.</p>
+
+          <h2>Main Topics</h2>
+          <p>Combinatorics, probability theory, geometry and algebra are the main topics of olympiad mathematics.</p>
+
+          <h2>Problem Solving Strategies</h2>
+          <p>It is important to solve problems in various ways and develop a creative approach.</p>
+
+          <h2>Practice Program</h2>
+          <p>Daily exercises, solving past olympiad tasks and regular evaluation are needed.</p>
+
+          <p>It is possible to achieve success in olympiads with professional guidance.</p>
+        `,
+      },
+      'english-learning-methods': {
+        title: 'Effective Methods for Learning English',
+        excerpt: 'Modern methods and practical tips for learning English quickly and effectively.',
+        category: 'General English',
+        date: 'December 3, 2024',
+        readTime: '6 min',
+        content: `
+          <p>English is one of the most important languages for global communication. It is possible to learn quickly with the right methods.</p>
+
+          <h2>Immersion Method</h2>
+          <p>Being in the language environment, watching movies, listening to music and reading books is important.</p>
+
+          <h2>Regular Practice</h2>
+          <p>Daily practice, speaking exercises and writing tasks develop language skills.</p>
+
+          <h2>Educational Technologies</h2>
+          <p>Use language learning applications, online courses and interactive exercises.</p>
+
+          <h2>Motivation</h2>
+          <p>Set your goals and track your progress. The feeling of success increases motivation.</p>
+
+          <p>It is possible to learn English effectively with the right strategy.</p>
+        `,
+      },
+      'sat-hazirligi-metodlari': {
+        title: 'Effective Methods in SAT Preparation',
+        excerpt: 'Detailed guide on the most effective methods and strategies to be used in the SAT exam preparation process.',
+        category: 'SAT',
+        date: 'December 15, 2024',
+        readTime: '5 min',
+        content: '',
+      },
+      'ielts-speaking-qaydalar': {
+        title: 'IELTS Speaking Rules',
+        excerpt: 'Basic rules and practical tips you need to know to achieve a high score on the IELTS Speaking test.',
+        category: 'IELTS',
+        date: 'December 12, 2024',
+        readTime: '4 min',
+        content: '',
+      },
+      'amerika-universitetleri': {
+        title: 'Education in American Universities',
+        excerpt: 'About bachelor\'s and master\'s programs in American universities, admission process and scholarship opportunities.',
+        category: 'Study Abroad',
+        date: 'December 10, 2024',
+        readTime: '6 min',
+        content: '',
+      },
+    },
+    categories: {
+      sat: 'SAT',
+      ielts: 'IELTS',
+      toefl: 'TOEFL',
+      'general-english': 'General English',
+      'xaricdə-təhsil': 'Study Abroad',
+      olimpiada: 'Olympiad',
+    },
+  },
+
+  // Achievements Page
+  achievements: {
+    breadcrumb: {
+      home: 'Home',
+      achievements: 'Achievements',
+    },
+    page: {
+      title: 'Achievements',
+      intro: 'We present our achievements in the field of academic preparation with the real results and success stories of our students.',
+    },
+    statistics: {
+      title: 'Statistical Indicators',
+      labels: {
+        acceptedStudents: 'Accepted Students',
+        successRate: 'Success Rate',
+        preparedStudents: 'Prepared Students',
+        yearsExperience: 'Years of Experience',
+        internationalInstitutions: 'International Institutions',
+        teachingStaff: 'Teaching Staff',
+      },
+    },
+    studentResults: {
+      title: 'Real Student Results',
+      data: {
+        1: { name: 'Ayla Mammadova' },
+        2: { name: 'Rashad Huseynov' },
+        3: { name: 'Nigar Karimova' },
+        4: { name: 'Elvin Rahimov' },
+        5: { name: 'Leyla Ismayilova' },
+        6: { name: 'Tural Maharramov' },
+      },
+    },
+    countries: {
+      title: 'Accepted Countries',
+      flagAlt: 'flag',
+      usa: 'USA',
+      canada: 'Canada',
+      turkey: 'Turkey',
+      russia: 'Russia',
+      china: 'China',
+      poland: 'Poland',
+      students: 'students',
+    },
+    successStories: {
+      title: 'Success Stories',
+    },
+    chart: {
+      labels: {
+        ielts: 'IELTS',
+        toefl: 'TOEFL',
+        sat: 'SAT',
+        yos: 'YÖS',
+        olympiad: 'Olympiad Preparation',
+      },
+      tooltipFormat: ': %',
+    },
+    universities: {
+      harvard: 'Harvard University',
+      toronto: 'University of Toronto',
+      koc: 'Koç University',
+      mit: 'MIT',
+      mcgill: 'McGill University',
+      moscow: 'Moscow State University',
+    },
+    successStoriesData: {
+      zeynab: {
+        name: 'Zeynab Abbasova',
+        beforeAfter: 'Weak English → IELTS 8.5',
+        story: 'When Zeynab joined our preparation program, her English was very weak. After 6 months of intensive training, she scored 8.5 on the IELTS exam. She is currently pursuing a master\'s degree in the USA.',
+        highlights: {
+          duration: '6 months',
+          type: 'IELTS preparation',
+          program: 'Intensive program',
+        },
+      },
+      orxan: {
+        name: 'Orkhan Guliyev',
+        beforeAfter: 'SAT 1100 → SAT 1550',
+        story: 'Orxan was strong in mathematics but weak in reading skills. With our strategies, he raised his SAT score from 1100 to 1550. He now studies at Stanford University.',
+        highlights: {
+          duration: '5 months',
+          type: 'SAT preparation',
+          program: 'Individual approach',
+        },
+      },
+      gunel: {
+        name: 'Gunel Mammadli',
+        beforeAfter: 'YÖS 350 → YÖS 540',
+        story: 'Gunel wanted to be admitted to Turkish universities. Thanks to our YÖS preparation, she raised her score from 350 to 540. She now studies at the medical faculty of Koç University.',
+        highlights: {
+          duration: '4 months',
+          type: 'YÖS preparation',
+          program: 'Medical faculty',
+        },
+      },
+    },
+    categories: {
+      sat: 'SAT',
+      ielts: 'IELTS',
+      toefl: 'TOEFL',
+      'xaricdə-təhsil': 'Study Abroad',
+      'study-abroad': 'Study Abroad',
+      olimpiada: 'Olympiad',
+      'general-english': 'General English',
+    },
+  },
+
+  // FAQ Page
+  faq: {
+    breadcrumb: {
+      home: 'Home',
+      faq: 'FAQ',
+    },
+    title: 'FAQ',
+    intro: 'Frequently asked questions and answers will be here.',
+  },
+
+  // NotFound Page
+  notFound: {
+    subtitle: 'Page not found',
+    description: 'The page you are looking for doesn\'t exist or has been moved.',
+    goHome: 'Go back to Home',
+    contactUs: 'Contact us',
+  },
+
+  // Team Page
+  team: {
+    title: 'Teaching Staff',
+    intro: 'Information about our team and teaching staff will be here.',
+  },
+
+  // Terms of Service Page
+  termsOfService: {
+    title: 'Terms of Service',
+    intro: 'By using this website, you agree to the terms of service listed below. If you do not agree with these terms, you are advised not to use the website.',
+    sections: {
+      general: {
+        title: 'General Terms',
+        content: 'EGE Dershane website is provided for informational purposes to users. The information on the site is of a general nature.',
+      },
+      contentUsage: {
+        title: 'Content Usage',
+        content: 'The texts, images and other materials on the website belong to EGE Dershane. Unauthorized copying, distribution or commercial use of these materials is prohibited.',
+      },
+      serviceChanges: {
+        title: 'Service Changes',
+        content: 'EGE Dershane reserves the right to change, update or delete the content, design and information presented on the website at any time.',
+      },
+      liability: {
+        title: 'Limitation of Liability',
+        content: 'EGE Dershane is not responsible for decisions made based on the information presented on the site. Users use the website at their own risk.',
+      },
+      thirdParty: {
+        title: 'Third Party Links',
+        content: 'There may be links to third parties on the website. EGE Dershane is not responsible for the content of these links.',
+      },
+      changes: {
+        title: 'Changes',
+        content: 'These terms of service may be updated from time to time. The updated version takes effect after being published on the website.',
+      },
+    },
+  },
+
+  // Privacy Policy Page
+  privacyPolicy: {
+    title: 'Privacy Policy',
+    intro: 'As EGE Dershane, we respect the privacy of our users and consider the protection of personal data a priority.',
+    introduction: 'This Privacy Policy explains for what purposes the information collected when using our website is used.',
+    sections: {
+      dataCollection: {
+        title: 'Collected Information',
+        intro: 'Only the following minimal information may be collected from our website for contact purposes:',
+        items: {
+          fullName: 'Full name',
+          phone: 'Phone number',
+          email: 'Email address',
+        },
+        note: 'This information is provided voluntarily by the user.',
+      },
+      dataUsage: {
+        title: 'Purpose of Data Usage',
+        intro: 'The collected information is used for the following purposes:',
+        items: {
+          contact: 'Contacting users',
+          information: 'Providing information about courses and services',
+          inquiries: 'Responding to user inquiries',
+          quality: 'Improving service quality',
+        },
+      },
+      dataSharing: {
+        title: 'Data Sharing',
+        content: 'Personal information of users is not shared with third parties. It can only be disclosed upon request from official institutions in accordance with legal requirements.',
+      },
+      dataProtection: {
+        title: 'Data Protection',
+        content: 'Technical and administrative measures are taken to ensure the security of personal information. Access to information is only possible by authorized persons.',
+      },
+      userRights: {
+        title: 'User Rights',
+        intro: 'Users:',
+        items: {
+          access: 'Have the right to obtain information about their personal data',
+          update: 'Have the right to request updating or deletion of data',
+        },
+        note: 'They can contact us for this purpose.',
+      },
+      changes: {
+        title: 'Changes',
+        content: 'EGE Dershane reserves the right to make changes to this Privacy Policy at any time. The updated version takes effect from the moment it is published on the website.',
+      },
+    },
   },
 }

@@ -7,9 +7,20 @@ import "swiper/css/pagination";
 import ProfileCard from "../ui/ProfileCard";
 import { getFeaturedTeachers } from "../../services/contentService";
 import ScrollReveal from "../ui/ScrollReveal";
+import { useLanguage } from "../../i18n/LanguageProvider";
 export default function Teachers() {
+  const { t, lang } = useLanguage()
   const navigate = useNavigate();
-  const teachers = getFeaturedTeachers();
+  const teachersData = getFeaturedTeachers();
+  
+  // Translate teacher data based on current language
+  const teachers = React.useMemo(() => {
+    return teachersData.map(teacher => ({
+      ...teacher,
+      fullName: t(`teachers.data.${teacher.slug}.fullName`) || teacher.fullName,
+      role: t(`teachers.data.${teacher.slug}.role`) || teacher.role,
+    }))
+  }, [teachersData, t, lang])
 
   const handleContactClick = (teacherName) => {
     // Placeholder for contact functionality
@@ -31,10 +42,10 @@ export default function Teachers() {
     <section className="teachers" id="teachers">
       <div className="container teachers__inner">
         <header className="sectionHeader">
-          <span className="sectionLabel">Müəllim heyəti</span>
-          <h2 className="sectionTitle">Peşəkar müəllimlərimiz</h2>
+          <span className="sectionLabel">{t('teachersSection.label')}</span>
+          <h2 className="sectionTitle">{t('teachersSection.title')}</h2>
           <p className="sectionDesc">
-            Təcrübəli və peşəkar müəllimlərimiz komandası ilə sizə ən yaxşı təhsil təcrübəsini təqdim edirik.
+            {t('teachersSection.description')}
           </p>
         </header>
 
@@ -73,8 +84,8 @@ export default function Teachers() {
                       avatarUrl={teacher.photoUrl}
                       miniAvatarUrl={teacher.photoUrl}
                       handle={teacher.slug}
-                      status="Online"
-                      contactText="Əlaqə"
+                      status={t('teachersSection.status')}
+                      contactText={t('teachersSection.contact')}
                       onContactClick={() => handleContactClick(teacher.fullName)}
                       enableTilt={true}
                       behindGlowEnabled={true}

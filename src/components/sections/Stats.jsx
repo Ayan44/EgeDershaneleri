@@ -164,7 +164,7 @@ function Stats() {
           <div className="stats__media">
             <img
               src="/photos/statistics.png"
-              alt="Statistika və nəticələr"
+              alt={t('stats.imageAlt')}
               className="stats__image"
               loading="lazy"
             />
@@ -173,7 +173,7 @@ function Stats() {
               <div className="founderCard__avatar">
                 <img
                   src="/photos/founder.jpg"
-                  alt="Malik Məmmədov"
+                  alt={t('stats.founder.name')}
                   loading="lazy"
                 />
               </div>

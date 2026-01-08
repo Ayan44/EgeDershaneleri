@@ -6,10 +6,6 @@ const Footer = () => {
   const { t } = useLanguage()
   const currentYear = new Date().getFullYear()
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
   return (
     <footer className="siteFooter">
       <div className="container footerContainer">
@@ -32,23 +28,23 @@ const Footer = () => {
                 <a
                   href="#"
                   className="footerSocialLink"
-                  aria-label="Instagram səhifəmizə keçin"
+                  aria-label={t('footer.social.ariaLabels.instagram')}
                 >
-                  Instagram
+                  {t('footer.social.instagram')}
                 </a>
                 <a
                   href="#"
                   className="footerSocialLink"
-                  aria-label="WhatsApp ilə əlaqə saxlayın"
+                  aria-label={t('footer.social.ariaLabels.whatsapp')}
                 >
-                  WhatsApp
+                  {t('footer.social.whatsapp')}
                 </a>
                 <a
                   href="#"
                   className="footerSocialLink"
-                  aria-label="YouTube kanalımıza baxın"
+                  aria-label={t('footer.social.ariaLabels.youtube')}
                 >
-                  YouTube
+                  {t('footer.social.youtube')}
                 </a>
               </div>
             </div>
@@ -156,7 +152,7 @@ const Footer = () => {
               <div className="footerContactItem">
                 <span className="footerContactIcon" aria-hidden="true">📍</span>
                 <address className="footerContactAddress">
-                  Bakı, Azərbaycan
+                  {t('footer.address')}
                 </address>
               </div>
               <div className="footerContactHours">
@@ -192,16 +188,6 @@ const Footer = () => {
               </Link>
             </nav>
           </div>
-
-          {/* Scroll to Top Button */}
-          <button
-            onClick={scrollToTop}
-            className="scrollToTop"
-            aria-label={t('footer.scrollToTop')}
-            type="button"
-          >
-            <span aria-hidden="true">↑</span>
-          </button>
         </div>
       </div>
     </footer>

@@ -4,7 +4,9 @@ import { getCourseBySlug } from '../services/contentService'
 import ScrollToTop from '../components/ui/ScrollToTop'
 import ScrollReveal from '../components/ui/ScrollReveal'
 import Breadcrumb from '../components/ui/Breadcrumb'
+import { useLanguage } from '../i18n/LanguageProvider'
 function CoursePage() {
+  const { t, lang } = useLanguage()
   const { courseId, subCourseId } = useParams()
 
   // Determine the course slug
@@ -17,7 +19,22 @@ function CoursePage() {
     courseSlug = courseId
   }
 
-  const course = getCourseBySlug(courseSlug)
+  const courseData = getCourseBySlug(courseSlug)
+
+  // Translate course data based on current language
+  const course = courseData ? {
+    ...courseData,
+    title: t(`courseDetails.data.${courseSlug}.title`) || courseData.title,
+    shortDescription: t(`courseDetails.data.${courseSlug}.shortDescription`) || courseData.shortDescription,
+    level: t(`courseDetails.data.${courseSlug}.level`) || courseData.level,
+    format: t(`courseDetails.data.${courseSlug}.format`) || courseData.format,
+    audience: courseData.audience?.map((_, index) =>
+      t(`courseDetails.data.${courseSlug}.audience.${index}`) || courseData.audience[index]
+    ) || courseData.audience,
+    program: courseData.program?.map((_, index) =>
+      t(`courseDetails.data.${courseSlug}.program.${index}`) || courseData.program[index]
+    ) || courseData.program,
+  } : null
 
   useEffect(() => {
     // Scroll to top when component mounts
@@ -29,9 +46,9 @@ function CoursePage() {
       <main className="container page">
         <Breadcrumb
           items={[
-            { href: '/', label: 'Ana səhifə' },
-            { href: '/courses', label: 'Kurslar' },
-            { label: 'Kurs tapılmadı' }
+            { href: '/', label: t('courseDetails.breadcrumb.home') },
+            { href: '/courses', label: t('courseDetails.breadcrumb.courses') },
+            { label: t('courseDetails.breadcrumb.notFound') }
           ]}
         />
 
@@ -43,12 +60,12 @@ function CoursePage() {
         >
           <div className="pageContentAbout">
             <header className="pageHeader">
-              <h1>Kurs tapılmadı</h1>
-              <p>Axtardığınız kurs mövcud deyil. Zəhmət olmasa kurs siyahısından seçin.</p>
+              <h1>{t('courseDetails.notFound.title')}</h1>
+              <p>{t('courseDetails.notFound.message')}</p>
 
               <div className="page__cta">
                 <Link to="/courses" className="btn btn--primary">
-                  Bütün kurslara bax
+                  {t('courseDetails.notFound.viewAll')}
                 </Link>
               </div>
             </header>
@@ -64,8 +81,8 @@ function CoursePage() {
       <main className="container page">
         <Breadcrumb
           items={[
-            { href: '/', label: 'Ana səhifə' },
-            { href: '/courses', label: 'Kurslar' },
+            { href: '/', label: t('courseDetails.breadcrumb.home') },
+            { href: '/courses', label: t('courseDetails.breadcrumb.courses') },
             { label: course.title }
           ]}
         />
@@ -100,7 +117,7 @@ function CoursePage() {
 
                     <div className="course-hero__cta">
                       <Link to="/contact" className="btn btn--primary btn--large">
-                        Qeydiyyat üçün müraciət et
+                        {t('courseDetails.applyForRegistration')}
                       </Link>
                     </div>
                   </div>
@@ -128,7 +145,7 @@ function CoursePage() {
           >
             <section className="course-audience">
               <div className="container">
-                <h2 className="course-section__title">Kurs kimlər üçün uyğundur</h2>
+                <h2 className="course-section__title">{t('courseDetails.audience.title')}</h2>
                 <div className="course-audience__grid">
                   {course.audience.map((item, index) => (
                     <div key={index} className="audience-card">
@@ -158,7 +175,7 @@ function CoursePage() {
           >
             <section className="course-outcomes">
               <div className="container">
-                <h2 className="course-section__title">Nə öyrənəcəksən</h2>
+                <h2 className="course-section__title">{t('courseDetails.learningOutcomes.title')}</h2>
                 <div className="course-outcomes__grid">
                   {course.program.slice(0, 6).map((item, index) => (
                     <div key={index} className="outcome-item" style={{ animationDelay: `${index * 0.1}s` }}>
@@ -190,18 +207,18 @@ function CoursePage() {
               <div className="container">
                 <div className="course-final-cta__content">
                   <h2 className="course-final-cta__title">
-                    Hazırsan? Qeydiyyatdan keç və gələcəyini qur!
+                    {t('courseDetails.finalCta.title')}
                   </h2>
                   <p className="course-final-cta__subtitle">
-                    İndi müraciət et və kursumuza qoşul. Sənin uğurun bizim prioritetimizdir.
+                    {t('courseDetails.finalCta.subtitle')}
                   </p>
 
                   <div className="course-final-cta__actions">
                     <Link to="/contact" className="btn btn--primary btn--large">
-                      İndi müraciət et
+                      {t('courseDetails.finalCta.applyNow')}
                     </Link>
                     <a href="tel:+994501234567" className="btn btn--secondary">
-                      📞 +994 50 123 45 67
+                      {t('courseDetails.finalCta.phone')}
                     </a>
                   </div>
                 </div>

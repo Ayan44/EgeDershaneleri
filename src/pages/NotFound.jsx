@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
+import { useLanguage } from '../i18n/LanguageProvider'
 
 function NotFound() {
+    const { t } = useLanguage()
     return (
         <main className="container page">
             <div className="pageContentAbout">
@@ -8,17 +10,17 @@ function NotFound() {
                     <div className="not-found-hero__content">
                         <div className="not-found-hero__text">
                             <h1 className="not-found-hero__title">404</h1>
-                            <h2 className="not-found-hero__subtitle">Page not found</h2>
+                            <h2 className="not-found-hero__subtitle">{t('notFound.subtitle')}</h2>
                             <p className="not-found-hero__description">
-                                The page you are looking for doesn't exist or has been moved.
+                                {t('notFound.description')}
                             </p>
 
                             <div className="not-found-hero__actions">
                                 <Link to="/" className="btn btn--primary">
-                                    Go back to Home
+                                    {t('notFound.goHome')}
                                 </Link>
                                 <Link to="/contact" className="not-found-hero__contact-link">
-                                    Contact us
+                                    {t('notFound.contactUs')}
                                 </Link>
                             </div>
                         </div>

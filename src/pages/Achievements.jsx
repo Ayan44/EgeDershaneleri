@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useMemo } from 'react'
 import { Pie } from 'react-chartjs-2'
 import {
   Chart as ChartJS,
@@ -8,169 +8,8 @@ import {
 } from 'chart.js'
 import Breadcrumb from '../components/ui/Breadcrumb'
 import ScrollReveal from '../components/ui/ScrollReveal'
+import { useLanguage } from '../i18n/LanguageProvider'
 ChartJS.register(ArcElement, Tooltip, Legend)
-
-// Placeholder data - can be easily replaced with real data later
-const STATISTICS_DATA = [
-  { value: '850+', label: 'Qəbul olunan tələbə' },
-  { value: '95%', label: 'Uğur nisbəti' },
-  { value: '1500+', label: 'Hazırlanan tələbə' },
-  { value: '12+', label: 'İllik təcrübə' },
-  { value: '25+', label: 'Beynəlxalq müəssisə' },
-  { value: '50+', label: 'Müəllim heyəti' }
-]
-
-// Chart data - exam type distribution
-const CHART_DATA = {
-  labels: ['IELTS', 'TOEFL', 'SAT', 'YÖS', 'Olimpiada Hazırlığı'],
-  datasets: [
-    {
-      data: [30, 25, 20, 15, 10],
-      backgroundColor: [
-        'rgba(37, 99, 235, 0.8)',    // Blue - IELTS
-        'rgba(124, 58, 237, 0.8)',  // Purple - TOEFL
-        'rgba(16, 185, 129, 0.8)',  // Green - SAT
-        'rgba(245, 158, 11, 0.8)',  // Amber - YÖS
-        'rgba(239, 68, 68, 0.8)',   // Red - Olympiad
-      ],
-      borderColor: [
-        'rgba(37, 99, 235, 1)',
-        'rgba(124, 58, 237, 1)',
-        'rgba(16, 185, 129, 1)',
-        'rgba(245, 158, 11, 1)',
-        'rgba(239, 68, 68, 1)',
-      ],
-      borderWidth: 2,
-    },
-  ],
-}
-
-const CHART_OPTIONS = {
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins: {
-    legend: {
-      position: 'bottom',
-      labels: {
-        padding: 20,
-        usePointStyle: true,
-        font: {
-          size: 12,
-          family: 'Inter, system-ui, sans-serif',
-          weight: '500',
-        },
-        color: '#374151',
-      },
-    },
-    tooltip: {
-      backgroundColor: 'rgba(0, 0, 0, 0.8)',
-      titleColor: '#ffffff',
-      bodyColor: '#ffffff',
-      cornerRadius: 8,
-      callbacks: {
-        label: function (context) {
-          return context.label + ': ' + context.raw + '%'
-        }
-      }
-    },
-  },
-}
-
-const STUDENT_RESULTS_DATA = [
-  {
-    id: 1,
-    name: 'Ayla Məmmədova',
-    photo: '/photos/students/student.jpg',
-    examType: 'SAT',
-    score: '1520/1600',
-    acceptedCountry: 'ABŞ',
-    acceptedUniversity: 'Harvard University'
-  },
-  {
-    id: 2,
-    name: 'Rəşad Hüseynov',
-    photo: '/photos/students/student.jpg',
-    examType: 'IELTS',
-    score: '8.5/9.0',
-    acceptedCountry: 'Kanada',
-    acceptedUniversity: 'University of Toronto'
-  },
-  {
-    id: 3,
-    name: 'Nigar Kərimova',
-    photo: '/photos/students/student.jpg',
-    examType: 'YÖS',
-    score: '520/600',
-    acceptedCountry: 'Türkiyə',
-    acceptedUniversity: 'Koç University'
-  },
-  {
-    id: 4,
-    name: 'Elvin Rəhimov',
-    photo: '/photos/students/student.jpg',
-    examType: 'TOEFL',
-    score: '115/120',
-    acceptedCountry: 'ABŞ',
-    acceptedUniversity: 'MIT'
-  },
-  {
-    id: 5,
-    name: 'Leyla İsmayılova',
-    photo: '/photos/students/student.jpg',
-    examType: 'SAT',
-    score: '1480/1600',
-    acceptedCountry: 'Kanada',
-    acceptedUniversity: 'McGill University'
-  },
-  {
-    id: 6,
-    name: 'Tural Məhərrəmov',
-    photo: '/photos/students/student.jpg',
-    examType: 'IELTS',
-    score: '8.0/9.0',
-    acceptedCountry: 'Rusiya',
-    acceptedUniversity: 'Moscow State University'
-  }
-]
-
-const COUNTRIES_DATA = [
-  { name: 'ABŞ', flag: '/photos/flags/usa.png', students: '320 tələbə' },
-  { name: 'Kanada', flag: '/photos/flags/canada.png', students: '180 tələbə' },
-  { name: 'Türkiyə', flag: '/photos/flags/turkey.png', students: '250 tələbə' },
-  { name: 'Rusiya', flag: '/photos/flags/russia.png', students: '45 tələbə' },
-  { name: 'Çin', flag: '/photos/flags/china.png', students: '35 tələbə' },
-  { name: 'Polşa', flag: '/photos/flags/poland.png', students: '20 tələbə' }
-]
-
-const SUCCESS_STORIES_DATA = [
-  {
-    id: 1,
-    name: 'Zeynəb Abbasova',
-    photo: '/photos/students/student.jpg',
-    beforeAfter: 'İngilis dili biliyi zəif → IELTS 8.5',
-    story: 'Zeynəb bizim hazırlıq proqramımıza qoşulduqda ingilis dili biliyi çox zəif idi. 6 ay intensiv təlimdən sonra IELTS imtahanında 8.5 bal topladı. Hazırda ABŞ-da magistratura təhsili alır.',
-    highlights: ['6 ay', 'IELTS hazırlığı', 'Intensiv proqram'],
-    imageLeft: true
-  },
-  {
-    id: 2,
-    name: 'Orxan Quliyev',
-    photo: '/photos/students/student.jpg',
-    beforeAfter: 'SAT 1100 → SAT 1550',
-    story: 'Orxan riyaziyyatda güclü idi, amma oxu bacarıqları zəif idi. Bizim strategiyalarımızla SAT balını 1100-dən 1550-ə qaldırdı. İndi Stanford Universitetində oxuyur.',
-    highlights: ['5 ay', 'SAT hazırlığı', 'Fərdi yanaşma'],
-    imageLeft: false
-  },
-  {
-    id: 3,
-    name: 'Günel Məmmədli',
-    photo: '/photos/students/student.jpg',
-    beforeAfter: 'YÖS 350 → YÖS 540',
-    story: 'Günel Türkiyə universitetlərinə qəbul olmaq istəyirdi. Bizim YÖS hazırlığımız sayəsində balını 350-dən 540-ə qaldırdı. Koç Universitetində tibb fakültəsində oxuyur.',
-    highlights: ['4 ay', 'YÖS hazırlığı', 'Tibb fakültəsi'],
-    imageLeft: true
-  }
-]
 
 // Count-up animation hook for statistics
 function useCountUpStats(targetValues) {
@@ -280,6 +119,191 @@ function parseStatValue(raw) {
 }
 
 function Achievements() {
+  const { t, lang } = useLanguage()
+
+  // Statistics data with translations
+  const STATISTICS_DATA = useMemo(() => [
+    { value: '850+', label: t('achievements.statistics.labels.acceptedStudents') },
+    { value: '95%', label: t('achievements.statistics.labels.successRate') },
+    { value: '1500+', label: t('achievements.statistics.labels.preparedStudents') },
+    { value: '12+', label: t('achievements.statistics.labels.yearsExperience') },
+    { value: '25+', label: t('achievements.statistics.labels.internationalInstitutions') },
+    { value: '50+', label: t('achievements.statistics.labels.teachingStaff') }
+  ], [t, lang])
+
+  // Chart data with translations
+  const CHART_DATA = useMemo(() => ({
+    labels: [
+      t('achievements.chart.labels.ielts'),
+      t('achievements.chart.labels.toefl'),
+      t('achievements.chart.labels.sat'),
+      t('achievements.chart.labels.yos'),
+      t('achievements.chart.labels.olympiad'),
+    ],
+    datasets: [
+      {
+        data: [30, 25, 20, 15, 10],
+        backgroundColor: [
+          'rgba(37, 99, 235, 0.8)',    // Blue - IELTS
+          'rgba(124, 58, 237, 0.8)',  // Purple - TOEFL
+          'rgba(16, 185, 129, 0.8)',  // Green - SAT
+          'rgba(245, 158, 11, 0.8)',  // Amber - YÖS
+          'rgba(239, 68, 68, 0.8)',   // Red - Olympiad
+        ],
+        borderColor: [
+          'rgba(37, 99, 235, 1)',
+          'rgba(124, 58, 237, 1)',
+          'rgba(16, 185, 129, 1)',
+          'rgba(245, 158, 11, 1)',
+          'rgba(239, 68, 68, 1)',
+        ],
+        borderWidth: 2,
+      },
+    ],
+  }), [t, lang])
+
+  const CHART_OPTIONS = useMemo(() => ({
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          padding: 20,
+          usePointStyle: true,
+          font: {
+            size: 12,
+            family: 'Inter, system-ui, sans-serif',
+            weight: '500',
+          },
+          color: '#374151',
+        },
+      },
+      tooltip: {
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        titleColor: '#ffffff',
+        bodyColor: '#ffffff',
+        cornerRadius: 8,
+        callbacks: {
+          label: function (context) {
+            return context.label + t('achievements.chart.tooltipFormat') + context.raw
+          }
+        }
+      },
+    },
+  }), [t, lang])
+
+  // Student results data
+  const STUDENT_RESULTS_DATA = useMemo(() => [
+    {
+      id: 1,
+      name: t('achievements.studentResults.data.1.name') || 'Ayla Məmmədova',
+      photo: '/photos/students/student.jpg',
+      examType: 'SAT',
+      score: '1520/1600',
+      acceptedCountry: t('achievements.countries.usa'),
+      acceptedUniversity: t('achievements.universities.harvard')
+    },
+    {
+      id: 2,
+      name: t('achievements.studentResults.data.2.name') || 'Rəşad Hüseynov',
+      photo: '/photos/students/student.jpg',
+      examType: 'IELTS',
+      score: '8.5/9.0',
+      acceptedCountry: t('achievements.countries.canada'),
+      acceptedUniversity: t('achievements.universities.toronto')
+    },
+    {
+      id: 3,
+      name: t('achievements.studentResults.data.3.name') || 'Nigar Kərimova',
+      photo: '/photos/students/student.jpg',
+      examType: 'YÖS',
+      score: '520/600',
+      acceptedCountry: t('achievements.countries.turkey'),
+      acceptedUniversity: t('achievements.universities.koc')
+    },
+    {
+      id: 4,
+      name: t('achievements.studentResults.data.4.name') || 'Elvin Rəhimov',
+      photo: '/photos/students/student.jpg',
+      examType: 'TOEFL',
+      score: '115/120',
+      acceptedCountry: t('achievements.countries.usa'),
+      acceptedUniversity: t('achievements.universities.mit')
+    },
+    {
+      id: 5,
+      name: t('achievements.studentResults.data.5.name') || 'Leyla İsmayılova',
+      photo: '/photos/students/student.jpg',
+      examType: 'SAT',
+      score: '1480/1600',
+      acceptedCountry: t('achievements.countries.canada'),
+      acceptedUniversity: t('achievements.universities.mcgill')
+    },
+    {
+      id: 6,
+      name: t('achievements.studentResults.data.6.name') || 'Tural Məhərrəmov',
+      photo: '/photos/students/student.jpg',
+      examType: 'IELTS',
+      score: '8.0/9.0',
+      acceptedCountry: t('achievements.countries.russia'),
+      acceptedUniversity: t('achievements.universities.moscow')
+    }
+  ], [t, lang])
+
+  // Countries data
+  const COUNTRIES_DATA = useMemo(() => [
+    { name: t('achievements.countries.usa'), flag: '/photos/flags/usa.png', students: `320 ${t('achievements.countries.students')}` },
+    { name: t('achievements.countries.canada'), flag: '/photos/flags/canada.png', students: `180 ${t('achievements.countries.students')}` },
+    { name: t('achievements.countries.turkey'), flag: '/photos/flags/turkey.png', students: `250 ${t('achievements.countries.students')}` },
+    { name: t('achievements.countries.russia'), flag: '/photos/flags/russia.png', students: `45 ${t('achievements.countries.students')}` },
+    { name: t('achievements.countries.china'), flag: '/photos/flags/china.png', students: `35 ${t('achievements.countries.students')}` },
+    { name: t('achievements.countries.poland'), flag: '/photos/flags/poland.png', students: `20 ${t('achievements.countries.students')}` }
+  ], [t, lang])
+
+  // Success stories data
+  const SUCCESS_STORIES_DATA = useMemo(() => [
+    {
+      id: 1,
+      name: t('achievements.successStoriesData.zeynab.name'),
+      photo: '/photos/students/student.jpg',
+      beforeAfter: t('achievements.successStoriesData.zeynab.beforeAfter'),
+      story: t('achievements.successStoriesData.zeynab.story'),
+      highlights: [
+        t('achievements.successStoriesData.zeynab.highlights.duration'),
+        t('achievements.successStoriesData.zeynab.highlights.type'),
+        t('achievements.successStoriesData.zeynab.highlights.program')
+      ],
+      imageLeft: true
+    },
+    {
+      id: 2,
+      name: t('achievements.successStoriesData.orxan.name'),
+      photo: '/photos/students/student.jpg',
+      beforeAfter: t('achievements.successStoriesData.orxan.beforeAfter'),
+      story: t('achievements.successStoriesData.orxan.story'),
+      highlights: [
+        t('achievements.successStoriesData.orxan.highlights.duration'),
+        t('achievements.successStoriesData.orxan.highlights.type'),
+        t('achievements.successStoriesData.orxan.highlights.program')
+      ],
+      imageLeft: false
+    },
+    {
+      id: 3,
+      name: t('achievements.successStoriesData.gunel.name'),
+      photo: '/photos/students/student.jpg',
+      beforeAfter: t('achievements.successStoriesData.gunel.beforeAfter'),
+      story: t('achievements.successStoriesData.gunel.story'),
+      highlights: [
+        t('achievements.successStoriesData.gunel.highlights.duration'),
+        t('achievements.successStoriesData.gunel.highlights.type'),
+        t('achievements.successStoriesData.gunel.highlights.program')
+      ],
+      imageLeft: true
+    }
+  ], [t, lang])
+
   // Parse statistics for count-up animation
   const parsedStats = STATISTICS_DATA.map((stat) => ({
     ...stat,
@@ -299,8 +323,8 @@ function Achievements() {
       >
         <Breadcrumb
           items={[
-            { href: '/', label: 'Ana səhifə' },
-            { label: 'Nailiyyətlərimiz' }
+            { href: '/', label: t('achievements.breadcrumb.home') },
+            { label: t('achievements.breadcrumb.achievements') }
           ]}
         />
       </ScrollReveal>
@@ -312,10 +336,9 @@ function Achievements() {
           blurStrength={10}
         >
           <header className="pageHeader">
-            <h1>Nailiyyətlərimiz</h1>
+            <h1>{t('achievements.page.title')}</h1>
             <p className="pageIntro">
-              Tələbələrimizin real nəticələri və uğur hekayələri ilə akademik
-              hazırlıq sahəsindəki nailiyyətlərimizi təqdim edirik.
+              {t('achievements.page.intro')}
             </p>
           </header>
         </ScrollReveal>
@@ -330,7 +353,7 @@ function Achievements() {
           >
             <section className="achievements-stats" ref={sectionRef}>
               <div className="container">
-                <h2 className="achievements-section__title">Statistik göstəricilər</h2>
+                <h2 className="achievements-section__title">{t('achievements.statistics.title')}</h2>
                 <div className="achievements-stats__content">
                   <div className="achievements-stats__grid">
                     {parsedStats.map((stat, index) => (
@@ -360,7 +383,7 @@ function Achievements() {
           >
             <section className="achievements-results">
               <div className="container">
-                <h2 className="achievements-section__title">Real tələbə nəticələri</h2>
+                <h2 className="achievements-section__title">{t('achievements.studentResults.title')}</h2>
                 <div className="achievements-results__grid">
                   {STUDENT_RESULTS_DATA.map((student) => (
                     <div key={student.id} className="student-result-card">
@@ -397,14 +420,14 @@ function Achievements() {
           >
             <section className="achievements-countries">
               <div className="container">
-                <h2 className="achievements-section__title">Qəbul olunan ölkələr</h2>
+                <h2 className="achievements-section__title">{t('achievements.countries.title')}</h2>
                 <div className="achievements-countries__grid">
                   {COUNTRIES_DATA.map((country) => (
                     <div key={country.name} className="country-card">
                       <div className="country-card__flag">
                         <img
                           src={country.flag}
-                          alt={`${country.name} bayrağı`}
+                          alt={`${country.name} ${t('achievements.countries.flagAlt')}`}
                           loading="lazy"
                         />
                       </div>
@@ -424,7 +447,7 @@ function Achievements() {
           >
             <section className="achievements-stories">
               <div className="container">
-                <h2 className="achievements-section__title">Uğur hekayələri</h2>
+                <h2 className="achievements-section__title">{t('achievements.successStories.title')}</h2>
                 <div className="achievements-stories__list">
                   {SUCCESS_STORIES_DATA.map((story) => (
                     <div key={story.id} className="success-story">

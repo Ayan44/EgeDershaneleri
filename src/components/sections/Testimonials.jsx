@@ -12,8 +12,18 @@ import { getTestimonials } from "../../services/contentService";
 import { useLanguage } from "../../i18n/LanguageProvider";
 
 export default function Testimonials() {
-  const { t } = useLanguage()
-  const testimonials = getTestimonials();
+  const { t, lang } = useLanguage()
+  const testimonialsData = getTestimonials();
+
+  // Translate testimonials based on current language
+  const testimonials = React.useMemo(() => {
+    return testimonialsData.map(testimonial => ({
+      ...testimonial,
+      studentName: t(`testimonials.data.${testimonial.id}.studentName`) || testimonial.studentName,
+      text: t(`testimonials.data.${testimonial.id}.text`) || testimonial.text,
+      scoreOrResult: t(`testimonials.data.${testimonial.id}.scoreOrResult`) || testimonial.scoreOrResult,
+    }))
+  }, [testimonialsData, t, lang])
 
   return (
     <ScrollReveal

@@ -93,5 +93,5 @@ export function getBlogPostBySlug(slug) {
 
 export function getBlogCategories() {
   const categories = new Set(BLOG_DATA.map(post => post.category))
-  return ['Bütün kateqoriyalar', ...Array.from(categories).sort()]
+  return Array.from(categories).sort()
 }

@@ -4,8 +4,23 @@ import { getBlogPosts } from "../../services/contentService";
 import ScrollReveal from "../ui/ScrollReveal";
 import { useLanguage } from "../../i18n/LanguageProvider";
 export default function BlogPreview() {
-  const { t } = useLanguage()
-  const blogPosts = getBlogPosts({ limit: 3 });
+  const { t, lang } = useLanguage()
+  const blogPostsData = getBlogPosts({ limit: 3 });
+
+  // Translate blog posts based on current language
+  const blogPosts = React.useMemo(() => {
+    return blogPostsData.map(post => {
+      const postSlug = post.slug || post.id
+      const categoryKey = post.category?.toLowerCase().replace(/\s+/g, '-') || ''
+      return {
+        ...post,
+        title: t(`blog.data.${postSlug}.title`) || post.title,
+        excerpt: t(`blog.data.${postSlug}.excerpt`) || post.excerpt,
+        date: t(`blog.data.${postSlug}.date`) || post.date,
+        category: categoryKey ? (t(`blog.categories.${categoryKey}`) || post.category) : post.category,
+      }
+    })
+  }, [blogPostsData, t, lang])
 
   return (
     <ScrollReveal
@@ -30,7 +45,7 @@ export default function BlogPreview() {
                 <Link to={`/blog?post=${post.slug}`} className="blogCard__link">
                   <div className="blogCard__image">
                     <div className="blogCard__imageOverlay">
-                      <span className="blogCard__category">{t('blogPreview.category')}</span>
+                      <span className="blogCard__category">{post.category || t('blogPreview.category')}</span>
                     </div>
                     {/* Fallback gradient if image fails */}
                     <div

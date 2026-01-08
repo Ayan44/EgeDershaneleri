@@ -97,7 +97,7 @@ function Contact() {
         })
       } else {
         // Formspree JSON error formatı ola bilər
-        let errMsg = t("contact.form.error") || "Mesaj göndərilə bilmədi. Zəhmət olmasa yenidən cəhd edin."
+        let errMsg = t("contact.form.error")
         try {
           const data = await res.json()
           if (data?.errors?.length) errMsg = data.errors[0].message
@@ -108,7 +108,7 @@ function Contact() {
     } catch (error) {
       setToast({
         type: "error",
-        message: t("contact.form.errorNetwork") || "Şəbəkə xətası. Zəhmət olmasa yenidən cəhd edin.",
+        message: t("contact.form.errorNetwork"),
       })
     } finally {
       setTimeout(() => setToast(null), 5000)
@@ -169,7 +169,7 @@ function Contact() {
                 <div className="contactInfoRows">
                   <div className="contactInfoRow">
                     <div className="contactInfoIcon">
-                      <img src="/photos/contact_icons/phone.png" alt="Phone" />
+                      <img src="/photos/contact_icons/phone.png" alt={t('contact.info.phone.label')} />
                     </div>
                     <div className="contactInfoContent">
                       <h3>{t('contact.info.phone.label')}</h3>
@@ -179,7 +179,7 @@ function Contact() {
 
                   <div className="contactInfoRow">
                     <div className="contactInfoIcon">
-                      <img src="/photos/contact_icons/email.png" alt="Email" />
+                      <img src="/photos/contact_icons/email.png" alt={t('contact.info.email.label')} />
                     </div>
                     <div className="contactInfoContent">
                       <h3>{t('contact.info.email.label')}</h3>
@@ -189,7 +189,7 @@ function Contact() {
 
                   <div className="contactInfoRow">
                     <div className="contactInfoIcon">
-                      <img src="/photos/contact_icons/location.png" alt="Location" />
+                      <img src="/photos/contact_icons/location.png" alt={t('contact.info.location.label')} />
                     </div>
                     <div className="contactInfoContent">
                       <h3>{t('contact.info.location.label')}</h3>
@@ -306,7 +306,7 @@ function Contact() {
 
                   {/* Send Message Button */}
                   <button type="submit" className="sendMessageBtn" disabled={isSubmitting}>
-                    {isSubmitting ? (t('contact.form.submitting') || "Göndərilir...") : t('contact.form.submit')}
+                    {isSubmitting ? t('contact.form.submitting') : t('contact.form.submit')}
                   </button>
 
                 </form>

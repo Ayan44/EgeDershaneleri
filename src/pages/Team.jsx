@@ -1,8 +1,11 @@
+import { useLanguage } from '../i18n/LanguageProvider'
+
 function Team() {
+  const { t } = useLanguage()
   return (
     <main className="container page">
-      <h1>Müəllim heyəti</h1>
-      <p>Komandamız və müəllim heyəti haqqında məlumat burada olacaq.</p>
+      <h1>{t('team.title')}</h1>
+      <p>{t('team.intro')}</p>
     </main>
   )
 }

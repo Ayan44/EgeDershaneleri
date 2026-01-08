@@ -7,19 +7,44 @@ import { COURSE_CATEGORIES } from '../data/courses'
 import ScrollReveal from '../components/ui/ScrollReveal'
 import { useLanguage } from '../i18n/LanguageProvider'
 export default function Teachers() {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
   const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate()
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
 
-  const allTeachers = getTeachers()
+  const allTeachersData = getTeachers()
 
-  // Get teacher from URL param
+  // Translate teacher data based on current language
+  const allTeachers = allTeachersData.map(teacher => ({
+    ...teacher,
+    fullName: t(`teachers.data.${teacher.slug}.fullName`) || teacher.fullName,
+    role: t(`teachers.data.${teacher.slug}.role`) || teacher.role,
+    bio: t(`teachers.data.${teacher.slug}.bio`) || teacher.bio,
+    specialties: teacher.specialties?.map((_, index) =>
+      t(`teachers.data.${teacher.slug}.specialties.${index}`) || teacher.specialties[index]
+    ) || teacher.specialties,
+  }))
+
+  // Get teacher from URL param and translate
   const selectedTeacher = useMemo(() => {
     const teacherSlug = searchParams.get('teacher')
-    return teacherSlug ? getTeacherBySlug(teacherSlug) : null
-  }, [searchParams])
+    if (!teacherSlug) return null
+
+    const teacherData = getTeacherBySlug(teacherSlug)
+    if (!teacherData) return null
+
+    // Translate teacher data based on current language
+    return {
+      ...teacherData,
+      fullName: t(`teachers.data.${teacherData.slug}.fullName`) || teacherData.fullName,
+      role: t(`teachers.data.${teacherData.slug}.role`) || teacherData.role,
+      bio: t(`teachers.data.${teacherData.slug}.bio`) || teacherData.bio,
+      specialties: teacherData.specialties?.map((_, index) =>
+        t(`teachers.data.${teacherData.slug}.specialties.${index}`) || teacherData.specialties[index]
+      ) || teacherData.specialties,
+    }
+  }, [searchParams, t, lang])
 
   const isModalOpen = !!selectedTeacher
 
@@ -191,7 +216,7 @@ export default function Teachers() {
                       <div className="teacher-card__content">
                         <h3 className="teacher-card__name">{teacher.fullName}</h3>
                         <p className="teacher-card__role">{teacher.role}</p>
-                        <p className="teacher-card__bio">{teacher.shortBio}</p>
+                        <p className="teacher-card__bio">{teacher.bio}</p>
 
                         <div className="teacher-card__specialties">
                           {teacher.specialties.slice(0, 3).map(specialty => (
@@ -266,16 +291,19 @@ export default function Teachers() {
                       <div className="teacher-modal__courses">
                         <h3>{t('teachers.modal.coursesTitle')}</h3>
                         <div className="teacher-modal__course-list">
-                          {selectedTeacher.courseSlugs.map(courseSlug => (
-                            <button
-                              key={courseSlug}
-                              className="teacher-modal__course teacher-modal__course--clickable"
-                              onClick={() => handleCourseClick(courseSlug)}
-                              type="button"
-                            >
-                              {courseSlug.replace('-', ' ').toUpperCase()}
-                            </button>
-                          ))}
+                          {selectedTeacher.courseSlugs.map(courseSlug => {
+                            const courseTitle = t(`courseDetails.data.${courseSlug}.title`) || courseSlug.replace('-', ' ').toUpperCase()
+                            return (
+                              <button
+                                key={courseSlug}
+                                className="teacher-modal__course teacher-modal__course--clickable"
+                                onClick={() => handleCourseClick(courseSlug)}
+                                type="button"
+                              >
+                                {courseTitle}
+                              </button>
+                            )
+                          })}
                         </div>
                       </div>
                     )}

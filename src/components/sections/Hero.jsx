@@ -28,7 +28,7 @@ function Hero() {
             delay={100}
             duration={1.5}
             ease="power3.out"
-            splitType="chars"
+            splitType="words"
             from={{ opacity: 0, y: 24 }}
             to={{ opacity: 1, y: 0 }}
             threshold={0.2}

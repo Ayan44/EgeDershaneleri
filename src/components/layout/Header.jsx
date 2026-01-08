@@ -206,7 +206,7 @@ function Header() {
         <button
           type="button"
           className="nav__toggle"
-          aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-label={menuOpen ? t('nav.ariaLabels.closeMenu') : t('nav.ariaLabels.openMenu')}
           aria-expanded={menuOpen}
           aria-controls="main-navigation"
           onClick={handleToggleMenu}
