@@ -2,17 +2,18 @@ import { Link } from 'react-router-dom'
 import { COURSES_DATA } from '../../data/courses'
 import ScrollReveal from '../ui/ScrollReveal'
 import { useLanguage } from '../../i18n/LanguageProvider'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 function Services() {
   const { t, lang } = useLanguage()
+  const [showAll, setShowAll] = useState(false)
 
   // Transform the centralized course data into the format needed for the grid
   const coursesForGrid = useMemo(() => {
     return COURSES_DATA.map(course => {
       const courseSlug = course.slug || course.id
       return {
-        title: t(`courseDetails.data.${courseSlug}.title`) || course.title,
-        description: t(`courseDetails.data.${courseSlug}.shortDescription`) || course.shortDescription,
+        title: t(`courseDetails.data.${courseSlug}.title`),
+        description: t(`courseDetails.data.${courseSlug}.shortDescription`),
         thumbnailUrl: course.thumbnailUrl,
         href: courseSlug.startsWith('olympiad-')
           ? `/courses/olympiad/${courseSlug.replace('olympiad-', '')}`
@@ -20,6 +21,9 @@ function Services() {
       }
     })
   }, [t, lang])
+
+  const displayedCourses = showAll ? coursesForGrid : coursesForGrid.slice(0, 6)
+  const hasMoreCourses = coursesForGrid.length > 6
 
   return (
     <ScrollReveal
@@ -39,7 +43,7 @@ function Services() {
           </div>
 
           <div className="coursesGrid">
-            {coursesForGrid.map((course) => (
+            {displayedCourses.map((course) => (
               <Link key={course.href} to={course.href} className="courseCard">
                 <div className="courseCard__media">
                   <img
@@ -59,6 +63,17 @@ function Services() {
               </Link>
             ))}
           </div>
+
+          {hasMoreCourses && !showAll && (
+            <div className="services__more">
+              <button
+                onClick={() => setShowAll(true)}
+                className="btn btn--secondary"
+              >
+                {t('services.showMore')}
+              </button>
+            </div>
+          )}
         </div>
       </section>
     </ScrollReveal>

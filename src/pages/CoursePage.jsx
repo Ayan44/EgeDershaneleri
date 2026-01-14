@@ -1,13 +1,13 @@
 import { Link, useParams } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { getCourseBySlug } from '../services/contentService'
-import ScrollToTop from '../components/ui/ScrollToTop'
 import ScrollReveal from '../components/ui/ScrollReveal'
 import Breadcrumb from '../components/ui/Breadcrumb'
 import { useLanguage } from '../i18n/LanguageProvider'
 function CoursePage() {
   const { t, lang } = useLanguage()
   const { courseId, subCourseId } = useParams()
+  const [showCampBanner, setShowCampBanner] = useState(false)
 
   // Determine the course slug
   let courseSlug = ''
@@ -24,22 +24,57 @@ function CoursePage() {
   // Translate course data based on current language
   const course = courseData ? {
     ...courseData,
-    title: t(`courseDetails.data.${courseSlug}.title`) || courseData.title,
-    shortDescription: t(`courseDetails.data.${courseSlug}.shortDescription`) || courseData.shortDescription,
-    level: t(`courseDetails.data.${courseSlug}.level`) || courseData.level,
-    format: t(`courseDetails.data.${courseSlug}.format`) || courseData.format,
-    audience: courseData.audience?.map((_, index) =>
-      t(`courseDetails.data.${courseSlug}.audience.${index}`) || courseData.audience[index]
-    ) || courseData.audience,
-    program: courseData.program?.map((_, index) =>
-      t(`courseDetails.data.${courseSlug}.program.${index}`) || courseData.program[index]
-    ) || courseData.program,
+    title: t(`courseDetails.data.${courseSlug}.title`),
+    shortDescription: t(`courseDetails.data.${courseSlug}.shortDescription`),
+    level: t(`courseDetails.data.${courseSlug}.level`),
+    format: t(`courseDetails.data.${courseSlug}.format`),
+    audience: (() => {
+      const audienceData = t(`courseDetails.data.${courseSlug}.audience`)
+      if (Array.isArray(audienceData)) {
+        return audienceData
+      }
+      // Fallback: try to get individual items by index
+      const audienceArray = []
+      let index = 0
+      while (index < 10) {
+        const item = t(`courseDetails.data.${courseSlug}.audience.${index}`)
+        if (!item || item === `courseDetails.data.${courseSlug}.audience.${index}`) break
+        audienceArray.push(item)
+        index++
+      }
+      return audienceArray
+    })(),
+    program: (() => {
+      const programData = t(`courseDetails.data.${courseSlug}.program`)
+      if (Array.isArray(programData)) {
+        return programData
+      }
+      // Fallback: try to get individual items by index
+      const programArray = []
+      let index = 0
+      while (index < 15) {
+        const item = t(`courseDetails.data.${courseSlug}.program.${index}`)
+        if (!item || item === `courseDetails.data.${courseSlug}.program.${index}`) break
+        programArray.push(item)
+        index++
+      }
+      return programArray
+    })(),
   } : null
 
   useEffect(() => {
     // Scroll to top when component mounts
     window.scrollTo(0, 0)
-  }, [])
+    
+    // Show camp banner for YÖS/TYS course
+    if (courseSlug === 'yos-tys') {
+      setShowCampBanner(true)
+    }
+  }, [courseSlug])
+  
+  const handleCloseCampBanner = () => {
+    setShowCampBanner(false)
+  }
 
   if (!course) {
     return (
@@ -76,9 +111,7 @@ function CoursePage() {
   }
 
   return (
-    <>
-      <ScrollToTop />
-      <main className="container page">
+    <main className="container page">
         <Breadcrumb
           items={[
             { href: '/', label: t('courseDetails.breadcrumb.home') },
@@ -86,6 +119,36 @@ function CoursePage() {
             { label: course.title }
           ]}
         />
+
+        {/* Intensive Camp Banner for YÖS/TYS */}
+        {showCampBanner && courseSlug === 'yos-tys' && (
+          <div className="intensive-camp-banner">
+            <div className="intensive-camp-banner__content">
+              <div className="intensive-camp-banner__text">
+                <h3 className="intensive-camp-banner__title">
+                  {t('courseDetails.intensiveCamp.title')}
+                </h3>
+                <p className="intensive-camp-banner__description">
+                  {t('courseDetails.intensiveCamp.description')}
+                </p>
+                <div className="intensive-camp-banner__schedule">
+                  <span className="intensive-camp-banner__schedule-icon">⏰</span>
+                  <span>{t('courseDetails.intensiveCamp.schedule')}</span>
+                </div>
+                <p className="intensive-camp-banner__opportunity">
+                  {t('courseDetails.intensiveCamp.opportunity')}
+                </p>
+              </div>
+              <button
+                onClick={handleCloseCampBanner}
+                className="intensive-camp-banner__close"
+                aria-label={t('courseDetails.intensiveCamp.close')}
+              >
+                ×
+              </button>
+            </div>
+          </div>
+        )}
 
         <div className="pageContentAbout">
           {/* 1️⃣ Hero Section */}
@@ -109,10 +172,22 @@ function CoursePage() {
                         <span className="info-chip__icon">📊</span>
                         <span>{course.level}</span>
                       </div>
-                      <div className="info-chip">
-                        <span className="info-chip__icon">💻</span>
-                        <span>{course.format}</span>
+                      {course.format && (Array.isArray(course.format) ? course.format : course.format.split(' / '))
+                        .filter(item => item && item.trim())
+                        .map((formatItem, index) => {
+                          const trimmedFormat = formatItem.trim().toLowerCase()
+                          const icon = trimmedFormat.includes('online') || trimmedFormat.includes('onlayn') 
+                            ? '💻' 
+                            : trimmedFormat.includes('əyani') || trimmedFormat.includes('in-person') || trimmedFormat.includes('offline')
+                            ? '🏫'
+                            : '💻'
+                          return (
+                            <div key={index} className="info-chip">
+                              <span className="info-chip__icon">{icon}</span>
+                              <span>{formatItem.trim()}</span>
                       </div>
+                          )
+                        })}
                     </div>
 
                     <div className="course-hero__cta">
@@ -156,9 +231,6 @@ function CoursePage() {
                         {index === 3 && '💼'}
                       </div>
                       <h3 className="audience-card__title">{item.split(':')[0] || item}</h3>
-                      <p className="audience-card__description">
-                        {item.includes(':') ? item.split(':')[1].trim() : item}
-                      </p>
                     </div>
                   ))}
                 </div>
@@ -217,7 +289,7 @@ function CoursePage() {
                     <Link to="/contact" className="btn btn--primary btn--large">
                       {t('courseDetails.finalCta.applyNow')}
                     </Link>
-                    <a href="tel:+994777440745" className="btn btn--secondary">
+                    <a href="tel:+994777440745" className="btn btn--secondary-course">
                       {t('courseDetails.finalCta.phone')}
                     </a>
                   </div>
@@ -227,7 +299,6 @@ function CoursePage() {
           </ScrollReveal>
         </div>
       </main>
-    </>
   )
 }
 

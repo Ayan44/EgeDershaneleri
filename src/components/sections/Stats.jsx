@@ -118,8 +118,8 @@ function Stats() {
 
   const STATS_CONFIG_TRANSLATED = [
     { value: '500+', label: t('stats.items.students') },
-    { value: '120+', label: t('stats.items.internationalAdmissions') },
-    { value: '10+', label: t('stats.items.yearsExperience') },
+    { value: '100%', label: t('stats.items.internationalAdmissions') },
+    { value: '7+', label: t('stats.items.yearsExperience') },
   ]
 
   const parsedStats = STATS_CONFIG_TRANSLATED.map((stat) => ({
@@ -169,27 +169,40 @@ function Stats() {
               loading="lazy"
             />
 
-            <div className="stats__ceo-card founderCard">
-              <div className="founderCard__avatar">
-                <img
-                  src="/photos/founder.jpg"
-                  alt={t('stats.founder.name')}
-                  loading="lazy"
-                />
-              </div>
-              <div className="founderCard__text">
-                <p className="founderCard__name">{t('stats.founder.name')}</p>
-                <p className="founderCard__role">{t('stats.founder.role')}</p>
-                <div className="founderCard__socials">
-                  <p>{t('stats.founder.social1')}</p>
-                  <p>{t('stats.founder.social2')}</p>
-                  <p>{t('stats.founder.social3')}</p>
+            <div className="stats__cards">
+              <div className="stats__ceo-card founderCard">
+                <div className="founderCard__avatar">
+                  <img
+                    src="/photos/founder.jpg"
+                    alt={t('stats.founder.name')}
+                    loading="lazy"
+                  />
                 </div>
-                <div className="founderCard__tags">
-                  <span className="founderCard__tag">{t('stats.founder.tag1')}</span>
-                  <span className="founderCard__tag">
-                    {t('stats.founder.tag2')}
-                  </span>
+                <div className="founderCard__text">
+                  <p className="founderCard__name">{t('stats.founder.name')}</p>
+                  <p className="founderCard__role">{t('stats.founder.role')}</p>
+                  <div className="founderCard__socials">
+                    <p>{t('stats.founder.social1')}</p>
+                    <p>{t('stats.founder.social2')}</p>
+                    <p>{t('stats.founder.social3')}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="stats__ceo-card founderCard">
+                <div className="founderCard__avatar">
+                  <img
+                    src="/photos/vusale-memmedova.jpg"
+                    alt={t('stats.director.name')}
+                    loading="lazy"
+                  />
+                </div>
+                <div className="founderCard__text">
+                  <p className="founderCard__name">{t('stats.director.name')}</p>
+                  <p className="founderCard__role">{t('stats.director.role')}</p>
+                  <div className="founderCard__socials">
+                    <p>{t('stats.director.social1')}</p>
+                  </div>
                 </div>
               </div>
             </div>

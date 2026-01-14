@@ -45,12 +45,11 @@ export const en = {
     phone: 'Phone',
     email: 'Email',
     location: 'Location',
-    hours: 'Weekdays: 10:00–19:00',
+    hours: 'Monday - Saturday: 09:00–20:00',
     copyright: '© 2025 EGE Dershane. All rights reserved.',
     developedBy: 'Developed by',
     privacyPolicy: 'Privacy Policy',
     termsOfService: 'Terms of Service',
-    scrollToTop: 'Scroll to top',
   },
 
   // Hero Section
@@ -84,7 +83,7 @@ export const en = {
       },
       email: {
         label: 'Email Address',
-        address: 'info@egedershane.az',
+        address: 'bakuegedershaneleri@gmail.com',
       },
       location: {
         label: 'Office Location',
@@ -196,7 +195,7 @@ export const en = {
         },
         studyAbroad: {
           question: 'What are the study abroad services?',
-          answer: 'Our study abroad services include university selection, document preparation, visa process, admission strategy and study plan preparation.',
+          answer: 'Our study abroad services include university selection, document preparation, visa process, admission strategy, study plan preparation and scholarship opportunities.',
         },
         achievements: {
           question: 'How are our achievement indicators?',
@@ -221,6 +220,7 @@ export const en = {
     subtitle: 'Support your students with professional courses and individual support services for international and local exam preparation.',
     viewDetails: 'View details',
     courseAlt: 'course',
+    showMore: 'Show more',
   },
 
   // Courses Page
@@ -431,7 +431,7 @@ export const en = {
     imageAlt: 'Statistics and results',
     items: {
       students: 'Students',
-      internationalAdmissions: 'International admissions',
+      internationalAdmissions: 'Admission Rate',
       yearsExperience: 'Years of experience',
     },
     founder: {
@@ -442,6 +442,11 @@ export const en = {
       social3: '@egemathcenter',
       tag1: '💼 Education expert',
       tag2: '🏆 Pioneer of PRACTICAL MATHEMATICS in Azerbaijan',
+    },
+    director: {
+      name: 'VUSALE MAMMADOVA',
+      role: 'Executive Director of',
+      social1: '@ege_dershaneleri'
     },
   },
 
@@ -492,7 +497,7 @@ export const en = {
   studyAbroadComponent: {
     eyebrow: 'Study Abroad',
     title: 'Education at the world\'s best universities',
-    subtitle: 'We are with you with professional advice and full support services to realize your dream of studying abroad. We simplify the admission process to universities in Europe, America and other countries.',
+    subtitle: 'We are with you with professional advice and full support services to realize your dream of studying abroad. We simplify the admission process to universities in Turkey, Europe, America and other countries.',
     services: {
       universitySelection: 'University selection and suitability analysis',
       documentPreparation: 'Document preparation and application process',
@@ -536,6 +541,14 @@ export const en = {
     learningOutcomes: {
       title: 'What you will learn',
     },
+    intensiveCamp: {
+      title: '🔥 Intensive Pre-Exam Camp',
+      description: 'During the period close to the exam, an intensive preparation camp is organized from 9:00 AM to 6:00 PM. Students come to the course to prepare for the exam and achieve maximum results.',
+      schedule: '9:00 AM - 6:00 PM',
+      opportunity: 'Take advantage of this opportunity!',
+      cta: 'Get information about the camp',
+      close: 'Close',
+    },
     finalCta: {
       title: 'Ready? Register and build your future!',
       subtitle: 'Apply now and join our course. Your success is our priority.',
@@ -545,14 +558,14 @@ export const en = {
     data: {
       sat: {
         title: 'SAT Preparation',
-        shortDescription: 'Intensive preparation program to achieve high results on the SAT exam. An important step for admission to American universities.',
+        shortDescription: 'Intensive preparation program to achieve high results on the SAT exam. An important step for admission to American universities, English education in Turkey, and ADA University.',
         level: 'Intermediate level',
-        format: 'Online',
+        format: 'Online / In-person',
         audience: [
-          'High school graduates and graduates',
-          'Those applying to American universities',
-          'Those targeting high academic results',
-          'Those who want to complete the school program'
+          'Those targeting admission to American universities: Suitable for high school graduates and graduates who want to study at US universities and are preparing for the SAT exam.',
+          'Those seeking English-language education in Turkey: Designed for students preparing for the SAT exam to gain admission to English-language universities in Turkey.',
+          'Those targeting admission to ADA University: Ideal for those who want to achieve high scores on the SAT exam for admission to ADA University.',
+          'Those targeting high academic results: Suitable for those who want to score high on the SAT exam and increase their chances of admission to international universities.'
         ],
         program: [
           'Reading: text comprehension and analysis skills',
@@ -567,17 +580,17 @@ export const en = {
       'yos-tys': {
         title: 'YÖS / TYS Preparation',
         shortDescription: 'Professional preparation for YÖS and TYS exams for admission to Turkish universities. Increase your chances of admission to Turkey\'s best universities.',
-        level: 'Intermediate level',
-        format: 'Online',
+        level: 'Beginner level',
+        format: 'Online / In-person',
         audience: [
-          'Those applying to Turkish universities',
-          'High school graduates preparing for YÖS/TYS exam',
-          'Those who want to get acquainted with the Turkish education system',
-          'Those targeting education abroad'
+          'Those targeting admission to Turkish universities: Suitable for high school graduates who want to study at Turkey\'s best universities and are preparing for YÖS and TYS exams.',
+          'Those preparing for YÖS exam: Designed for students preparing for the YÖS exam which includes Mathematics, Physics, Chemistry and Biology subjects.',
+          'Those preparing for TYS exam: Ideal for high school graduates preparing for the TYS exam which includes Turkish language and literature, Mathematics and History subjects.',
+          'Those expecting high results in exams: Suitable for those who want to score high on YÖS and TYS exams and increase their chances of admission to Turkey\'s best universities.'
         ],
         program: [
-          'YÖS: Mathematics, Physics, Chemistry, Biology',
-          'TYS: Turkish language and literature, Mathematics, History',
+          'YÖS: Mathematics (Logic, Geometry, Algebra)',
+          'TYS: Turkish language',
           'Practical tests and topic reviews',
           'Information about Turkish universities',
           'Individual preparation plan and tracking',
@@ -589,7 +602,7 @@ export const en = {
         title: 'IELTS Preparation',
         shortDescription: 'Professional preparation course for the international English language exam. The most widely accepted English language certificate in the world.',
         level: 'All levels',
-        format: 'Online',
+        format: 'Online / In-person',
         audience: [
           'Those targeting education abroad',
           'Those who need an English language certificate for work',
@@ -610,7 +623,7 @@ export const en = {
         title: 'TOEFL Preparation',
         shortDescription: 'Intensive preparation program to achieve high results on the TOEFL iBT exam. Ideal for American and Canadian universities.',
         level: 'Intermediate level',
-        format: 'Online',
+        format: 'Online / In-person',
         audience: [
           'Those applying to American and Canadian universities',
           'Those who want to develop academic English skills',
@@ -631,12 +644,12 @@ export const en = {
         title: 'General English',
         shortDescription: 'Intensive course program designed to develop general English language skills.',
         level: 'Beginner level',
-        format: 'Online',
+        format: 'Online / In-person',
         audience: [
           'Those who want to learn English from scratch',
           'Those who want to develop general communication skills',
           'Those who want to learn English for travel and work',
-          'Language skills for communication with family and friends'
+          'Those preparing for IELTS and SAT: IELTS and SAT exams require intermediate level English. Students at beginner level first prepare in the general English course'
         ],
         program: [
           'Basic grammar rules and usage',
@@ -652,7 +665,7 @@ export const en = {
         title: 'Olympiad Mathematics',
         shortDescription: 'Specialized preparation program for mathematics olympiads. For those who want to participate in international mathematics competitions.',
         level: 'Advanced level',
-        format: 'Online',
+        format: 'Online / In-person',
         audience: [
           'Students who want to participate in mathematics olympiads',
           'Those who want to develop high mathematics skills',
@@ -673,7 +686,7 @@ export const en = {
         title: 'IQ Olympiad Preparation',
         shortDescription: 'Special preparation program for IQ and logic olympiads. Ideal preparation for participating in international IQ competitions.',
         level: 'Intermediate level',
-        format: 'Online',
+        format: 'Online / In-person',
         audience: [
           'Students who want to participate in IQ olympiads',
           'Those who want to develop logic and thinking skills',
@@ -694,7 +707,7 @@ export const en = {
         title: 'English Language Olympiad Preparation',
         shortDescription: 'High-level preparation program for English language olympiads. Professional support for participating in international language competitions.',
         level: 'Advanced level',
-        format: 'Online',
+        format: 'Online / In-person',
         audience: [
           'Students who want to participate in English language olympiads',
           'Those who want to develop high-level language skills',
@@ -709,6 +722,112 @@ export const en = {
           'International olympiad formats',
           'Text analysis and literary criticism',
           'Time management and strategies'
+        ],
+      },
+      'graduation-preparation': {
+        title: 'Graduation Exam Preparation',
+        shortDescription: 'Professional preparation for 9th and 11th grade graduation exams. Intensive program to achieve high results in DIM graduation exams.',
+        level: 'Beginner level',
+        format: 'Online / In-person',
+        audience: [
+          '9th and 11th grade students: Suitable for students preparing for graduation exams who want to complete the school program and achieve high results.',
+          'Those targeting high scores in DIM exams: Designed for students who want to achieve high results in graduation exams and gain academic success.',
+          'Those seeking systematic and planned preparation: Ideal for students and parents who want lessons to be conducted based on topics with tests and practical exercises.',
+          'Those who want to adapt to exam format: Suitable for those who want to learn the DIM exam format and develop test-solving skills.'
+        ],
+        program: [
+          'Azerbaijani language: grammar, writing and text comprehension',
+          'Mathematics: algebra, geometry and problem solving',
+          'English language: grammar, vocabulary and reading skills',
+          'Topic explanation and theoretical foundations',
+          'Practical tests and exam format exercises',
+          'Score improvement strategies and time management',
+          'Mock exams and performance analysis'
+        ],
+      },
+      'entrant-preparation': {
+        title: 'Entrance Exam Preparation',
+        shortDescription: 'Professional preparation for 11th grade exams. Preparation for entrance exams with score improvement strategies for graduation and block tests.',
+        level: 'Beginner level',
+        format: 'Online / In-person',
+        audience: [
+          'Students who want to strengthen their knowledge: Suitable for those with weak basic topics who want to fill gaps and learn lessons systematically.',
+          'Those targeting to improve exam results: Designed for students who want to score higher in graduation or entrance exams and significantly improve their results.',
+          'Those seeking planned and monitored preparation: Suitable for students and parents who want lessons to be conducted based on a program with attendance and result monitoring.',
+          'Those who want to reduce exam stress: Ideal for those who want to prepare psychologically for exams through tests, quizzes and explanatory lessons.'
+        ],
+        program: [
+          'Group I: Physics, Chemistry, Mathematics',
+          'Group II: Biology, Chemistry, Mathematics',
+          'Group III: History, Geography, Azerbaijani language',
+          'Group IV: Mathematics, English language, Azerbaijani language',
+          'Entrance exam strategies and score improvement techniques',
+          'Preparation for graduation and block tests',
+          'Mock exams and performance monitoring',
+          'Individual preparation plan and strengthening weaknesses'
+        ],
+      },
+      miq: {
+        title: 'MIQ - Teacher Recruitment',
+        shortDescription: 'Professional preparation for teacher recruitment exams. Preparation program for MIQ exam to get hired as a teacher in educational institutions.',
+        level: 'Intermediate level',
+        format: 'Online / In-person',
+        audience: [
+          'Those who want to get hired as a teacher',
+          'Teacher candidates applying to educational institutions',
+          'Those preparing for MIQ exam',
+          'Those who want to improve their pedagogy and methodology knowledge'
+        ],
+        program: [
+          'Fundamentals of pedagogy and psychology',
+          'Teaching methodology and lesson planning',
+          'Logical thinking and analytical skills',
+          'Test solving techniques and strategies',
+          'Adaptation to exam format',
+          'Mock exams and performance analysis',
+          'Recruitment process and advice'
+        ],
+      },
+      'russian-language': {
+        title: 'Russian Language',
+        shortDescription: 'Professional course program to learn Russian from scratch or improve existing knowledge. Communication, grammar and vocabulary expansion.',
+        level: 'All levels',
+        format: 'Online / In-person',
+        audience: [
+          'Those who want to learn Russian from scratch',
+          'Those who want to develop Russian communication skills',
+          'Those who need Russian for work and education',
+          'Those interested in Russian literature and culture'
+        ],
+        program: [
+          'Basic grammar rules and usage',
+          'Vocabulary expansion and word stock',
+          'Speaking skills and pronunciation',
+          'Reading and writing skills',
+          'Listening comprehension and communication',
+          'Practice in real-life situations',
+          'Introduction to Russian culture and literature'
+        ],
+      },
+      'german-language': {
+        title: 'German Language',
+        shortDescription: 'Intensive course program to learn German at a professional level. Ideal preparation for admission to European universities and job opportunities.',
+        level: 'All levels',
+        format: 'Online / In-person',
+        audience: [
+          'Those who want to learn German from scratch',
+          'Those targeting education in Germany',
+          'Those who need German for work',
+          'Those interested in German culture and literature'
+        ],
+        program: [
+          'German grammar and syntax',
+          'Vocabulary expansion and word stock',
+          'Speaking skills and pronunciation',
+          'Reading and writing skills',
+          'Listening comprehension and communication',
+          'Preparation for TestDaF and Goethe certificates',
+          'Introduction to German culture and society'
         ],
       },
     },
@@ -952,11 +1071,11 @@ export const en = {
     },
     chart: {
       labels: {
-        ielts: 'IELTS',
-        toefl: 'TOEFL',
-        sat: 'SAT',
         yos: 'YÖS',
-        olympiad: 'Olympiad Preparation',
+        entrant: 'Entrant',
+        english: 'English Language',
+        individual: 'Individual',
+        sat: 'SAT',
       },
       tooltipFormat: ': %',
     },

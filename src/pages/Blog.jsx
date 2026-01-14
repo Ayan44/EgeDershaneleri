@@ -5,6 +5,61 @@ import Breadcrumb from '../components/ui/Breadcrumb'
 import { getBlogPosts, getBlogPostBySlug, getBlogCategories } from '../services/contentService'
 import ScrollReveal from '../components/ui/ScrollReveal'
 import { useLanguage } from '../i18n/LanguageProvider'
+
+// Sanitize HTML content to prevent XSS attacks
+// Allows safe formatting tags but removes scripts, event handlers, and dangerous attributes
+const sanitizeHTML = (html) => {
+  if (!html || typeof html !== 'string') return ''
+
+  const cleaned = html.trim()
+  if (!cleaned) return ''
+
+  // Only proceed if we're in the browser (client-side)
+  if (typeof document === 'undefined') {
+    return cleaned
+  }
+
+  try {
+    // Create a temporary div to parse and sanitize HTML
+    const temp = document.createElement('div')
+    // Set HTML content - browser will parse it correctly
+    temp.innerHTML = cleaned
+
+    // Remove dangerous elements and attributes
+    const dangerousTags = ['script', 'iframe', 'object', 'embed', 'form', 'input', 'button', 'link', 'meta', 'style']
+    const dangerousAttributes = ['onerror', 'onload', 'onclick', 'onmouseover', 'onfocus', 'onblur', 'onchange', 'onsubmit', 'onmouseout', 'onkeydown', 'onkeyup']
+
+    // Remove dangerous tags
+    dangerousTags.forEach(tag => {
+      const elements = temp.querySelectorAll(tag)
+      elements.forEach(el => el.remove())
+    })
+
+    // Remove dangerous attributes from all elements
+    const allElements = temp.querySelectorAll('*')
+    allElements.forEach(el => {
+      dangerousAttributes.forEach(attr => {
+        el.removeAttribute(attr)
+      })
+      // Remove javascript: and data: URLs from href and src
+      const href = el.getAttribute('href')
+      const src = el.getAttribute('src')
+      if (href && (href.toLowerCase().startsWith('javascript:') || href.toLowerCase().startsWith('data:text/html'))) {
+        el.removeAttribute('href')
+      }
+      if (src && (src.toLowerCase().startsWith('javascript:') || src.toLowerCase().startsWith('data:text/html'))) {
+        el.removeAttribute('src')
+      }
+    })
+
+    // Return the sanitized HTML - innerHTML will properly format it
+    const sanitized = temp.innerHTML
+    return sanitized || cleaned
+  } catch (error) {
+    // If sanitization fails, return original (trusted source - translation files)
+    return cleaned
+  }
+}
 export default function Blog() {
   const { t, lang } = useLanguage()
   const navigate = useNavigate()
@@ -38,7 +93,7 @@ export default function Blog() {
         title: t(`blog.data.${post.slug}.title`) || post.title,
         excerpt: t(`blog.data.${post.slug}.excerpt`) || post.excerpt,
         category: translatedCategory,
-        content: translatedContent || post.content,
+        content: (translatedContent || post.content || '').trim(),
         coverImage: post.coverImage || post.coverUrl,
         date: t(`blog.data.${post.slug}.date`) || post.date,
         readTime: t(`blog.data.${post.slug}.readTime`) || post.readTime,
@@ -92,7 +147,7 @@ export default function Blog() {
           title: t(`blog.data.${postData.slug}.title`) || postData.title,
           excerpt: t(`blog.data.${postData.slug}.excerpt`) || postData.excerpt,
           category: translatedCategory,
-          content: translatedContent || postData.content,
+          content: (translatedContent || postData.content || '').trim(),
           coverImage: postData.coverImage || postData.coverUrl,
           date: t(`blog.data.${postData.slug}.date`) || postData.date,
           readTime: t(`blog.data.${postData.slug}.readTime`) || postData.readTime,
@@ -322,7 +377,7 @@ export default function Blog() {
 
               <div
                 className="blog-modal__content"
-                dangerouslySetInnerHTML={{ __html: selectedPost.content }}
+                dangerouslySetInnerHTML={{ __html: sanitizeHTML(selectedPost.content || '') }}
               />
             </div>
           )}

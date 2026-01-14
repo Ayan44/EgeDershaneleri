@@ -3,7 +3,11 @@ import './ContactPage.css'
 import Breadcrumb from '../components/ui/Breadcrumb'
 import ScrollReveal from '../components/ui/ScrollReveal'
 import { useLanguage } from '../i18n/LanguageProvider'
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/xdakqggz" // <-- öz endpoint-in
+
+// Use environment variables - no fallback for security
+const FORMSPREE_ENDPOINT = import.meta.env.VITE_FORMSPREE_ENDPOINT
+const CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL
+const CONTACT_PHONE = import.meta.env.VITE_CONTACT_PHONE
 
 function Contact() {
   const { t } = useLanguage()
@@ -17,6 +21,8 @@ function Contact() {
   const [errors, setErrors] = useState({})
   const [toast, setToast] = useState(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitCount, setSubmitCount] = useState(0)
+  const [lastSubmitTime, setLastSubmitTime] = useState(0)
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -37,18 +43,48 @@ function Contact() {
   const validateForm = () => {
     const newErrors = {}
 
-    if (!formData.fullName.trim()) {
+    // Validate fullName: required, max length, no HTML tags
+    const fullName = formData.fullName.trim()
+    if (!fullName) {
       newErrors.fullName = t('contact.form.fullName.error')
+    } else if (fullName.length > 100) {
+      newErrors.fullName = t('contact.form.fullName.tooLong') || 'Name is too long (max 100 characters)'
+    } else if (/<[^>]*>/g.test(fullName)) {
+      newErrors.fullName = t('contact.form.fullName.invalid') || 'Invalid characters in name'
     }
 
-    if (!formData.email.trim()) {
+    // Validate email: required, proper format, max length
+    const email = formData.email.trim()
+    if (!email) {
       newErrors.email = t('contact.form.email.error')
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    } else if (email.length > 254) {
+      newErrors.email = t('contact.form.email.tooLong') || 'Email is too long'
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       newErrors.email = t('contact.form.email.invalid')
     }
 
-    if (!formData.message.trim()) {
+    // Validate phone: optional but if provided, must be valid format
+    const phone = formData.phone.trim()
+    if (phone && phone.length > 20) {
+      newErrors.phone = t('contact.form.phone.tooLong') || 'Phone number is too long'
+    } else if (phone && !/^[\d\s\-\+\(\)]+$/.test(phone)) {
+      newErrors.phone = t('contact.form.phone.invalid') || 'Invalid phone number format'
+    }
+
+    // Validate message: required, max length, no HTML tags
+    const message = formData.message.trim()
+    if (!message) {
       newErrors.message = t('contact.form.message.error')
+    } else if (message.length > 5000) {
+      newErrors.message = t('contact.form.message.tooLong') || 'Message is too long (max 5000 characters)'
+    } else if (/<script[^>]*>/gi.test(message)) {
+      newErrors.message = t('contact.form.message.invalid') || 'Invalid content in message'
+    }
+
+    // Validate subject: optional but if provided, max length
+    const subject = formData.subject.trim()
+    if (subject && subject.length > 200) {
+      newErrors.subject = t('contact.form.subject.tooLong') || 'Subject is too long'
     }
 
     setErrors(newErrors)
@@ -61,21 +97,61 @@ function Contact() {
     if (!validateForm()) return
     if (isSubmitting) return
 
+    // Rate limiting: max 3 submissions per 5 minutes
+    const now = Date.now()
+    const timeSinceLastSubmit = now - lastSubmitTime
+    const fiveMinutes = 5 * 60 * 1000
+
+    if (timeSinceLastSubmit < fiveMinutes && submitCount >= 3) {
+      setToast({
+        type: "error",
+        message: t("contact.form.rateLimit") || "Too many submissions. Please wait a few minutes before trying again.",
+      })
+      setTimeout(() => setToast(null), 5000)
+      return
+    }
+
+    // Update rate limiting state
+    if (timeSinceLastSubmit >= fiveMinutes) {
+      setSubmitCount(1)
+    } else {
+      setSubmitCount(prev => prev + 1)
+    }
+    setLastSubmitTime(now)
+
     setIsSubmitting(true)
 
     try {
+      // Sanitize inputs before sending
+      const sanitizeInput = (input) => {
+        return String(input || '')
+          .trim()
+          .replace(/<[^>]*>/g, '') // Remove HTML tags
+          .substring(0, 5000) // Max length
+      }
+
       const payload = new FormData()
-      payload.append("fullName", formData.fullName)
-      payload.append("email", formData.email)
-      payload.append("phone", formData.phone)
-      payload.append("subject", formData.subject)
-      payload.append("message", formData.message)
+      payload.append("fullName", sanitizeInput(formData.fullName))
+      payload.append("email", sanitizeInput(formData.email))
+      payload.append("phone", sanitizeInput(formData.phone))
+      payload.append("subject", sanitizeInput(formData.subject))
+      payload.append("message", sanitizeInput(formData.message))
 
       // Email subject (Formspree dəstəkləyir)
-      payload.append("_subject", `EGE Dershane — Contact: ${formData.subject || "no-subject"}`)
+      const safeSubject = sanitizeInput(formData.subject) || "no-subject"
+      payload.append("_subject", `EGE Dershane — Contact: ${safeSubject}`)
 
       // Honeypot (spam) — formda input kimi də verəcəyik
       payload.append("_gotcha", "")
+
+      if (!FORMSPREE_ENDPOINT) {
+        setToast({
+          type: "error",
+          message: t("contact.form.errorConfig") || "Configuration error. Please contact support.",
+        })
+        setIsSubmitting(false)
+        return
+      }
 
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
@@ -100,12 +176,22 @@ function Contact() {
         let errMsg = t("contact.form.error")
         try {
           const data = await res.json()
-          if (data?.errors?.length) errMsg = data.errors[0].message
-        } catch { }
+          // Only show safe error messages, don't expose internal details
+          if (data?.errors?.length && typeof data.errors[0].message === 'string') {
+            const safeMessage = data.errors[0].message.substring(0, 200)
+            // Only use if it's a user-friendly message
+            if (!safeMessage.includes('stack') && !safeMessage.includes('Error:')) {
+              errMsg = safeMessage
+            }
+          }
+        } catch {
+          // Silently fail to avoid exposing errors
+        }
 
         setToast({ type: "error", message: errMsg })
       }
     } catch (error) {
+      // Don't expose error details to users
       setToast({
         type: "error",
         message: t("contact.form.errorNetwork"),
@@ -173,7 +259,7 @@ function Contact() {
                     </div>
                     <div className="contactInfoContent">
                       <h3>{t('contact.info.phone.label')}</h3>
-                      <p><a href="tel:+994777440745" className="contactLink">{t('contact.info.phone.number')}</a></p>
+                      <p><a href={CONTACT_PHONE ? `tel:${CONTACT_PHONE}` : '#'} className="contactLink">{t('contact.info.phone.number')}</a></p>
                     </div>
                   </div>
 
@@ -183,7 +269,7 @@ function Contact() {
                     </div>
                     <div className="contactInfoContent">
                       <h3>{t('contact.info.email.label')}</h3>
-                      <p><a href="mailto:info@egedershane.az" className="contactLink">{t('contact.info.email.address')}</a></p>
+                      <p><a href={CONTACT_EMAIL ? `mailto:${CONTACT_EMAIL}` : '#'} className="contactLink">{t('contact.info.email.address')}</a></p>
                     </div>
                   </div>
 
@@ -224,7 +310,7 @@ function Contact() {
                       <h3>{t('contact.info.whatsapp.label')}</h3>
                       <p>
                         <a
-                          href="https://wa.me/994777440745"
+                          href={CONTACT_PHONE ? `https://wa.me/${CONTACT_PHONE.replace(/[^0-9]/g, '')}` : '#'}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="contactLink"

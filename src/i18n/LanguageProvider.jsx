@@ -51,8 +51,11 @@ export const LanguageProvider = ({ children }) => {
             }
         }
 
-        // Return the key if the final value is not a string
-        return typeof value === 'string' ? value : key
+        // Return the value if it's a string or array, otherwise return the key
+        if (typeof value === 'string' || Array.isArray(value)) {
+            return value
+        }
+        return key
     }
 
     const value = {

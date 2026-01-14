@@ -125,39 +125,37 @@ function Achievements() {
 
   // Statistics data with translations
   const STATISTICS_DATA = useMemo(() => [
-    { value: '850+', label: t('achievements.statistics.labels.acceptedStudents') },
-    { value: '95%', label: t('achievements.statistics.labels.successRate') },
-    { value: '1500+', label: t('achievements.statistics.labels.preparedStudents') },
-    { value: '12+', label: t('achievements.statistics.labels.yearsExperience') },
-    { value: '25+', label: t('achievements.statistics.labels.internationalInstitutions') },
-    { value: '50+', label: t('achievements.statistics.labels.teachingStaff') }
+    { value: '500+', label: t('achievements.statistics.labels.acceptedStudents') },
+    { value: '100%', label: t('achievements.statistics.labels.successRate') },
+    { value: '7+', label: t('achievements.statistics.labels.yearsExperience') },
+    { value: '20+', label: t('achievements.statistics.labels.teachingStaff') }
   ], [t, lang])
 
   // Chart data with translations
   const CHART_DATA = useMemo(() => ({
     labels: [
-      t('achievements.chart.labels.ielts'),
-      t('achievements.chart.labels.toefl'),
-      t('achievements.chart.labels.sat'),
       t('achievements.chart.labels.yos'),
-      t('achievements.chart.labels.olympiad'),
+      t('achievements.chart.labels.entrant'),
+      t('achievements.chart.labels.english'),
+      t('achievements.chart.labels.individual'),
+      t('achievements.chart.labels.sat'),
     ],
     datasets: [
       {
-        data: [30, 25, 20, 15, 10],
+        data: [35, 30, 20, 10, 15],
         backgroundColor: [
-          'rgba(37, 99, 235, 0.8)',    // Blue - IELTS
-          'rgba(124, 58, 237, 0.8)',  // Purple - TOEFL
-          'rgba(16, 185, 129, 0.8)',  // Green - SAT
           'rgba(245, 158, 11, 0.8)',  // Amber - YÖS
-          'rgba(239, 68, 68, 0.8)',   // Red - Olympiad
+          'rgba(37, 99, 235, 0.8)',    // Blue - Abituriyent
+          'rgba(124, 58, 237, 0.8)',  // Purple - İngilis dili
+          'rgba(239, 68, 68, 0.8)',   // Red - Fərdi
+          'rgba(16, 185, 129, 0.8)',  // Green - SAT
         ],
         borderColor: [
+          'rgba(245, 158, 11, 1)',
           'rgba(37, 99, 235, 1)',
           'rgba(124, 58, 237, 1)',
-          'rgba(16, 185, 129, 1)',
-          'rgba(245, 158, 11, 1)',
           'rgba(239, 68, 68, 1)',
+          'rgba(16, 185, 129, 1)',
         ],
         borderWidth: 2,
       },

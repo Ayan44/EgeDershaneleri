@@ -45,18 +45,17 @@ export const az = {
     phone: 'Telefon',
     email: 'Email',
     location: 'Ünvan',
-    hours: 'Həftə içi: 10:00–19:00',
+    hours: 'Bazar ertəsi - Şənbə: 09:00–20:00',
     copyright: '© 2025 EGE Dershane. Bütün hüquqlar qorunur.',
     developedBy: 'Developed by',
     privacyPolicy: 'Məxfilik siyasəti',
     termsOfService: 'İstifadə şərtləri',
-    scrollToTop: 'Yuxarı sürüşdür',
   },
 
   // Hero Section
   hero: {
     title: 'Gələcəyini bu gündən qur.',
-    subtitle: 'SAT, YÖS, IELTS və daha çoxu üçün nəticəyönümlü hazırlıq proqramları ilə tələbələri hədəflədikləri universitetlərə aparırıq.',
+    subtitle: 'SAT, YÖS, IELTS və daha çoxu üçün nəticəyönümlü hazırlıq proqramları ilə şagirdləri hədəflədikləri universitetlərə aparırıq.',
     contact: 'Əlaqə',
     about: 'Haqqımızda',
     chips: {
@@ -84,7 +83,7 @@ export const az = {
       },
       email: {
         label: 'Email ünvanı',
-        address: 'info@egedershane.az',
+        address: 'bakuegedershaneleri@gmail.com',
       },
       location: {
         label: 'Ofis ünvanı',
@@ -196,7 +195,7 @@ export const az = {
         },
         studyAbroad: {
           question: 'Xaricdə təhsil xidmətləri hansılardır?',
-          answer: 'Xaricdə təhsil xidmətlərimiz universitet seçimi, sənəd hazırlığı, viza prosesi, qəbul strategiyası və təhsil planı hazırlığını əhatə edir.',
+          answer: 'Xaricdə təhsil xidmətlərimiz universitet seçimi, sənəd hazırlığı, viza prosesi, qəbul strategiyası, təhsil planı hazırlığı və təqaüdlü təhsil imkanlarını əhatə edir.',
         },
         achievements: {
           question: 'Nailiyyət göstəricilərimiz necədir?',
@@ -221,6 +220,7 @@ export const az = {
     subtitle: 'Beynəlxalq və yerli imtahanlara hazırlıq üçün peşəkar kurslar və fərdi dəstək xidmətlərimizlə tələbələrinizə dəstək olun.',
     viewDetails: 'Ətraflı bax',
     courseAlt: 'kursu',
+    showMore: 'Daha çox',
   },
 
   // Courses Page
@@ -431,17 +431,22 @@ export const az = {
     imageAlt: 'Statistika və nəticələr',
     items: {
       students: 'Tələbə',
-      internationalAdmissions: 'Beynəlxalq qəbul',
+      internationalAdmissions: 'Qəbul faizi',
       yearsExperience: 'İllik təcrübə',
     },
     founder: {
       name: 'MALİK MƏMMƏDOV',
-      role: 'Founder of',
+      role: 'Təsisçi',
       social1: '@ege_dershaneleri',
       social2: '@buraxilishazirliqmerkezi',
       social3: '@egemathcenter',
       tag1: '💼 Təhsil eksperti',
       tag2: '🏆 Azərbaycanda PRAKTİK RİYAZİYYAT-ın banisi',
+    },
+    director: {
+      name: 'VÜSALƏ MƏMMƏDOVA',
+      role: 'İcraçı Direktor',
+      social1: '@ege_dershaneleri'
     },
   },
 
@@ -485,14 +490,14 @@ export const az = {
     title: 'Son yazılar',
     description: 'Təhsil sahəsində ən son xəbərlər, məsləhətlər və uğur hekayələrimizlə tanış olun.',
     category: 'Təhsil',
-    viewAll: 'Hamisına bax',
+    viewAll: 'Hamısına bax',
   },
 
   // StudyAbroad Component
   studyAbroadComponent: {
     eyebrow: 'Xaricdə Təhsil',
     title: 'Dünyanın ən yaxşı universitetlərində təhsil',
-    subtitle: 'Xaricdə təhsil arzunuzu gerçəkləşdirmək üçün peşəkar məsləhət və tam dəstək xidmətlərimizlə yanınızdayıq. Avropa, Amerika və digər ölkələrdəki universitetlərə qəbul prosesini sadələşdiririk.',
+    subtitle: 'Xaricdə təhsil arzunuzu gerçəkləşdirmək üçün peşəkar məsləhət və tam dəstək xidmətlərimizlə yanınızdayıq. Türkiyə, Avropa, Amerika və digər ölkələrdəki universitetlərə qəbul prosesini sadələşdiririk.',
     services: {
       universitySelection: 'Universitet seçimi və uyğunluq analizi',
       documentPreparation: 'Sənəd hazırlığı və müraciət prosesi',
@@ -536,6 +541,14 @@ export const az = {
     learningOutcomes: {
       title: 'Nə öyrənəcəksən',
     },
+    intensiveCamp: {
+      title: '🔥 İmtahana az qalmış intensiv kamp',
+      description: 'İmtahana az qalmış dövrdə səhər 9:00-dan axşam 18:00-a qədər intensiv hazırlıq kampı təşkil olunur. Şagirdlər gəlib kursda imtahana hazırlaşır və maksimum nəticə əldə edirlər.',
+      schedule: 'Səhər 9:00 - Axşam 18:00',
+      opportunity: 'Bu fürsətdən istifadə edin!',
+      cta: 'Kamp haqqında məlumat al',
+      close: 'Bağla',
+    },
     finalCta: {
       title: 'Hazırsan? Qeydiyyatdan keç və gələcəyini qur!',
       subtitle: 'İndi müraciət et və kursumuza qoşul. Sənin uğurun bizim prioritetimizdir.',
@@ -545,14 +558,14 @@ export const az = {
     data: {
       sat: {
         title: 'SAT Hazırlığı',
-        shortDescription: 'SAT imtahanına yüksək nəticə əldə etmək üçün intensiv hazırlıq proqramı. Amerikalı universitetlərə qəbul üçün vacib bir addımdır.',
+        shortDescription: 'SAT imtahanına yüksək nəticə əldə etmək üçün intensiv hazırlıq proqramı. Amerika universitetlərinə, Türkiyədə ingiliscə təhsilə, ADA universitetinə qəbul üçün vacib bir addımdır.',
         level: 'Orta səviyyə',
-        format: 'Onlayn',
+        format: 'Onlayn / Əyani',
         audience: [
-          'Abituriyentlər və məzunlar',
-          'Amerika universitetlərinə müraciət edənlər',
-          'Yüksək akademik nəticə hədəfləyənlər',
-          'Məktəb proqramını tamamlamaq istəyənlər'
+          'Amerika universitetlərinə qəbul hədəfləyənlər: ABŞ universitetlərinə təhsil almaq istəyən, SAT imtahanına hazırlaşan abituriyentlər və məzunlar üçün uyğundur.',
+          'Türkiyədə ingiliscə təhsil istəyənlər: Türkiyənin ingiliscə təhsil verən universitetlərinə qəbul üçün SAT imtahanına hazırlaşan şagirdlər üçün nəzərdə tutulub.',
+          'ADA universitetinə qəbul hədəfləyənlər: ADA Universitetinə qəbul üçün SAT imtahanında yüksək nəticə əldə etmək istəyənlər üçün idealdır.',
+          'Yüksək akademik nəticə hədəfləyənlər: SAT imtahanında yüksək bal toplamaq, beynəlxalq universitetlərə qəbul şansını artırmaq istəyənlər üçün uyğundur.'
         ],
         program: [
           'Reading: mətn anlayışı və təhlil bacarıqları',
@@ -567,17 +580,17 @@ export const az = {
       'yos-tys': {
         title: 'YÖS / TYS Hazırlığı',
         shortDescription: 'Türk universitetlərinə qəbul üçün YÖS və TYS imtahanlarına peşəkar hazırlıq. Türkiyənin ən yaxşı universitetlərinə qəbul şansınızı artırın.',
-        level: 'Orta səviyyə',
-        format: 'Onlayn',
+        level: 'Başlanğıc səviyyə',
+        format: 'Onlayn / Əyani',
         audience: [
-          'Türkiyə universitetlərinə müraciət edənlər',
-          'YÖS/TYS imtahanına hazırlaşan abituriyentlər',
-          'Türk təhsil sistemi ilə tanış olmaq istəyənlər',
-          'Xaricdə təhsil hədəfləyənlər'
+          'Türkiyə universitetlərinə qəbul hədəfləyənlər: Türkiyənin ən yaxşı universitetlərinə təhsil almaq istəyən, YÖS və TYS imtahanlarına hazırlaşan abituriyentlər üçün uyğundur.',
+          'YÖS imtahanına hazırlaşanlar: Riyaziyyat, Fizika, Kimya və Biologiya fənlərindən ibarət YÖS imtahanına hazırlaşan şagirdlər üçün nəzərdə tutulub.',
+          'TYS imtahanına hazırlaşanlar: Türk dili və ədəbiyyatı, Riyaziyyat və Tarix fənlərindən ibarət TYS imtahanına hazırlaşan abituriyentlər üçün idealdır.',
+          'İmtahanda yüksək nəticə gözləyənlər: YÖS və TYS imtahanlarında yüksək bal toplamaq, Türkiyənin ən yaxşı universitetlərinə qəbul şansını artırmaq istəyənlər üçün uyğundur.'
         ],
         program: [
-          'YÖS: Riyaziyyat, Fizika, Kimya, Biologiya',
-          'TYS: Türk dili və ədəbiyyatı, Riyaziyyat, Tarix',
+          'YÖS: Riyaziyyat (Məntiq, Həndəsə, Cəbr)',
+          'TYS: Türk dili',
           'Praktiki testlər və mövzu təkrarları',
           'Türk universitetləri haqqında məlumat',
           'Fərdi hazırlıq planı və izləmə',
@@ -589,7 +602,7 @@ export const az = {
         title: 'IELTS Hazırlığı',
         shortDescription: 'Beynəlxalq ingilis dili imtahanı üçün peşəkar hazırlıq kursu. Dünyanın ən çox qəbul edilən ingilis dili sertifikatı.',
         level: 'Bütün səviyyələr',
-        format: 'Onlayn',
+        format: 'Onlayn / Əyani',
         audience: [
           'Xaricdə təhsil hədəfləyənlər',
           'İş üçün ingilis dili sertifikatı ehtiyacı olanlar',
@@ -610,7 +623,7 @@ export const az = {
         title: 'TOEFL Hazırlığı',
         shortDescription: 'TOEFL iBT imtahanına yüksək nəticə əldə etmək üçün intensiv hazırlıq proqramı. Amerika və Kanada universitetləri üçün ideal.',
         level: 'Orta səviyyə',
-        format: 'Onlayn',
+        format: 'Onlayn / Əyani',
         audience: [
           'Amerika və Kanada universitetlərinə müraciət edənlər',
           'Akademik ingilis dili bacarıqlarını inkişaf etdirmək istəyənlər',
@@ -631,12 +644,12 @@ export const az = {
         title: 'Ümumi İngilis Dili',
         shortDescription: 'Ümumi ingilis dili bacarıqlarını inkişaf etdirmək üçün nəzərdə tutulmuş intensiv kurs proqramı.',
         level: 'Başlanğıc səviyyə',
-        format: 'Onlayn',
+        format: 'Onlayn / Əyani',
         audience: [
           'İngilis dilini sıfırdan öyrənmək istəyənlər',
           'Ümumi ünsiyyət bacarıqlarını inkişaf etdirmək istəyənlər',
           'Səyahət və iş üçün ingilis dili öyrənmək istəyənlər',
-          'Ailə və dostlarla ünsiyyət üçün dil bacarıqları'
+          'IELTS və SAT üçün hazırlaşmaq istəyənlər: IELTS və SAT imtahanları üçün orta səviyyə ingilis dili tələb olunur. Başlanğıc səviyyədə olan şagirdlər ilk öncə ümumi ingilis dili kursunda hazırlaşırlar'
         ],
         program: [
           'Əsas qrammatika qaydaları və istifadə',
@@ -652,7 +665,7 @@ export const az = {
         title: 'Olimpiada Riyaziyyatı',
         shortDescription: 'Riyaziyyat olimpiadaları üçün ixtisaslaşdırılmış hazırlıq proqramı. Beynəlxalq riyaziyyat müsabiqələrinə qatılmaq istəyənlər üçün.',
         level: 'Yüksək səviyyə',
-        format: 'Onlayn',
+        format: 'Onlayn / Əyani',
         audience: [
           'Riyaziyyat olimpiadalarına qatılmaq istəyən şagirdlər',
           'Yüksək riyaziyyat bacarıqlarını inkişaf etdirmək istəyənlər',
@@ -673,7 +686,7 @@ export const az = {
         title: 'IQ Olimpiada Hazırlığı',
         shortDescription: 'IQ və məntiq olimpiadaları üçün xüsusi hazırlıq proqramı. Beynəlxalq IQ müsabiqələrinə qatılmaq üçün ideal hazırlıq.',
         level: 'Orta səviyyə',
-        format: 'Onlayn',
+        format: 'Onlayn / Əyani',
         audience: [
           'IQ olimpiadalarına qatılmaq istəyən şagirdlər',
           'Məntiq və düşünmə bacarıqlarını inkişaf etdirmək istəyənlər',
@@ -694,7 +707,7 @@ export const az = {
         title: 'İngilis Dili Olimpiada Hazırlığı',
         shortDescription: 'İngilis dili olimpiadaları üçün yüksək səviyyəli hazırlıq proqramı. Beynəlxalq dil müsabiqələrinə qatılmaq üçün peşəkar dəstək.',
         level: 'Yüksək səviyyə',
-        format: 'Onlayn',
+        format: 'Onlayn / Əyani',
         audience: [
           'İngilis dili olimpiadalarına qatılmaq istəyən şagirdlər',
           'Yüksək səviyyəli dil bacarıqlarını inkişaf etdirmək istəyənlər',
@@ -709,6 +722,112 @@ export const az = {
           'Beynəlxalq olimpiada formatları',
           'Mətn təhlili və ədəbi tənqid',
           'Vaxt idarəetmə və strategiyalar'
+        ],
+      },
+      'graduation-preparation': {
+        title: 'Buraxılış Hazırlığı',
+        shortDescription: '9 və 11-ci sinif buraxılış imtahanına peşəkar hazırlıq. DİM buraxılış imtahanında yüksək nəticə əldə etmək üçün intensiv proqram.',
+        level: 'Başlanğıc səviyyə',
+        format: 'Onlayn / Əyani',
+        audience: [
+          '9 və 11-ci sinif şagirdləri: Buraxılış imtahanına hazırlaşan, məktəb proqramını tamamlamaq və yüksək nəticə əldə etmək istəyən şagirdlər üçün uyğundur.',
+          'DİM imtahanında yüksək bal hədəfləyənlər: Buraxılış imtahanında yüksək nəticə əldə etmək, akademik uğur qazanmaq istəyən şagirdlər üçün nəzərdə tutulub.',
+          'Sistemli və planlı hazırlıq axtaranlar: Dərslərin mövzu əsasında, testlər və praktiki məşqlərlə aparılmasını istəyən şagird və valideynlər üçün idealdır.',
+          'İmtahan formatına uyğunlaşmaq istəyənlər: DİM imtahan formatını öyrənmək, test həll etmə bacarıqlarını inkişaf etdirmək istəyənlər üçün uyğundur.'
+        ],
+        program: [
+          'Azərbaycan dili: qrammatika, yazı və mətn anlayışı',
+          'Riyaziyyat: algebra, həndəsə və məsələ həlli',
+          'İngilis dili: qrammatika, lüğət və oxuma bacarıqları',
+          'Mövzu izahı və nəzəri əsaslar',
+          'Praktiki testlər və imtahan formatına uyğun məşqlər',
+          'Nəticə artırma strategiyaları və vaxt idarəetmə',
+          'Mock imtahanlar və performans təhlili'
+        ],
+      },
+      'entrant-preparation': {
+        title: 'Abituriyent Hazırlığı',
+        shortDescription: '11-ci sinif imtahanına peşəkar hazırlıq. Buraxılış və blok sınaqları üçün bal artırma strategiyaları ilə qəbul imtahanına hazırlıq.',
+        level: 'Başlanğıc səviyyə',
+        format: 'Onlayn / Əyani',
+        audience: [
+          'Biliklərini möhkəmləndirmək istəyən şagirdlər: Əsas mövzuları zəif olan, boşluqlarını doldurmaq və dərsləri sistemli şəkildə öyrənmək istəyənlər üçün uyğundur.',
+          'İmtahan nəticəsini yüksəltməyi hədəfləyənlər: Buraxılış və ya qəbul imtahanlarında daha yüksək bal toplamaq istəyən şagirdlər üçün nəzərdə tutulub.',
+          'Planlı və nəzarətli hazırlıq axtaranlar: Dərslərin proqram əsasında, davamiyyət və nəticə nəzarəti ilə aparılmasını istəyən şagird və valideynlər üçün uyğundur.',
+          'İmtahan stressini azaltmaq istəyənlər: Sınaqlar, testlər və izahlı dərslərlə imtahana psixoloji cəhətdən hazırlaşmaq istəyənlər üçün idealdır.'
+        ],
+        program: [
+          'I qrup: Fizika, Kimya, Riyaziyyat',
+          'II qrup: Biologiya, Kimya, Riyaziyyat',
+          'III qrup: Tarix, Coğrafiya, Azərbaycan dili',
+          'IV qrup: Riyaziyyat, İngilis dili, Azərbaycan dili',
+          'Qəbul imtahanı strategiyaları və bal artırma texnikaları',
+          'Buraxılış və blok sınaqlarına hazırlıq',
+          'Mock imtahanlar və performans izləmə',
+          'Fərdi hazırlıq planı və zəif tərəflərin gücləndirilməsi'
+        ],
+      },
+      miq: {
+        title: 'MIQ - Müəllim İşə Qəbulu',
+        shortDescription: 'Müəllim işə qəbul imtahanına peşəkar hazırlıq. Təhsil müəssisələrinə müəllim kimi işə qəbul olmaq üçün MIQ imtahanına hazırlıq proqramı.',
+        level: 'Orta səviyyə',
+        format: 'Onlayn / Əyani',
+        audience: [
+          'Müəllim kimi işə qəbul olmaq istəyənlər',
+          'Təhsil müəssisələrinə müraciət edən müəllim namizədləri',
+          'MIQ imtahanına hazırlaşanlar',
+          'Pedagogika və metodika biliklərini təkmilləşdirmək istəyənlər'
+        ],
+        program: [
+          'Pedagogika və psixologiya əsasları',
+          'Tədris metodikası və dərs planlaşdırması',
+          'Məntiqi düşünmə və analitik bacarıqlar',
+          'Test həll etmə texnikaları və strategiyalar',
+          'İmtahan formatına uyğunlaşma',
+          'Mock imtahanlar və performans təhlili',
+          'İşə qəbul prosesi və məsləhətlər'
+        ],
+      },
+      'russian-language': {
+        title: 'Rus Dili',
+        shortDescription: 'Rus dilini sıfırdan öyrənmək və ya mövcud bilikləri təkmilləşdirmək üçün peşəkar kurs proqramı. Kommunikasiya, qrammatika və lüğət genişləndirmə.',
+        level: 'Bütün səviyyələr',
+        format: 'Onlayn / Əyani',
+        audience: [
+          'Rus dilini sıfırdan öyrənmək istəyənlər',
+          'Rus dilində ünsiyyət bacarıqlarını inkişaf etdirmək istəyənlər',
+          'İş və təhsil üçün rus dili ehtiyacı olanlar',
+          'Rus ədəbiyyatı və mədəniyyəti ilə maraqlananlar'
+        ],
+        program: [
+          'Əsas qrammatika qaydaları və istifadə',
+          'Lüğət genişləndirmə və söz ehtiyatı',
+          'Danışıq bacarıqları və tələffüz',
+          'Oxuma və yazma bacarıqları',
+          'Dinləmə anlayışı və ünsiyyət',
+          'Real həyat situasiyalarında praktika',
+          'Rus mədəniyyəti və ədəbiyyatı ilə tanışlıq'
+        ],
+      },
+      'german-language': {
+        title: 'Alman Dili',
+        shortDescription: 'Alman dilini peşəkar səviyyədə öyrənmək üçün intensiv kurs proqramı. Avropa universitetlərinə qəbul və iş imkanları üçün ideal hazırlıq.',
+        level: 'Bütün səviyyələr',
+        format: 'Onlayn / Əyani',
+        audience: [
+          'Alman dilini sıfırdan öyrənmək istəyənlər',
+          'Almaniyada təhsil hədəfləyənlər',
+          'İş üçün alman dili ehtiyacı olanlar',
+          'Alman mədəniyyəti və ədəbiyyatı ilə maraqlananlar'
+        ],
+        program: [
+          'Alman dili qrammatikası və sintaksis',
+          'Lüğət genişləndirmə və söz ehtiyatı',
+          'Danışıq bacarıqları və tələffüz',
+          'Oxuma və yazma bacarıqları',
+          'Dinləmə anlayışı və ünsiyyət',
+          'TestDaF və Goethe sertifikatlarına hazırlıq',
+          'Alman mədəniyyəti və cəmiyyəti ilə tanışlıq'
         ],
       },
     },
@@ -952,11 +1071,11 @@ export const az = {
     },
     chart: {
       labels: {
-        ielts: 'IELTS',
-        toefl: 'TOEFL',
-        sat: 'SAT',
         yos: 'YÖS',
-        olympiad: 'Olimpiada Hazırlığı',
+        entrant: 'Abituriyent',
+        english: 'İngilis dili',
+        individual: 'Fərdi',
+        sat: 'SAT',
       },
       tooltipFormat: ': %',
     },

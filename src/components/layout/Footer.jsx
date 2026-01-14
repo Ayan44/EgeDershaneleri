@@ -142,8 +142,8 @@ const Footer = () => {
               </div>
               <div className="footerContactItem">
                 <span className="footerContactIcon" aria-hidden="true">✉️</span>
-                <a href="mailto:info@egedershane.az" className="footerContactLink">
-                  info@egedershane.az
+                <a href="mailto:bakuegedershaneleri@gmail.com" className="footerContactLink">
+                  bakuegedershaneleri@gmail.com
                 </a>
               </div>
               <div className="footerContactItem">

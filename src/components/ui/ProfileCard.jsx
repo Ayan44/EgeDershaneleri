@@ -256,7 +256,10 @@ const ProfileCardComponent = ({
               window.addEventListener('deviceorientation', deviceOrientationHandler);
             }
           })
-          .catch(console.error);
+          .catch(() => {
+            // Silently fail - device orientation permission denied
+            // This is expected behavior and doesn't need error logging
+          });
       } else {
         window.addEventListener('deviceorientation', deviceOrientationHandler);
       }

@@ -1,51 +1,55 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
-// Disable automatic scroll restoration
-if ('scrollRestoration' in history) {
-  history.scrollRestoration = 'manual'
-}
-
 function ScrollToTop() {
-  const { pathname, hash } = useLocation()
+  const { pathname } = useLocation()
 
   useEffect(() => {
-    // Handle scrolling after route changes
-    const handleScroll = () => {
-      if (hash) {
-        // If there's a hash, scroll to the element with that ID
-        const element = document.getElementById(hash.substring(1))
-        if (element) {
-          // Use setTimeout to ensure DOM is fully rendered
-          setTimeout(() => {
-            element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-          }, 100)
-        } else {
-          // If element doesn't exist, scroll to top
-          scrollToTop()
-        }
-      } else {
-        // No hash, scroll to top immediately
-        scrollToTop()
+    // Disable browser's default scroll restoration
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual'
+    }
+
+    // Scroll to top with multiple methods for maximum compatibility
+    const scrollToTop = () => {
+      // Method 1: window.scrollTo (simple and reliable)
+      window.scrollTo(0, 0)
+      
+      // Method 2: Direct property assignment (immediate, no animation)
+      if (document.documentElement) {
+        document.documentElement.scrollTop = 0
+        document.documentElement.scrollLeft = 0
+      }
+      if (document.body) {
+        document.body.scrollTop = 0
+        document.body.scrollLeft = 0
+      }
+      
+      // Method 3: scrollIntoView for main element
+      const mainElement = document.querySelector('main')
+      if (mainElement) {
+        mainElement.scrollIntoView({ behavior: 'auto', block: 'start' })
       }
     }
 
-    const scrollToTop = () => {
-      // Force scroll to top with multiple methods for reliability
-      window.scrollTo(0, 0)
-      document.documentElement.scrollTop = 0
-      document.body.scrollTop = 0
+    // Immediate scroll
+    scrollToTop()
+
+    // Scroll after DOM updates
+    const rafId = requestAnimationFrame(() => {
+      scrollToTop()
+      // Also scroll after a small delay to handle async rendering
+      setTimeout(scrollToTop, 10)
+      setTimeout(scrollToTop, 50)
+    })
+
+    return () => {
+      cancelAnimationFrame(rafId)
     }
-
-    // Small delay to ensure DOM is fully updated
-    const timer = setTimeout(() => {
-      handleScroll()
-    }, 50)
-
-    return () => clearTimeout(timer)
-  }, [pathname, hash])
+  }, [pathname])
 
   return null
 }
 
 export default ScrollToTop
+

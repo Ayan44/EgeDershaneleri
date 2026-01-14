@@ -25,8 +25,8 @@ function Courses() {
       const courseSlug = course.slug || course.id
       grouped[translatedCategory].push({
         ...course,
-        title: t(`courseDetails.data.${courseSlug}.title`) || course.title,
-        shortDescription: t(`courseDetails.data.${courseSlug}.shortDescription`) || course.shortDescription,
+        title: t(`courseDetails.data.${courseSlug}.title`),
+        shortDescription: t(`courseDetails.data.${courseSlug}.shortDescription`),
         href: courseSlug.startsWith('olympiad-')
           ? `/courses/olympiad/${courseSlug.replace('olympiad-', '')}`
           : `/courses/${courseSlug}`

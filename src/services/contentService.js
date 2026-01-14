@@ -1,7 +1,6 @@
 import { COURSES_DATA } from '../data/courses'
 import { TEACHERS_DATA } from '../data/teachers'
 import { TESTIMONIALS_DATA } from '../data/testimonials'
-import { BLOG_POSTS_DATA } from '../data/blogPosts'
 import { BLOG_POSTS_DATA as BLOG_DATA } from '../data/blog'
 
 // Courses
@@ -21,8 +20,9 @@ export function getCoursesForNav() {
     if (!grouped[group]) {
       grouped[group] = []
     }
+    // Note: Title will be translated in the component using the translation function
     grouped[group].push({
-      label: course.title,
+      slug: course.slug,
       to: course.slug.startsWith('olympiad-')
         ? `/courses/olympiad/${course.slug.replace('olympiad-', '')}`
         : `/courses/${course.slug}`
