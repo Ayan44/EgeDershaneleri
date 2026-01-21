@@ -1,144 +1,112 @@
-// Course categories
+// Course Categories
 export const COURSE_CATEGORIES = {
-  IMTAHAN: 'İmtahan',
-  DIL: 'Dil',
-  OLIMPIADA: 'Olimpiada'
+  IMTAHAN: 'imtahan',
+  DIL: 'dil',
+  OLIMPIADA: 'olimpiada',
 }
 
+// Course Data
 export const COURSES_DATA = [
+  // İmtahan kateqoriyası
   {
-    id: 'sat',
+    id: 1,
     slug: 'sat',
     category: COURSE_CATEGORIES.IMTAHAN,
-    order: 1,
-    navGroup: 'main',
-    thumbnailUrl: '/courses/course.jpg',
+    navGroup: COURSE_CATEGORIES.IMTAHAN,
+    thumbnailUrl: '/photos/courses/SAT.png',
   },
   {
-    id: 'yos-tys',
+    id: 2,
     slug: 'yos-tys',
     category: COURSE_CATEGORIES.IMTAHAN,
-    order: 2,
-    navGroup: 'main',
-    thumbnailUrl: '/courses/course.jpg',
+    navGroup: COURSE_CATEGORIES.IMTAHAN,
+    thumbnailUrl: '/photos/courses/YOS_TYS.png',
   },
   {
-    id: 'ielts',
-    slug: 'ielts',
-    category: COURSE_CATEGORIES.DIL,
-    order: 3,
-    navGroup: 'main',
-    thumbnailUrl: '/courses/course.jpg',
-  },
-  {
-    id: 'toefl',
-    slug: 'toefl',
-    category: COURSE_CATEGORIES.DIL,
-    order: 4,
-    navGroup: 'main',
-    thumbnailUrl: '/courses/course.jpg',
-  },
-  {
-    id: 'general-english',
-    slug: 'general-english',
-    category: COURSE_CATEGORIES.DIL,
-    order: 5,
-    navGroup: 'main',
-    thumbnailUrl: '/courses/course.jpg',
-  },
-  {
-    id: 'olympiad-math',
-    slug: 'olympiad-math',
-    category: COURSE_CATEGORIES.OLIMPIADA,
-    order: 6,
-    navGroup: 'olympiad',
-    thumbnailUrl: '/courses/course.jpg',
-  },
-  {
-    id: 'olympiad-iq',
-    slug: 'olympiad-iq',
-    category: COURSE_CATEGORIES.OLIMPIADA,
-    order: 7,
-    navGroup: 'olympiad',
-    thumbnailUrl: '/courses/course.jpg',
-  },
-  {
-    id: 'olympiad-english',
-    slug: 'olympiad-english',
-    category: COURSE_CATEGORIES.OLIMPIADA,
-    order: 8,
-    navGroup: 'olympiad',
-    thumbnailUrl: '/courses/course.jpg',
-  },
-  {
-    id: 'graduation-preparation',
+    id: 3,
     slug: 'graduation-preparation',
     category: COURSE_CATEGORIES.IMTAHAN,
-    order: 9,
-    navGroup: 'main',
-    thumbnailUrl: '/courses/course.jpg',
+    navGroup: COURSE_CATEGORIES.IMTAHAN,
+    thumbnailUrl: '/photos/courses/Buraxılış.png',
   },
   {
-    id: 'entrant-preparation',
+    id: 4,
     slug: 'entrant-preparation',
     category: COURSE_CATEGORIES.IMTAHAN,
-    order: 10,
-    navGroup: 'main',
-    thumbnailUrl: '/courses/course.jpg',
+    navGroup: COURSE_CATEGORIES.IMTAHAN,
+    thumbnailUrl: '/photos/courses/Abituriyent.png',
   },
+
+  // Dil kateqoriyası
   {
-    id: 'miq',
-    slug: 'miq',
-    category: COURSE_CATEGORIES.IMTAHAN,
-    order: 11,
-    navGroup: 'main',
-    thumbnailUrl: '/courses/course.jpg',
-  },
-  {
-    id: 'russian-language',
-    slug: 'russian-language',
+    id: 5,
+    slug: 'ielts',
     category: COURSE_CATEGORIES.DIL,
-    order: 12,
-    navGroup: 'main',
-    thumbnailUrl: '/courses/course.jpg',
+    navGroup: COURSE_CATEGORIES.DIL,
+    thumbnailUrl: '/photos/courses/IELTS.png',
   },
   {
-    id: 'german-language',
-    slug: 'german-language',
+    id: 6,
+    slug: 'toefl',
     category: COURSE_CATEGORIES.DIL,
-    order: 13,
-    navGroup: 'main',
-    thumbnailUrl: '/courses/course.jpg',
-  }
+    navGroup: COURSE_CATEGORIES.DIL,
+    thumbnailUrl: '/photos/courses/TOEFL.png',
+  },
+  {
+    id: 7,
+    slug: 'general-english',
+    category: COURSE_CATEGORIES.DIL,
+    navGroup: COURSE_CATEGORIES.DIL,
+    thumbnailUrl: '/photos/courses/General.png',
+  },
+  {
+    id: 8,
+    slug: 'alman',
+    category: COURSE_CATEGORIES.DIL,
+    navGroup: COURSE_CATEGORIES.DIL,
+    thumbnailUrl: '/photos/courses/Alman.png',
+  },
+  {
+    id: 9,
+    slug: 'rus',
+    category: COURSE_CATEGORIES.DIL,
+    navGroup: COURSE_CATEGORIES.DIL,
+    thumbnailUrl: '/photos/courses/Rus.png',
+  },
+
+  // Olimpiada kateqoriyası
+  {
+    id: 10,
+    slug: 'olympiad-math',
+    category: COURSE_CATEGORIES.OLIMPIADA,
+    navGroup: COURSE_CATEGORIES.OLIMPIADA,
+    thumbnailUrl: '/photos/courses/OlimpRiyaz.png',
+  },
+  {
+    id: 11,
+    slug: 'olympiad-iq',
+    category: COURSE_CATEGORIES.OLIMPIADA,
+    navGroup: COURSE_CATEGORIES.OLIMPIADA,
+    thumbnailUrl: '/photos/courses/MIQ.png',
+  },
+  {
+    id: 12,
+    slug: 'olympiad-english',
+    category: COURSE_CATEGORIES.OLIMPIADA,
+    navGroup: COURSE_CATEGORIES.OLIMPIADA,
+    thumbnailUrl: '/photos/courses/OlimpEng.png',
+  },
 ]
 
-// Helper functions
-export const getCourses = () => COURSES_DATA
-
-export const getCourseById = (id) => COURSES_DATA.find(course => course.id === id)
-
-export const getCoursesForGrid = () => {
-  return COURSES_DATA.map(course => ({
-    category: course.category,
-    href: course.slug.startsWith('olympiad-')
-      ? `/courses/olympiad/${course.slug.replace('olympiad-', '')}`
-      : `/courses/${course.slug}`
-  }))
+// Utility functions
+export function getCourses() {
+  return COURSES_DATA
 }
 
-export const getCoursesByCategory = () => {
-  const grouped = {}
-  COURSES_DATA.forEach(course => {
-    const category = course.category
-    if (!grouped[category]) {
-      grouped[category] = []
-    }
-    grouped[category].push({
-      ...course,
-      href: course.slug.startsWith('olympiad-')
-        ? `/courses/olympiad/${course.slug.replace('olympiad-', '')}`
-        : `/courses/${course.slug}`
-    })
-  })
-  return grouped
+export function getCourseById(id) {
+  return COURSES_DATA.find(course => course.id === id)
+}
+
+export function getCoursesByCategory(category) {
+  return COURSES_DATA.filter(course => course.category === category)
 }

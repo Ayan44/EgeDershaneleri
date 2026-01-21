@@ -47,11 +47,23 @@ export default function BlogPreview() {
                     <div className="blogCard__imageOverlay">
                       <span className="blogCard__category">{post.category || t('blogPreview.category')}</span>
                     </div>
+                    <img
+                      src={post.coverImage}
+                      alt={post.title}
+                      className="blogCard__imageSrc"
+                      loading="lazy"
+                      onError={(e) => {
+                        // Fallback to gradient if image fails to load
+                        e.target.style.display = 'none';
+                        e.target.nextSibling.style.display = 'block';
+                      }}
+                    />
                     {/* Fallback gradient if image fails */}
                     <div
                       className="blogCard__imageFallback"
                       style={{
-                        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+                        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                        display: 'none'
                       }}
                     />
                   </div>

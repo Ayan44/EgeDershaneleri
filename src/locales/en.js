@@ -87,7 +87,7 @@ export const en = {
       },
       location: {
         label: 'Office Location',
-        address: 'Baku city, Narimanov district\nAzadlig Avenue 123',
+        address: 'Baku city, Narimanov district\nTabriz street 210c',
       },
       instagram: {
         label: 'Instagram',
@@ -134,7 +134,7 @@ export const en = {
     },
     map: {
       title: 'Our office location',
-      description: 'You can find our office location using the map below. We are located at Təbriz street 210c, Narimanov district, Baku city.',
+      description: 'You can find our office location using the map below. We are located at Tabriz street 210c, Narimanov district, Baku city.',
     },
   },
 
@@ -375,50 +375,38 @@ export const en = {
       'malik-memmedov': {
         fullName: 'Malik Mammadov',
         role: 'Founder & Mathematics Expert',
-        bio: 'Malik Mammadov is the founder and head teacher of EGE Dershane. He is considered the pioneer of practical mathematics in Azerbaijan. With more than 15 years of experience, he has helped thousands of students develop a love for mathematics. He specializes in SAT, YÖS/TYS and olympiad preparation. He plays an important role in hundreds of students achieving high results every year. He also prepares and organizes training programs for teachers.',
-        specialties: ['SAT Mathematics', 'YÖS/TYS Mathematics', 'Olympiad Mathematics', 'Private Lessons'],
+        bio: 'Malik Mammadov is the founder and head teacher of EGE Dershane. He is considered the pioneer of practical mathematics in Azerbaijan. With more than 15 years of experience, he has helped thousands of students develop a love for mathematics. He specializes in YÖS/TYS, entrant and olympiad preparation. He plays an important role in hundreds of students achieving high results every year. He also prepares and organizes training programs for teachers.',
+        specialties: ['YÖS/TYS', 'Entrant Mathematics', 'Private Lessons', 'Graduation Mathematics'],
       },
-      'ayla-memmedova': {
-        fullName: 'Ayla Mammadova',
-        role: 'SAT / IELTS Teacher',
-        bio: 'Ayla Mammadova is a professional teacher specializing in SAT and IELTS preparation. She received higher education in the USA and England and has deep knowledge of international exam systems. With more than 10 years of experience, she has helped thousands of students get admitted to foreign universities. 95% of students who achieve high scores on the SAT are her students. She also shows an average of 7.0+ results in IELTS. She is famous for her individual approach and practical methods.',
-        specialties: ['SAT Preparation', 'IELTS Speaking', 'TOEFL Writing', 'Study Abroad Consultation'],
+      'fatime-gurbanzade': {
+        fullName: 'Fatima Gurbanzade',
+        role: 'English / German Language',
+        bio: 'Fatima Gurbanzade is a professional teacher specializing in SAT and IELTS preparation. She graduated from Azerbaijan State University of Culture and Arts and has deep knowledge of international exam systems. With more than 6 years of experience, she has helped thousands of students get admitted to foreign universities. In addition to English, she also provides high-level preparation in German. She is famous for her individual approach and practical methods.',
+        specialties: ['SAT (English)', 'IELTS', 'TOEFL', 'German Language'],
       },
-      'resul-quliyev': {
-        fullName: 'Rasul Guliyev',
-        role: 'YÖS / TYS Preparation',
-        bio: 'Rasul Guliyev is a teacher specializing in admission to Turkey\'s top universities. He received education at Istanbul and Ankara universities. He knows the YÖS/TYS exam system perfectly and provides a practical approach to his students. 85% of his students are admitted to Turkey\'s best universities. He has high knowledge in Turkish language and literature as well as mathematics topics. He realizes each student\'s potential to the maximum with individual preparation plans.',
-        specialties: ['YÖS Mathematics', 'TYS Turkish Language', 'Turkish Universities', 'Visa Process'],
+      'gulyaz-mesediyev': {
+        fullName: 'Gulyaz Meshediyeva',
+        role: 'Azerbaijani Language / Literature',
+        bio: 'Gulyaz Meshediyeva is a teacher specializing in Azerbaijani language and literature. She graduated from Baku Slavic University with a degree in philology. She knows the exam system perfectly and provides a practical approach to her students. In addition, she teaches Azerbaijani language to students in Russian sections. With more than 6 years of teaching experience, she maximizes each student\'s potential.',
+        specialties: ['Azerbaijani Language', 'Literature'],
       },
-      'leyla-huseynova': {
-        fullName: 'Leyla Huseynova',
-        role: 'Olympiad Mathematics',
-        bio: 'Leyla Huseynova is an experienced teacher who has participated in international mathematics olympiads and won awards. She knows all the intricacies of mathematics olympiads and helps reveal young talents. Her students take high places in international olympiads every year. She has special expertise in combinatorics, geometry and probability theory. She not only provides theoretical knowledge to her students, but also tries to instill creative thinking skills. In addition to olympiad preparation, she also helps with SAT and YÖS preparation.',
-        specialties: ['Olympiad Mathematics', 'Combinatorics', 'Geometry', 'Logic Problems'],
+      'aygun-mirzeyeva': {
+        fullName: 'Aygun Mirzayeva',
+        role: 'English Language',
+        bio: 'Aygun Mirzayeva teaches English language preparation. .... She not only provides theoretical knowledge to her students, but also tries to instill creative thinking skills.',
+        specialties: ['English Language', 'Speaking', 'Writing', 'Reading', 'Listening'],
       },
-      'eli-hesenov': {
-        fullName: 'Ali Hasanov',
-        role: 'General English',
-        bio: 'Ali Hasanov is an experienced teacher specializing in teaching English from scratch. He received language education in England and has experience in communication methods. Most of his students can communicate freely in a short time. He uses language learning methods in real-life situations. He is experienced in travel, business English and academic English. He increases students\' enthusiasm for learning languages with his individual approach and motivation techniques.',
-        specialties: ['General English', 'Business English', 'Travel English', 'Conversation Practice'],
+      'ismayil-haqverdiyev': {
+        fullName: 'Ismail Hagverdiyev',
+        role: 'YÖS / TYS',
+        bio: 'Ismail Hagverdiyev is a professional teacher specializing in YÖS/TYS, with extensive experience in mathematics. He has special expertise in combinatorics, geometry and probability theory. He not only provides theoretical knowledge to his students, but also tries to instill creative thinking skills. In addition to olympiad preparation, he also helps with YÖS/TYS, graduation and entrant preparation.',
+        specialties: ['YÖS/TYS', 'Graduation', 'Entrant', 'Olympiad Mathematics', 'Combinatorics', 'Geometry', 'Logic Problems'],
       },
-      'nigar-ibrahimova': {
-        fullName: 'Nigar Ibrahimova',
-        role: 'TOEFL / IELTS Expert',
-        bio: 'Nigar Ibrahimova is an expert teacher specializing in achieving high results in TOEFL and IELTS exams. She received higher education in Canada and knows international exam systems perfectly. Her students\' average TOEFL result is 100+, and they achieve 7.0+ scores in IELTS. She develops each of the Listening, Reading, Writing and Speaking skills separately. She prepares students for the real exam through practical exercises and mock exams. She also provides consultation in foreign university admission processes.',
-        specialties: ['TOEFL iBT', 'IELTS Writing', 'Academic English', 'Test Strategies'],
-      },
-      'emin-veliyev': {
-        fullName: 'Amin Valiyev',
-        role: 'Olympiad Logic and IQ',
-        bio: 'Amin Valiyev prepares special preparation programs for young people participating in IQ and logic olympiads. He has experience winning awards in international olympiads. He is considered an expert in pattern recognition, analytical thinking and logic problem solving. He not only gives ready-made questions to his students, but also teaches the ability to create new problems. His students take high places in international IQ competitions. Psychological preparation and stress management techniques are also included in the curriculum.',
-        specialties: ['IQ Olympiads', 'Logic Problems', 'Pattern Recognition', 'Psychological Preparation'],
-      },
-      'gunel-karimova': {
-        fullName: 'Gunel Karimova',
-        role: 'English Language Olympiad',
-        bio: 'Gunel Karimova teaches academic writing and communication skills to young people participating in English language olympiads. She received language education in England and knows international olympiad formats perfectly. She has special expertise in essay writing, debate and presentation skills. Many of her students win awards in international English language olympiads. She has deep knowledge in academic vocabulary, grammar and text analysis. She develops creative writing and literary criticism skills.',
-        specialties: ['Olympiad English', 'Essay Writing', 'Debate Skills', 'Creative Writing'],
+      'sekine-lazimova': {
+        fullName: 'Sekine Lazimova',
+        role: 'SAT Mathematics',
+        bio: 'Sekine Lazimova is an expert teacher specializing in SAT Mathematics preparation. She graduated from Azerbaijan State Pedagogical University in Mathematics Teaching and Azerbaijan State University of Economics in IT, and has perfect knowledge of international exam systems. She prepares students for the real exam through practical exercises and mock exams. She has more than 5 years of teaching experience.',
+        specialties: ['SAT Mathematics'],
       },
     },
   },
@@ -511,6 +499,7 @@ export const en = {
       learnMore: 'Learn more',
     },
     highlight: 'Free initial consultation',
+    imageAlt: 'Study abroad services - EGE Dershane',
   },
 
   // Teachers Section (Home Page)

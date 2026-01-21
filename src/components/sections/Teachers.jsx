@@ -14,11 +14,12 @@ export default function Teachers() {
   const teachersData = getFeaturedTeachers();
 
   // Translate teacher data based on current language
+  // Text content comes from locale files (az.js, en.js)
   const teachers = React.useMemo(() => {
     return teachersData.map(teacher => ({
       ...teacher,
-      fullName: t(`teachers.data.${teacher.slug}.fullName`) || teacher.fullName,
-      role: t(`teachers.data.${teacher.slug}.role`) || teacher.role,
+      fullName: t(`teachers.data.${teacher.slug}.fullName`) || teacher.slug,
+      role: t(`teachers.data.${teacher.slug}.role`) || '',
     }))
   }, [teachersData, t, lang])
 

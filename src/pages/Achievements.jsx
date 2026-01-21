@@ -198,7 +198,7 @@ function Achievements() {
     {
       id: 1,
       name: t('achievements.studentResults.data.1.name') || 'Ayla Məmmədova',
-      photo: '/photos/students/student.jpg',
+      photo: '/photos/students/Kənan.png',
       examType: 'SAT',
       score: '1520/1600',
       acceptedCountry: t('achievements.countries.usa'),
@@ -207,7 +207,7 @@ function Achievements() {
     {
       id: 2,
       name: t('achievements.studentResults.data.2.name') || 'Rəşad Hüseynov',
-      photo: '/photos/students/student.jpg',
+      photo: '/photos/students/Sürəyya.png',
       examType: 'IELTS',
       score: '8.5/9.0',
       acceptedCountry: t('achievements.countries.canada'),
@@ -216,7 +216,7 @@ function Achievements() {
     {
       id: 3,
       name: t('achievements.studentResults.data.3.name') || 'Nigar Kərimova',
-      photo: '/photos/students/student.jpg',
+      photo: '/photos/students/Xədicə.png',
       examType: 'YÖS',
       score: '520/600',
       acceptedCountry: t('achievements.countries.turkey'),
@@ -225,7 +225,7 @@ function Achievements() {
     {
       id: 4,
       name: t('achievements.studentResults.data.4.name') || 'Elvin Rəhimov',
-      photo: '/photos/students/student.jpg',
+      photo: '/photos/students/Zəhra.png',
       examType: 'TOEFL',
       score: '115/120',
       acceptedCountry: t('achievements.countries.usa'),
@@ -234,7 +234,7 @@ function Achievements() {
     {
       id: 5,
       name: t('achievements.studentResults.data.5.name') || 'Leyla İsmayılova',
-      photo: '/photos/students/student.jpg',
+      photo: '/photos/students/Rəna.png',
       examType: 'SAT',
       score: '1480/1600',
       acceptedCountry: t('achievements.countries.canada'),
@@ -243,7 +243,7 @@ function Achievements() {
     {
       id: 6,
       name: t('achievements.studentResults.data.6.name') || 'Tural Məhərrəmov',
-      photo: '/photos/students/student.jpg',
+      photo: '/photos/students/Sürəyya.png',
       examType: 'IELTS',
       score: '8.0/9.0',
       acceptedCountry: t('achievements.countries.russia'),
@@ -266,7 +266,7 @@ function Achievements() {
     {
       id: 1,
       name: t('achievements.successStoriesData.zeynab.name'),
-      photo: '/photos/students/student.jpg',
+      photo: '/photos/students/Sürəyya.png',
       beforeAfter: t('achievements.successStoriesData.zeynab.beforeAfter'),
       story: t('achievements.successStoriesData.zeynab.story'),
       highlights: [
@@ -279,7 +279,7 @@ function Achievements() {
     {
       id: 2,
       name: t('achievements.successStoriesData.orxan.name'),
-      photo: '/photos/students/student.jpg',
+      photo: '/photos/students/Zəhra.png',
       beforeAfter: t('achievements.successStoriesData.orxan.beforeAfter'),
       story: t('achievements.successStoriesData.orxan.story'),
       highlights: [
@@ -292,7 +292,7 @@ function Achievements() {
     {
       id: 3,
       name: t('achievements.successStoriesData.gunel.name'),
-      photo: '/photos/students/student.jpg',
+      photo: '/photos/students/Rəna.png',
       beforeAfter: t('achievements.successStoriesData.gunel.beforeAfter'),
       story: t('achievements.successStoriesData.gunel.story'),
       highlights: [

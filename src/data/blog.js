@@ -20,7 +20,7 @@ export const BLOG_POSTS_DATA = [
     `,
     category: "SAT",
     date: "15 Dekabr 2024",
-    coverImage: "/photos/blog/blog.png",
+    coverImage: "/photos/blog/b-sat.jpg",
     readTime: "5 dəqiqə"
   },
   {
@@ -44,7 +44,7 @@ export const BLOG_POSTS_DATA = [
     `,
     category: "IELTS",
     date: "12 Dekabr 2024",
-    coverImage: "/photos/blog/blog.png",
+    coverImage: "/photos/blog/b-ielts.webp",
     readTime: "4 dəqiqə"
   },
   {
@@ -68,7 +68,7 @@ export const BLOG_POSTS_DATA = [
     `,
     category: "Xaricdə təhsil",
     date: "10 Dekabr 2024",
-    coverImage: "/photos/blog/blog.png",
+    coverImage: "/photos/blog/b-abroad.webp",
     readTime: "6 dəqiqə"
   },
   {
@@ -95,7 +95,7 @@ export const BLOG_POSTS_DATA = [
     `,
     category: "TOEFL",
     date: "08 Dekabr 2024",
-    coverImage: "/photos/blog/blog.png",
+    coverImage: "/photos/blog/b-toefl.webp",
     readTime: "7 dəqiqə"
   },
   {
@@ -119,7 +119,7 @@ export const BLOG_POSTS_DATA = [
     `,
     category: "Olimpiada",
     date: "05 Dekabr 2024",
-    coverImage: "/photos/blog/blog.png",
+    coverImage: "/photos/blog/b-olympiad.jpg",
     readTime: "5 dəqiqə"
   },
   {
@@ -146,7 +146,7 @@ export const BLOG_POSTS_DATA = [
     `,
     category: "General English",
     date: "03 Dekabr 2024",
-    coverImage: "/photos/blog/blog.png",
+    coverImage: "/photos/blog/b-general.png",
     readTime: "6 dəqiqə"
   }
 ];

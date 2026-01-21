@@ -16,15 +16,17 @@ export default function Teachers() {
   const allTeachersData = getTeachers()
 
   // Translate teacher data based on current language
-  const allTeachers = allTeachersData.map(teacher => ({
-    ...teacher,
-    fullName: t(`teachers.data.${teacher.slug}.fullName`) || teacher.fullName,
-    role: t(`teachers.data.${teacher.slug}.role`) || teacher.role,
-    bio: t(`teachers.data.${teacher.slug}.bio`) || teacher.bio,
-    specialties: teacher.specialties?.map((_, index) =>
-      t(`teachers.data.${teacher.slug}.specialties.${index}`) || teacher.specialties[index]
-    ) || teacher.specialties,
-  }))
+  // Text content comes from locale files (az.js, en.js)
+  const allTeachers = allTeachersData.map(teacher => {
+    const translatedSpecialties = t(`teachers.data.${teacher.slug}.specialties`)
+    return {
+      ...teacher,
+      fullName: t(`teachers.data.${teacher.slug}.fullName`) || teacher.slug,
+      role: t(`teachers.data.${teacher.slug}.role`) || '',
+      bio: t(`teachers.data.${teacher.slug}.bio`) || '',
+      specialties: Array.isArray(translatedSpecialties) ? translatedSpecialties : [],
+    }
+  })
 
   // Get teacher from URL param and translate
   const selectedTeacher = useMemo(() => {
@@ -35,14 +37,14 @@ export default function Teachers() {
     if (!teacherData) return null
 
     // Translate teacher data based on current language
+    // Text content comes from locale files (az.js, en.js)
+    const translatedSpecialties = t(`teachers.data.${teacherData.slug}.specialties`)
     return {
       ...teacherData,
-      fullName: t(`teachers.data.${teacherData.slug}.fullName`) || teacherData.fullName,
-      role: t(`teachers.data.${teacherData.slug}.role`) || teacherData.role,
-      bio: t(`teachers.data.${teacherData.slug}.bio`) || teacherData.bio,
-      specialties: teacherData.specialties?.map((_, index) =>
-        t(`teachers.data.${teacherData.slug}.specialties.${index}`) || teacherData.specialties[index]
-      ) || teacherData.specialties,
+      fullName: t(`teachers.data.${teacherData.slug}.fullName`) || teacherData.slug,
+      role: t(`teachers.data.${teacherData.slug}.role`) || '',
+      bio: t(`teachers.data.${teacherData.slug}.bio`) || '',
+      specialties: Array.isArray(translatedSpecialties) ? translatedSpecialties : [],
     }
   }, [searchParams, t, lang])
 

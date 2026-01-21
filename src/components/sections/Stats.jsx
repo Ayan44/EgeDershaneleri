@@ -192,7 +192,7 @@ function Stats() {
               <div className="stats__ceo-card founderCard">
                 <div className="founderCard__avatar">
                   <img
-                    src="/photos/vusale-memmedova.jpg"
+                    src="/photos/m-vusale.jpeg"
                     alt={t('stats.director.name')}
                     loading="lazy"
                   />

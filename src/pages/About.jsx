@@ -159,7 +159,13 @@ function About() {
               </p>
               {/* Gallery content will be implemented later */}
               <div style={{ width: '100%', height: '70vh' }}>
-                <DomeGallery grayscale={false} fit={1} maxVerticalRotationDeg={0} overlayBlurColor='transparent' />
+                <DomeGallery
+                  images={GALLERY_ITEMS}
+                  grayscale={false}
+                  fit={1}
+                  maxVerticalRotationDeg={0}
+                  overlayBlurColor='transparent'
+                />
               </div>
             </section>
           </ScrollReveal>

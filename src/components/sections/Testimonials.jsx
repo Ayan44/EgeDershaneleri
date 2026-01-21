@@ -19,9 +19,9 @@ export default function Testimonials() {
   const testimonials = React.useMemo(() => {
     return testimonialsData.map(testimonial => ({
       ...testimonial,
-      studentName: t(`testimonials.data.${testimonial.id}.studentName`) || testimonial.studentName,
-      text: t(`testimonials.data.${testimonial.id}.text`) || testimonial.text,
-      scoreOrResult: t(`testimonials.data.${testimonial.id}.scoreOrResult`) || testimonial.scoreOrResult,
+      studentName: t(`testimonials.data.${testimonial.id}.studentName`),
+      text: t(`testimonials.data.${testimonial.id}.text`),
+      scoreOrResult: t(`testimonials.data.${testimonial.id}.scoreOrResult`),
     }))
   }, [testimonialsData, t, lang])
 
@@ -64,20 +64,20 @@ export default function Testimonials() {
               }}
               className="testimonialsSwiper"
             >
-              {testimonials.map((t) => (
-                <SwiperSlide key={t.id}>
+              {testimonials.map((testimonial) => (
+                <SwiperSlide key={testimonial.id}>
                   <article className="testimonialCard">
                     <div className="testimonialAvatar">
                       <img
-                        src="/photos/students/student.jpg"
-                        alt={`${t.studentName} avatar`}
+                        src={testimonial.image}
+                        alt={`${testimonial.studentName} avatar`}
                         loading="lazy"
                       />
                     </div>
-                    <p className="testimonialText">"{t.text}"</p>
-                    <div className="testimonialName">{t.studentName}</div>
-                    {t.scoreOrResult && (
-                      <div className="testimonialScore">{t.scoreOrResult}</div>
+                    <p className="testimonialText">"{testimonial.text}"</p>
+                    <div className="testimonialName">{testimonial.studentName}</div>
+                    {testimonial.scoreOrResult && (
+                      <div className="testimonialScore">{testimonial.scoreOrResult}</div>
                     )}
                   </article>
                 </SwiperSlide>
