@@ -6403,7 +6403,7 @@ main {
 }
 
 .student-result-card__score {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 700;
   color: #1f2937;
 }
@@ -6937,7 +6937,7 @@ main {
   }
 
   .student-result-card__score {
-    font-size: 1.1rem;
+    font-size: 0.75rem;
   }
 
   .success-story__name {

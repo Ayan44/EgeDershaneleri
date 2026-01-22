@@ -197,57 +197,57 @@ function Achievements() {
   const STUDENT_RESULTS_DATA = useMemo(() => [
     {
       id: 1,
-      name: t('achievements.studentResults.data.1.name') || 'Ayla Məmmədova',
-      photo: '/photos/students/Kənan.png',
-      examType: 'SAT',
-      score: '1520/1600',
-      acceptedCountry: t('achievements.countries.usa'),
-      acceptedUniversity: t('achievements.universities.harvard')
+      name: t('achievements.studentResults.data.1.name') || 'Anar Həbibli',
+      photo: '/photos/students/AnarHəbibli.png',
+      examType: 'YÖS/TYS',
+      score: 'Bilgisayar Mühendisliği',
+      acceptedCountry: t('achievements.countries.turkey'),
+      acceptedUniversity: t('achievements.universities.adnan')
     },
     {
       id: 2,
-      name: t('achievements.studentResults.data.2.name') || 'Rəşad Hüseynov',
-      photo: '/photos/students/Sürəyya.png',
-      examType: 'IELTS',
-      score: '8.5/9.0',
-      acceptedCountry: t('achievements.countries.canada'),
-      acceptedUniversity: t('achievements.universities.toronto')
+      name: t('achievements.studentResults.data.2.name') || 'Səidə Mustafayeva',
+      photo: '/photos/students/SəidəMustafayeva.png',
+      examType: 'YÖS/TYS',
+      score: 'Bilgisayar Mühendisliği',
+      acceptedCountry: t('achievements.countries.turkey'),
+      acceptedUniversity: t('achievements.universities.iskenderun')
     },
     {
       id: 3,
-      name: t('achievements.studentResults.data.3.name') || 'Nigar Kərimova',
-      photo: '/photos/students/Xədicə.png',
-      examType: 'YÖS',
-      score: '520/600',
+      name: t('achievements.studentResults.data.3.name') || 'Azər Zamanov',
+      photo: '/photos/students/AzərZamanov.png',
+      examType: 'YÖS/TYS',
+      score: 'Yazılım Mühendisliği',
       acceptedCountry: t('achievements.countries.turkey'),
-      acceptedUniversity: t('achievements.universities.koc')
+      acceptedUniversity: t('achievements.universities.adnan')
     },
     {
       id: 4,
-      name: t('achievements.studentResults.data.4.name') || 'Elvin Rəhimov',
-      photo: '/photos/students/Zəhra.png',
-      examType: 'TOEFL',
-      score: '115/120',
-      acceptedCountry: t('achievements.countries.usa'),
-      acceptedUniversity: t('achievements.universities.mit')
+      name: t('achievements.studentResults.data.4.name') || 'Əminə Məhərrəmli',
+      photo: '/photos/students/ƏminəMəhərrəmli.png',
+      examType: 'YÖS/TYS',
+      score: 'Bilgisayar Mühendisliği',
+      acceptedCountry: t('achievements.countries.turkey'),
+      acceptedUniversity: t('achievements.universities.iskenderun')
     },
     {
       id: 5,
-      name: t('achievements.studentResults.data.5.name') || 'Leyla İsmayılova',
-      photo: '/photos/students/Rəna.png',
-      examType: 'SAT',
-      score: '1480/1600',
-      acceptedCountry: t('achievements.countries.canada'),
-      acceptedUniversity: t('achievements.universities.mcgill')
+      name: t('achievements.studentResults.data.5.name') || 'Kənan Kərimli',
+      photo: '/photos/students/KənanKərimli.png',
+      examType: 'YÖS/TYS',
+      score: 'Makina Mühendisliği',
+      acceptedCountry: t('achievements.countries.turkey'),
+      acceptedUniversity: t('achievements.universities.adnan')
     },
     {
       id: 6,
-      name: t('achievements.studentResults.data.6.name') || 'Tural Məhərrəmov',
-      photo: '/photos/students/Sürəyya.png',
-      examType: 'IELTS',
-      score: '8.0/9.0',
-      acceptedCountry: t('achievements.countries.russia'),
-      acceptedUniversity: t('achievements.universities.moscow')
+      name: t('achievements.studentResults.data.6.name') || 'Əli Mehdiyev',
+      photo: '/photos/students/ƏliMehdiyev.png',
+      examType: 'YÖS/TYS',
+      score: 'Diş Hekimliği',
+      acceptedCountry: t('achievements.countries.turkey'),
+      acceptedUniversity: t('achievements.universities.zonguldak')
     }
   ], [t, lang])
 
@@ -265,40 +265,40 @@ function Achievements() {
   const SUCCESS_STORIES_DATA = useMemo(() => [
     {
       id: 1,
-      name: t('achievements.successStoriesData.zeynab.name'),
+      name: t('achievements.successStoriesData.sureyya.name'),
       photo: '/photos/students/Sürəyya.png',
-      beforeAfter: t('achievements.successStoriesData.zeynab.beforeAfter'),
-      story: t('achievements.successStoriesData.zeynab.story'),
+      beforeAfter: t('achievements.successStoriesData.sureyya.beforeAfter'),
+      story: t('achievements.successStoriesData.sureyya.story'),
       highlights: [
-        t('achievements.successStoriesData.zeynab.highlights.duration'),
-        t('achievements.successStoriesData.zeynab.highlights.type'),
-        t('achievements.successStoriesData.zeynab.highlights.program')
+        t('achievements.successStoriesData.sureyya.highlights.duration'),
+        t('achievements.successStoriesData.sureyya.highlights.type'),
+        t('achievements.successStoriesData.sureyya.highlights.program')
       ],
       imageLeft: true
     },
     {
       id: 2,
-      name: t('achievements.successStoriesData.orxan.name'),
+      name: t('achievements.successStoriesData.zehra.name'),
       photo: '/photos/students/Zəhra.png',
-      beforeAfter: t('achievements.successStoriesData.orxan.beforeAfter'),
-      story: t('achievements.successStoriesData.orxan.story'),
+      beforeAfter: t('achievements.successStoriesData.zehra.beforeAfter'),
+      story: t('achievements.successStoriesData.zehra.story'),
       highlights: [
-        t('achievements.successStoriesData.orxan.highlights.duration'),
-        t('achievements.successStoriesData.orxan.highlights.type'),
-        t('achievements.successStoriesData.orxan.highlights.program')
+        t('achievements.successStoriesData.zehra.highlights.duration'),
+        t('achievements.successStoriesData.zehra.highlights.type'),
+        t('achievements.successStoriesData.zehra.highlights.program')
       ],
       imageLeft: false
     },
     {
       id: 3,
-      name: t('achievements.successStoriesData.gunel.name'),
+      name: t('achievements.successStoriesData.rena.name'),
       photo: '/photos/students/Rəna.png',
-      beforeAfter: t('achievements.successStoriesData.gunel.beforeAfter'),
-      story: t('achievements.successStoriesData.gunel.story'),
+      beforeAfter: t('achievements.successStoriesData.rena.beforeAfter'),
+      story: t('achievements.successStoriesData.rena.story'),
       highlights: [
-        t('achievements.successStoriesData.gunel.highlights.duration'),
-        t('achievements.successStoriesData.gunel.highlights.type'),
-        t('achievements.successStoriesData.gunel.highlights.program')
+        t('achievements.successStoriesData.rena.highlights.duration'),
+        t('achievements.successStoriesData.rena.highlights.type'),
+        t('achievements.successStoriesData.rena.highlights.program')
       ],
       imageLeft: true
     }
