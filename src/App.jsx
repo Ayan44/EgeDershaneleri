@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
 import FloatingControls from './components/ui/FloatingControls'
@@ -43,6 +44,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
+      <SpeedInsights />
     </BrowserRouter>
   )
 }
