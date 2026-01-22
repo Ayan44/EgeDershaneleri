@@ -64,7 +64,12 @@ function StudyAbroad() {
               </div>
               <div className="abroad-hero__image">
                 <div className="abroad-hero__placeholder">
-                  {/* Using a placeholder div since no specific image was provided */}
+                  <img
+                    className="studyAbroad__image"
+                    src="/photos/studyAbroad.jpeg"
+                    alt={t('studyAbroadComponent.imageAlt')}
+                    loading="lazy"
+                  />
                 </div>
               </div>
             </div>

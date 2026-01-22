@@ -777,7 +777,7 @@ export const az = {
           'İşə qəbul prosesi və məsləhətlər'
         ],
       },
-      'russian-language': {
+      'rus': {
         title: 'Rus Dili',
         shortDescription: 'Rus dilini sıfırdan öyrənmək və ya mövcud bilikləri təkmilləşdirmək üçün peşəkar kurs proqramı. Kommunikasiya, qrammatika və lüğət genişləndirmə.',
         level: 'Bütün səviyyələr',
@@ -798,7 +798,7 @@ export const az = {
           'Rus mədəniyyəti və ədəbiyyatı ilə tanışlıq'
         ],
       },
-      'german-language': {
+      'alman': {
         title: 'Alman Dili',
         shortDescription: 'Alman dilini peşəkar səviyyədə öyrənmək üçün intensiv kurs proqramı. Avropa universitetlərinə qəbul və iş imkanları üçün ideal hazırlıq.',
         level: 'Bütün səviyyələr',

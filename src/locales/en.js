@@ -777,7 +777,7 @@ export const en = {
           'Recruitment process and advice'
         ],
       },
-      'russian-language': {
+      'rus': {
         title: 'Russian Language',
         shortDescription: 'Professional course program to learn Russian from scratch or improve existing knowledge. Communication, grammar and vocabulary expansion.',
         level: 'All levels',
@@ -798,7 +798,7 @@ export const en = {
           'Introduction to Russian culture and literature'
         ],
       },
-      'german-language': {
+      'alman': {
         title: 'German Language',
         shortDescription: 'Intensive course program to learn German at a professional level. Ideal preparation for admission to European universities and job opportunities.',
         level: 'All levels',
