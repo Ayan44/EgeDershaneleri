@@ -1,13 +1,28 @@
-import React, { useState } from 'react'
-import { GALLERY_ITEMS } from '../data/gallery'
+import React, { useState, useEffect } from 'react'
+import { getGalleryItems } from '../services/contentService'
+import { urlFor } from '../lib/sanityClient'
 import DomeGallery from '../components/sections/DomeGallery'
 import Breadcrumb from '../components/ui/Breadcrumb'
 import ScrollReveal from '../components/ui/ScrollReveal'
 import { useLanguage } from '../i18n/LanguageProvider'
 
 function About() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
   const [openFaq, setOpenFaq] = useState(null)
+  const [galleryItems, setGalleryItems] = useState([])
+
+  useEffect(() => {
+    async function fetchGallery() {
+      const items = await getGalleryItems()
+      if (items) {
+        setGalleryItems(items.map(item => ({
+          src: item.image ? urlFor(item.image).url() : '',
+          alt: language === 'en' ? item.altEn : item.altAz
+        })))
+      }
+    }
+    fetchGallery()
+  }, [language])
 
   const toggleFaq = (index) => {
     setOpenFaq(openFaq === index ? null : index)
@@ -160,7 +175,7 @@ function About() {
               {/* Gallery content will be implemented later */}
               <div style={{ width: '100%', height: '70vh' }}>
                 <DomeGallery
-                  images={GALLERY_ITEMS}
+                  images={galleryItems}
                   grayscale={false}
                   fit={1}
                   maxVerticalRotationDeg={0}

@@ -2,9 +2,10 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import Modal from '../components/ui/Modal'
 import Breadcrumb from '../components/ui/Breadcrumb'
-import { getBlogPosts, getBlogPostBySlug, getBlogCategories } from '../services/contentService'
+import { fetchAllPosts, fetchPostBySlug } from '../services/contentService'
 import ScrollReveal from '../components/ui/ScrollReveal'
 import { useLanguage } from '../i18n/LanguageProvider'
+import { PortableText } from '@portabletext/react'
 
 // Sanitize HTML content to prevent XSS attacks
 // Allows safe formatting tags but removes scripts, event handlers, and dangerous attributes
@@ -70,7 +71,15 @@ export default function Blog() {
   const [selectedPost, setSelectedPost] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const allPostsData = useMemo(() => getBlogPosts(), [])
+  const [allPostsData, setAllPostsData] = useState([])
+
+  useEffect(() => {
+    fetchAllPosts().then(data => {
+      if (data) {
+        setAllPostsData(data)
+      }
+    })
+  }, [])
 
   // Map original category names to translation keys
   const categoryKeyMap = useMemo(() => ({
@@ -87,27 +96,38 @@ export default function Blog() {
     return allPostsData.map(post => {
       const categoryKey = categoryKeyMap[post.category] || post.category.toLowerCase().replace(/\s+/g, '-')
       const translatedCategory = t(`blog.categories.${categoryKey}`) || post.category
-      const translatedContent = t(`blog.data.${post.slug}.content`)
+
+      let title, excerpt, content
+      if (lang === 'en') {
+        title = post.title_en || post.title
+        excerpt = post.excerpt_en || post.excerpt
+        content = post.content_en || post.content
+      } else {
+        title = post.title || post.title_en
+        excerpt = post.excerpt || post.excerpt_en
+        content = post.content || post.content_en
+      }
+
       return {
         ...post,
-        title: t(`blog.data.${post.slug}.title`) || post.title,
-        excerpt: t(`blog.data.${post.slug}.excerpt`) || post.excerpt,
+        title,
+        excerpt,
         category: translatedCategory,
-        content: (translatedContent || post.content || '').trim(),
-        coverImage: post.coverImage || post.coverUrl,
-        date: t(`blog.data.${post.slug}.date`) || post.date,
-        readTime: t(`blog.data.${post.slug}.readTime`) || post.readTime,
+        content,
+        coverImage: post.coverUrl,
+        date: post.date,
+        readTime: post.readTime,
       }
     })
   }, [allPostsData, t, lang, categoryKeyMap])
 
-  const categoriesData = useMemo(() => getBlogCategories(), [])
   const categories = useMemo(() => {
-    return categoriesData.map(cat => {
+    const uniqueCategories = Array.from(new Set(allPostsData.map(post => post.category)))
+    return uniqueCategories.map(cat => {
       const key = categoryKeyMap[cat] || cat.toLowerCase().replace(/\s+/g, '-')
       return t(`blog.categories.${key}`) || cat
     })
-  }, [categoriesData, t, lang, categoryKeyMap])
+  }, [allPostsData, t, lang, categoryKeyMap])
 
   // Update selectedCategory when language changes
   useEffect(() => {
@@ -116,7 +136,8 @@ export default function Blog() {
         return allCategoriesText
       } else {
         // Try to find matching translated category
-        const originalCategory = categoriesData.find(cat => {
+        const uniqueCategories = Array.from(new Set(allPostsData.map(post => post.category)))
+        const originalCategory = uniqueCategories.find(cat => {
           const key = categoryKeyMap[cat] || cat.toLowerCase().replace(/\s+/g, '-')
           const translated = t(`blog.categories.${key}`) || cat
           return translated === prevCategory
@@ -130,38 +151,49 @@ export default function Blog() {
         }
       }
     })
-  }, [lang, allCategoriesText, t, categoriesData, categoryKeyMap])
+  }, [lang, allCategoriesText, t, allPostsData, categoryKeyMap])
 
   // Get post from URL param on mount and translate
   useEffect(() => {
     const postSlug = searchParams.get('post')
     if (postSlug) {
-      const postData = getBlogPostBySlug(postSlug)
-      if (postData) {
-        // Translate post data
-        const categoryKey = categoryKeyMap[postData.category] || postData.category.toLowerCase().replace(/\s+/g, '-')
-        const translatedCategory = t(`blog.categories.${categoryKey}`) || postData.category
-        const translatedContent = t(`blog.data.${postData.slug}.content`)
-        const translatedPost = {
-          ...postData,
-          title: t(`blog.data.${postData.slug}.title`) || postData.title,
-          excerpt: t(`blog.data.${postData.slug}.excerpt`) || postData.excerpt,
-          category: translatedCategory,
-          content: (translatedContent || postData.content || '').trim(),
-          coverImage: postData.coverImage || postData.coverUrl,
-          date: t(`blog.data.${postData.slug}.date`) || postData.date,
-          readTime: t(`blog.data.${postData.slug}.readTime`) || postData.readTime,
+      fetchPostBySlug(postSlug).then(postData => {
+        if (postData) {
+          const categoryKey = categoryKeyMap[postData.category] || postData.category.toLowerCase().replace(/\s+/g, '-')
+          const translatedCategory = t(`blog.categories.${categoryKey}`) || postData.category
+
+          let title, excerpt, content
+          if (lang === 'en') {
+            title = postData.title_en || postData.title
+            excerpt = postData.excerpt_en || postData.excerpt
+            content = postData.content_en || postData.content
+          } else {
+            title = postData.title || postData.title_en
+            excerpt = postData.excerpt || postData.excerpt_en
+            content = postData.content || postData.content_en
+          }
+
+          const translatedPost = {
+            ...postData,
+            title,
+            excerpt,
+            category: translatedCategory,
+            content,
+            coverImage: postData.coverUrl,
+            date: postData.date,
+            readTime: postData.readTime,
+          }
+          setSelectedPost(translatedPost)
+          setIsModalOpen(true)
+        } else {
+          // Remove invalid slug from URL
+          const newSearchParams = new URLSearchParams(searchParams)
+          newSearchParams.delete('post')
+          setSearchParams(newSearchParams, { replace: true })
         }
-        setSelectedPost(translatedPost)
-        setIsModalOpen(true)
-      } else {
-        // Remove invalid slug from URL
-        const newSearchParams = new URLSearchParams(searchParams)
-        newSearchParams.delete('post')
-        setSearchParams(newSearchParams, { replace: true })
-      }
+      })
     }
-  }, [searchParams, setSearchParams, t, lang])
+  }, [searchParams, setSearchParams, t, lang, categoryKeyMap])
 
   // Filtered posts based on search and category
   const filteredPosts = useMemo(() => {
@@ -375,10 +407,13 @@ export default function Blog() {
                 </div>
               )}
 
-              <div
-                className="blog-modal__content"
-                dangerouslySetInnerHTML={{ __html: sanitizeHTML(selectedPost.content || '') }}
-              />
+              <div className="blog-modal__content">
+                {Array.isArray(selectedPost.content) ? (
+                  <PortableText value={selectedPost.content} />
+                ) : (
+                  <p>{selectedPost.content}</p>
+                )}
+              </div>
             </div>
           )}
         </Modal>

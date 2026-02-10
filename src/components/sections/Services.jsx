@@ -1,15 +1,22 @@
 import { Link } from 'react-router-dom'
-import { COURSES_DATA } from '../../data/courses'
+import { fetchAllCourses } from '../../services/contentService'
 import ScrollReveal from '../ui/ScrollReveal'
 import { useLanguage } from '../../i18n/LanguageProvider'
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 function Services() {
   const { t, lang } = useLanguage()
   const [showAll, setShowAll] = useState(false)
+  const [coursesData, setCoursesData] = useState([])
 
-  // Transform the centralized course data into the format needed for the grid
+  useEffect(() => {
+    fetchAllCourses().then(data => {
+      if (data) setCoursesData(data)
+    })
+  }, [])
+
+  // Transform the fetched course data into the format needed for the grid
   const coursesForGrid = useMemo(() => {
-    return COURSES_DATA.map(course => {
+    return coursesData.map(course => {
       const courseSlug = course.slug || course.id
       return {
         title: t(`courseDetails.data.${courseSlug}.title`),

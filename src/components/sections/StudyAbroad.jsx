@@ -1,8 +1,20 @@
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import ScrollReveal from '../ui/ScrollReveal'
 import { useLanguage } from '../../i18n/LanguageProvider'
+import { fetchSiteSettings } from '../../services/contentService'
+
 function StudyAbroad() {
   const { t } = useLanguage()
+  const [siteSettings, setSiteSettings] = useState(null)
+
+  useEffect(() => {
+    fetchSiteSettings().then(data => {
+      if (data) {
+        setSiteSettings(data)
+      }
+    })
+  }, [])
   return (
     <ScrollReveal
       baseOpacity={0}
@@ -41,7 +53,7 @@ function StudyAbroad() {
           <div className="studyAbroad__media">
             <img
               className="studyAbroad__image"
-              src="/photos/studyAbroad.jpeg"
+              src={siteSettings?.studyAbroadHero || "/photos/studyAbroad.jpeg"}
               alt={t('studyAbroadComponent.imageAlt')}
               loading="lazy"
             />

@@ -10,6 +10,7 @@ import Breadcrumb from '../components/ui/Breadcrumb'
 import ScrollReveal from '../components/ui/ScrollReveal'
 import { useLanguage } from '../i18n/LanguageProvider'
 import { useTheme } from '../components/ui/ThemeProvider'
+import { fetchStudentResults, fetchSuccessStories } from '../services/contentService'
 ChartJS.register(ArcElement, Tooltip, Legend)
 
 // Count-up animation hook for statistics
@@ -193,63 +194,90 @@ function Achievements() {
     },
   }), [t, lang, theme])
 
-  // Student results data
-  const STUDENT_RESULTS_DATA = useMemo(() => [
-    {
-      id: 1,
-      name: t('achievements.studentResults.data.1.name') || 'Anar Həbibli',
-      photo: '/photos/students/AnarHəbibli.png',
-      examType: 'YÖS/TYS',
-      score: 'Bilgisayar Mühendisliği',
-      acceptedCountry: t('achievements.countries.turkey'),
-      acceptedUniversity: t('achievements.universities.adnan')
-    },
-    {
-      id: 2,
-      name: t('achievements.studentResults.data.2.name') || 'Səidə Mustafayeva',
-      photo: '/photos/students/SəidəMustafayeva.png',
-      examType: 'YÖS/TYS',
-      score: 'Bilgisayar Mühendisliği',
-      acceptedCountry: t('achievements.countries.turkey'),
-      acceptedUniversity: t('achievements.universities.iskenderun')
-    },
-    {
-      id: 3,
-      name: t('achievements.studentResults.data.3.name') || 'Azər Zamanov',
-      photo: '/photos/students/AzərZamanov.png',
-      examType: 'YÖS/TYS',
-      score: 'Yazılım Mühendisliği',
-      acceptedCountry: t('achievements.countries.turkey'),
-      acceptedUniversity: t('achievements.universities.adnan')
-    },
-    {
-      id: 4,
-      name: t('achievements.studentResults.data.4.name') || 'Əminə Məhərrəmli',
-      photo: '/photos/students/ƏminəMəhərrəmli.png',
-      examType: 'YÖS/TYS',
-      score: 'Bilgisayar Mühendisliği',
-      acceptedCountry: t('achievements.countries.turkey'),
-      acceptedUniversity: t('achievements.universities.iskenderun')
-    },
-    {
-      id: 5,
-      name: t('achievements.studentResults.data.5.name') || 'Kənan Kərimli',
-      photo: '/photos/students/KənanKərimli.png',
-      examType: 'YÖS/TYS',
-      score: 'Makina Mühendisliği',
-      acceptedCountry: t('achievements.countries.turkey'),
-      acceptedUniversity: t('achievements.universities.adnan')
-    },
-    {
-      id: 6,
-      name: t('achievements.studentResults.data.6.name') || 'Əli Mehdiyev',
-      photo: '/photos/students/ƏliMehdiyev.png',
-      examType: 'YÖS/TYS',
-      score: 'Diş Hekimliği',
-      acceptedCountry: t('achievements.countries.turkey'),
-      acceptedUniversity: t('achievements.universities.zonguldak')
+  // Fetch student results from Sanity
+  const [studentResultsFromSanity, setStudentResultsFromSanity] = useState([])
+
+  useEffect(() => {
+    fetchStudentResults().then(data => {
+      if (data && data.length > 0) {
+        setStudentResultsFromSanity(data)
+      }
+    })
+  }, [])
+
+  // Student results data - map Sanity data or fallback to hardcoded
+  const STUDENT_RESULTS_DATA = useMemo(() => {
+    // If we have Sanity data, use it
+    if (studentResultsFromSanity.length > 0) {
+      return studentResultsFromSanity.map(s => ({
+        id: s.id,
+        name: lang === 'en' ? s.nameEn : s.nameAz,
+        photo: s.photo || `/photos/students/default.png`,
+        examType: s.examType,
+        score: lang === 'en' ? s.scoreEn : s.scoreAz,
+        acceptedCountry: lang === 'en' ? s.acceptedCountryEn : s.acceptedCountryAz,
+        acceptedUniversity: lang === 'en' ? s.acceptedUniversityEn : s.acceptedUniversityAz,
+      }))
     }
-  ], [t, lang])
+
+    // Fallback to hardcoded data
+    return [
+      {
+        id: 1,
+        name: t('achievements.studentResults.data.1.name') || 'Anar Həbibli',
+        photo: '/photos/students/AnarHəbibli.png',
+        examType: 'YÖS/TYS',
+        score: 'Bilgisayar Mühendisliği',
+        acceptedCountry: t('achievements.countries.turkey'),
+        acceptedUniversity: t('achievements.universities.adnan')
+      },
+      {
+        id: 2,
+        name: t('achievements.studentResults.data.2.name') || 'Səidə Mustafayeva',
+        photo: '/photos/students/SəidəMustafayeva.png',
+        examType: 'YÖS/TYS',
+        score: 'Bilgisayar Mühendisliği',
+        acceptedCountry: t('achievements.countries.turkey'),
+        acceptedUniversity: t('achievements.universities.iskenderun')
+      },
+      {
+        id: 3,
+        name: t('achievements.studentResults.data.3.name') || 'Azər Zamanov',
+        photo: '/photos/students/AzərZamanov.png',
+        examType: 'YÖS/TYS',
+        score: 'Yazılım Mühendisliği',
+        acceptedCountry: t('achievements.countries.turkey'),
+        acceptedUniversity: t('achievements.universities.adnan')
+      },
+      {
+        id: 4,
+        name: t('achievements.studentResults.data.4.name') || 'Əminə Məhərrəmli',
+        photo: '/photos/students/ƏminəMəhərrəmli.png',
+        examType: 'YÖS/TYS',
+        score: 'Bilgisayar Mühendisliği',
+        acceptedCountry: t('achievements.countries.turkey'),
+        acceptedUniversity: t('achievements.universities.iskenderun')
+      },
+      {
+        id: 5,
+        name: t('achievements.studentResults.data.5.name') || 'Kənan Kərimli',
+        photo: '/photos/students/KənanKərimli.png',
+        examType: 'YÖS/TYS',
+        score: 'Makina Mühendisliği',
+        acceptedCountry: t('achievements.countries.turkey'),
+        acceptedUniversity: t('achievements.universities.adnan')
+      },
+      {
+        id: 6,
+        name: t('achievements.studentResults.data.6.name') || 'Əli Mehdiyev',
+        photo: '/photos/students/ƏliMehdiyev.png',
+        examType: 'YÖS/TYS',
+        score: 'Diş Hekimliyi',
+        acceptedCountry: t('achievements.countries.turkey'),
+        acceptedUniversity: t('achievements.universities.zonguldak')
+      }
+    ]
+  }, [studentResultsFromSanity, t, lang])
 
   // Countries data
   const COUNTRIES_DATA = useMemo(() => [
@@ -261,48 +289,79 @@ function Achievements() {
     { name: t('achievements.countries.poland'), flag: '/photos/flags/poland.png', students: `20 ${t('achievements.countries.students')}` }
   ], [t, lang])
 
-  // Success stories data
-  const SUCCESS_STORIES_DATA = useMemo(() => [
-    {
-      id: 1,
-      name: t('achievements.successStoriesData.sureyya.name'),
-      photo: '/photos/students/Sürəyya.png',
-      beforeAfter: t('achievements.successStoriesData.sureyya.beforeAfter'),
-      story: t('achievements.successStoriesData.sureyya.story'),
-      highlights: [
-        t('achievements.successStoriesData.sureyya.highlights.duration'),
-        t('achievements.successStoriesData.sureyya.highlights.type'),
-        t('achievements.successStoriesData.sureyya.highlights.program')
-      ],
-      imageLeft: true
-    },
-    {
-      id: 2,
-      name: t('achievements.successStoriesData.zehra.name'),
-      photo: '/photos/students/Zəhra.png',
-      beforeAfter: t('achievements.successStoriesData.zehra.beforeAfter'),
-      story: t('achievements.successStoriesData.zehra.story'),
-      highlights: [
-        t('achievements.successStoriesData.zehra.highlights.duration'),
-        t('achievements.successStoriesData.zehra.highlights.type'),
-        t('achievements.successStoriesData.zehra.highlights.program')
-      ],
-      imageLeft: false
-    },
-    {
-      id: 3,
-      name: t('achievements.successStoriesData.rena.name'),
-      photo: '/photos/students/Rəna.png',
-      beforeAfter: t('achievements.successStoriesData.rena.beforeAfter'),
-      story: t('achievements.successStoriesData.rena.story'),
-      highlights: [
-        t('achievements.successStoriesData.rena.highlights.duration'),
-        t('achievements.successStoriesData.rena.highlights.type'),
-        t('achievements.successStoriesData.rena.highlights.program')
-      ],
-      imageLeft: true
+  // Fetch success stories from Sanity
+  const [successStoriesFromSanity, setSuccessStoriesFromSanity] = useState([])
+
+  useEffect(() => {
+    fetchSuccessStories().then(data => {
+      if (data && data.length > 0) {
+        setSuccessStoriesFromSanity(data)
+      }
+    })
+  }, [])
+
+  // Success stories data - map Sanity data or fallback to hardcoded
+  const SUCCESS_STORIES_DATA = useMemo(() => {
+    // If we have Sanity data, use it
+    if (successStoriesFromSanity.length > 0) {
+      return successStoriesFromSanity.map(s => ({
+        id: s.id,
+        name: lang === 'en' ? s.nameEn : s.nameAz,
+        photo: s.photo || `/photos/students/default.png`,
+        beforeAfter: lang === 'en' ? s.beforeAfterEn : s.beforeAfterAz,
+        story: lang === 'en' ? s.storyEn : s.storyAz,
+        highlights: [
+          lang === 'en' ? s.highlights.durationEn : s.highlights.durationAz,
+          lang === 'en' ? s.highlights.typeEn : s.highlights.typeAz,
+          lang === 'en' ? s.highlights.programEn : s.highlights.programAz,
+        ],
+        imageLeft: s.imageLeft,
+      }))
     }
-  ], [t, lang])
+
+    // Fallback to hardcoded data
+    return [
+      {
+        id: 1,
+        name: t('achievements.successStoriesData.sureyya.name'),
+        photo: '/photos/students/Sürəyya.png',
+        beforeAfter: t('achievements.successStoriesData.sureyya.beforeAfter'),
+        story: t('achievements.successStoriesData.sureyya.story'),
+        highlights: [
+          t('achievements.successStoriesData.sureyya.highlights.duration'),
+          t('achievements.successStoriesData.sureyya.highlights.type'),
+          t('achievements.successStoriesData.sureyya.highlights.program')
+        ],
+        imageLeft: true
+      },
+      {
+        id: 2,
+        name: t('achievements.successStoriesData.zehra.name'),
+        photo: '/photos/students/Zəhra.png',
+        beforeAfter: t('achievements.successStoriesData.zehra.beforeAfter'),
+        story: t('achievements.successStoriesData.zehra.story'),
+        highlights: [
+          t('achievements.successStoriesData.zehra.highlights.duration'),
+          t('achievements.successStoriesData.zehra.highlights.type'),
+          t('achievements.successStoriesData.zehra.highlights.program')
+        ],
+        imageLeft: false
+      },
+      {
+        id: 3,
+        name: t('achievements.successStoriesData.rena.name'),
+        photo: '/photos/students/Rəna.png',
+        beforeAfter: t('achievements.successStoriesData.rena.beforeAfter'),
+        story: t('achievements.successStoriesData.rena.story'),
+        highlights: [
+          t('achievements.successStoriesData.rena.highlights.duration'),
+          t('achievements.successStoriesData.rena.highlights.type'),
+          t('achievements.successStoriesData.rena.highlights.program')
+        ],
+        imageLeft: true
+      }
+    ]
+  }, [successStoriesFromSanity, t, lang])
 
   // Parse statistics for count-up animation
   const parsedStats = STATISTICS_DATA.map((stat) => ({

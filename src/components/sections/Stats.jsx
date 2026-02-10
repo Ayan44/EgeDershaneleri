@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import ScrollReveal from '../ui/ScrollReveal'
 import { useLanguage } from '../../i18n/LanguageProvider'
+import { fetchSiteSettings } from '../../services/contentService'
+
 const STATS_CONFIG = [
   { value: '500+', label: 'Tələbə' },
   { value: '120+', label: 'Beynəlxalq qəbul' },
@@ -115,6 +117,15 @@ function useCountUpStats(targetValues) {
 
 function Stats() {
   const { t } = useLanguage()
+  const [siteSettings, setSiteSettings] = useState(null)
+
+  useEffect(() => {
+    fetchSiteSettings().then(data => {
+      if (data) {
+        setSiteSettings(data)
+      }
+    })
+  }, [])
 
   const STATS_CONFIG_TRANSLATED = [
     { value: '500+', label: t('stats.items.students') },
@@ -163,7 +174,7 @@ function Stats() {
 
           <div className="stats__media">
             <img
-              src="/photos/statistics.png"
+              src={siteSettings?.statisticsImage || "/photos/statistics.png"}
               alt={t('stats.imageAlt')}
               className="stats__image"
               loading="lazy"
@@ -173,7 +184,7 @@ function Stats() {
               <div className="stats__ceo-card founderCard">
                 <div className="founderCard__avatar">
                   <img
-                    src="/photos/founder.jpg"
+                    src={siteSettings?.founderPhoto || "/photos/founder.jpg"}
                     alt={t('stats.founder.name')}
                     loading="lazy"
                   />

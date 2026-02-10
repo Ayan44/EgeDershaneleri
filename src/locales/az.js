@@ -4,6 +4,7 @@ export const az = {
     home: 'Ana səhifə',
     courses: 'Kurslar',
     teachers: 'Müəllim heyəti',
+    staff: 'Əməkdaş heyəti',
     studyAbroad: 'Xaricdə Təhsil',
     achievements: 'Nailiyyətlərimiz',
     about: 'Haqqımızda',
@@ -348,9 +349,11 @@ export const az = {
     breadcrumb: {
       home: 'Ana səhifə',
       teachers: 'Müəllim heyəti',
+      staff: 'Əməkdaş heyəti',
     },
     page: {
       title: 'Müəllim heyəti',
+      staffTitle: 'Əməkdaş heyəti',
       intro: 'Təcrübəli və peşəkar müəllimlərimiz komandası ilə tələbələrimizə ən yaxşı təhsil təcrübəsini təqdim edirik.',
     },
     search: {
@@ -358,6 +361,11 @@ export const az = {
     },
     filter: {
       allSpecialties: 'Bütün ixtisaslar',
+      role: {
+        all: 'Hamısı',
+        teacher: 'Müəllimlər',
+        staff: 'Digər əməkdaşlar'
+      },
     },
     reset: 'Sıfırla',
     empty: {
@@ -407,6 +415,35 @@ export const az = {
         role: 'SAT Riyaziyyatı',
         bio: 'Səkinə Lazımova SAT Riyaziyyatı üzrə ixtisaslaşmış ekspert müəllimdir. O, ali təhsilini Azərbaycan Dövlət Pedaqoji Universitetində Riyaziyyat müəllimliyi, eyni zamanda Azərbaycan Dövlət İqtisad Universitetində İnformasiya Texnologiyaları (IT) ixtisası üzrə almışdır. Bu akademik baza ona riyaziyyatı həm pedaqoji, həm də analitik yanaşma ilə tədris etməyə imkan verir. Səkinə müəllim beynəlxalq imtahan sistemlərini dərindən bilir və dərslərində SAT formatına tam uyğun metodlardan istifadə edir. O, tələbələri praktiki məşqlər, mövzu üzrə testlər və mock imtahanlar vasitəsilə real imtahan mühitinə hazırlayır. Dərslərində vaxtın düzgün idarə olunması, strategiya qurmaq və səhvlərin analizi əsas prioritetlərdəndir. 5 ildən artıq pedaqoji fəaliyyəti ərzində Səkinə Lazımova çoxsaylı tələbənin SAT Riyaziyyatı üzrə yüksək nəticə əldə etməsinə və xarici universitetlərə qəbul üçün tələb olunan balı toplamasına kömək etmişdir.',
         specialties: ['SAT Riyaziyyatı'],
+      },
+      'leyla-mirzeyeva': {
+        fullName: 'Leyla Mirzəyeva',
+        role: 'Kurs Meneceri',
+        bio: 'Leyla Mirzəyeva EGE Dershane-də Kurs Meneceri vəzifəsində çalışır. O, tədris mərkəzinin gündəlik fəaliyyətinin effektiv idarə olunması, tələbə və müəllim heyəti arasındakı koordinasiyanın təşkili, həmçinin valideynlərlə əlaqələrin qurulması üzrə məsul şəxsdir. 4 illik peşəkar iş təcrübəsi ilə Leyla xanım, təhsil sahəsində operativ məsələlərin həlli və müştəri məmnuniyyətinin təmin edilməsində xüsusi səriştəyə malikdir. Onun əsas vəzifələrindən biri kursdaxili nizam-intizamın qorunması, dərs cədvəllərinin optimallaşdırılması və tədris prosesinin fasiləsizliyini təmin etməkdir. Leyla Mirzəyeva hər bir müraciətə fərdi yanaşaraq, tələbə və valideynlərin suallarını operativ şəkildə cavablandırır və onların rahatlığı üçün əlindən gələni edir.',
+        specialties: ['İdarəetmə', 'Valideynlərlə ünsiyyət', 'Tədris planlaması'],
+      },
+      'aysu-seferli': {
+        fullName: 'Aysu Səfərli',
+        role: 'Reception',
+        bio: `Aysu Səfərli kursumuzun reception əməkdaşı olaraq gündəlik müraciətlərin qarşılanması, qeydiyyat proseslərinin idarə olunması və ziyarətçilərin düzgün şəkildə yönləndirilməsi ilə məşğuldur. O, kursa ilk dəfə müraciət edən tələbə və valideynlər üçün ilkin ünsiyyət nöqtəsi rolunu oynayır və təqdim etdiyi aydın, nəzakətli və səmimi kommunikasiya ilə müsbət ilk təəssüratın formalaşmasına töhfə verir.
+
+Reception sahəsində 1 illik iş təcrübəsi ərzində Aysu Səfərli müştəri yönümlü yanaşma, vaxtın effektiv idarə olunması və çoxsaylı müraciətlərlə paralel işləmək bacarıqlarını inkişaf etdirib. O, gündəlik iş prosesində diqqətlilik və məsuliyyət prinsiplərinə önəm verir, daxil olan sorğuların vaxtında və düzgün cavablandırılmasını təmin edir.
+
+Komanda daxilində koordinasiyalı işləmək Aysunun əsas üstünlüklərindən biridir. Təşkilati bacarıqları və işinə məsuliyyətli yanaşması kursun ümumi xidmət keyfiyyətinin yüksəlməsində mühüm rol oynayır.
+`,
+        specialties: ['Müştəri xidmətləri', 'Qeydiyyat', 'Kommunikasiya'],
+      },
+      'vusale-memmedova': {
+        fullName: 'Vüsalə Məmmədova',
+        role: 'İcraçı Direktor',
+        bio: `Vüsalə Məmmədova kursumuzun icraçı direktoru olaraq təşkilatın strateji idarə olunmasına və uzunmüddətli inkişaf istiqamətlərinin müəyyənləşdirilməsinə rəhbərlik edir. O, təhsil xidmətlərinin keyfiyyətinin yüksəldilməsi, daxili proseslərin optimallaşdırılması və komandanın effektiv fəaliyyətinin təmin olunması sahəsində əsas qərarverici rolu daşıyır.
+
+15 ildən artıq peşəkar iş təcrübəsinə malik olan Vüsalə Məmmədova müxtəlif idarəetmə və təşkilati strukturlarda rəhbər vəzifələrdə çalışmış, təhsil və xidmət yönümlü layihələrin uğurla həyata keçirilməsində iştirak etmişdir. 
+
+İcraçı direktor kimi o, müəllim heyəti, inzibati əməkdaşlar və menecment komandası arasında koordinasiyanın təmin edilməsinə xüsusi diqqət yetirir. Komanda daxilində şəffaf kommunikasiya, məsuliyyət bölgüsü və əməkdaşlığa əsaslanan iş mühiti formalaşdıraraq, kursun ümumi fəaliyyətinin sistemli və stabil şəkildə davam etməsini təmin edir.
+
+Vüsalə Məmmədova liderlik yanaşmasında analitik düşüncə, strateji baxış və insan yönümlü idarəetmə prinsiplərini ön planda tutur. O, həm tələbə və valideyn məmnuniyyətinin artırılmasını, həm də kursun bazarda etibarlı və peşəkar təhsil mərkəzi kimi mövqeyinin möhkəmləndirilməsini əsas prioritetlərdən biri hesab edir.`,
+        specialties: ['Strateji İdarəetmə', 'Liderlik', 'Təhsil İdarəçiliyi'],
       },
     },
   },

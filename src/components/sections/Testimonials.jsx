@@ -13,15 +13,23 @@ import { useLanguage } from "../../i18n/LanguageProvider";
 
 export default function Testimonials() {
   const { t, lang } = useLanguage()
-  const testimonialsData = getTestimonials();
+  const [testimonialsData, setTestimonialsData] = React.useState([])
+
+  React.useEffect(() => {
+    async function fetchData() {
+      const data = await getTestimonials()
+      setTestimonialsData(data)
+    }
+    fetchData()
+  }, [])
 
   // Translate testimonials based on current language
   const testimonials = React.useMemo(() => {
     return testimonialsData.map(testimonial => ({
       ...testimonial,
-      studentName: t(`testimonials.data.${testimonial.id}.studentName`),
-      text: t(`testimonials.data.${testimonial.id}.text`),
-      scoreOrResult: t(`testimonials.data.${testimonial.id}.scoreOrResult`),
+      studentName: lang === 'en' ? testimonial.nameEn : testimonial.nameAz,
+      text: lang === 'en' ? testimonial.quoteEn : testimonial.quoteAz,
+      scoreOrResult: lang === 'en' ? testimonial.universityEn : testimonial.universityAz,
     }))
   }, [testimonialsData, t, lang])
 

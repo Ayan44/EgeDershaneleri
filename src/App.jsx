@@ -9,7 +9,7 @@ import CoursePage from './pages/CoursePage'
 import StudyAbroad from './pages/StudyAbroad'
 import Achievements from './pages/Achievements'
 import About from './pages/About'
-import Teachers from './pages/Teachers'
+import Staff from './pages/Staff'
 import FAQ from './pages/FAQ'
 import Blog from './pages/Blog'
 import Contact from './pages/Contact'
@@ -32,8 +32,9 @@ function App() {
         <Route path="/study-abroad" element={<StudyAbroad />} />
         <Route path="/achievements" element={<Achievements />} />
         <Route path="/about" element={<About />} />
-        <Route path="/team" element={<Navigate to="/teachers" replace />} />
-        <Route path="/teachers" element={<Teachers />} />
+        <Route path="/team" element={<Navigate to="/staff" replace />} />
+        <Route path="/teachers" element={<Navigate to="/staff" replace />} />
+        <Route path="/staff" element={<Staff />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/contact" element={<Contact />} />

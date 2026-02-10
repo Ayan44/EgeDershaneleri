@@ -5,22 +5,49 @@ import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import ProfileCard from "../ui/ProfileCard";
-import { getFeaturedTeachers } from "../../services/contentService";
+import { fetchFeaturedTeachers } from "../../services/contentService";
 import ScrollReveal from "../ui/ScrollReveal";
 import { useLanguage } from "../../i18n/LanguageProvider";
 export default function Teachers() {
   const { t, lang } = useLanguage()
   const navigate = useNavigate();
-  const teachersData = getFeaturedTeachers();
+  const [teachersData, setTeachersData] = React.useState([]);
+
+  React.useEffect(() => {
+    fetchFeaturedTeachers().then(data => {
+      if (data && data.length > 0) {
+        setTeachersData(data);
+      }
+    });
+  }, []);
 
   // Translate teacher data based on current language
   // Text content comes from locale files (az.js, en.js)
+  // Translate teacher data based on current language
+  // Text content comes from locale files (az.js, en.js)
+  // Translate teacher data based on current language
+  // Text content comes from locale files (az.js, en.js) or Sanity
   const teachers = React.useMemo(() => {
-    return teachersData.map(teacher => ({
-      ...teacher,
-      fullName: t(`teachers.data.${teacher.slug}.fullName`) || teacher.slug,
-      role: t(`teachers.data.${teacher.slug}.role`) || '',
-    }))
+    return teachersData.map(teacher => {
+      let resolvedFullName, resolvedJobTitle
+
+      if (lang === 'en') {
+        // EN
+        resolvedFullName = teacher.fullName_en || t(`teachers.data.${teacher.slug}.fullName`) || teacher.fullName || teacher.slug
+        resolvedJobTitle = teacher.jobTitle_en || t(`teachers.data.${teacher.slug}.role`) || teacher.jobTitle || ''
+      } else {
+        // AZ (Default)
+        resolvedFullName = teacher.fullName || t(`teachers.data.${teacher.slug}.fullName`) || teacher.slug
+        resolvedJobTitle = teacher.jobTitle || t(`teachers.data.${teacher.slug}.role`) || ''
+      }
+
+      return {
+        ...teacher,
+        fullName: resolvedFullName,
+        jobTitle: resolvedJobTitle,
+        role: teacher.roleType,
+      }
+    })
   }, [teachersData, t, lang])
 
   const handleContactClick = (teacherName) => {
@@ -80,7 +107,7 @@ export default function Teachers() {
                     >
                       <ProfileCard
                         name={teacher.fullName}
-                        title={teacher.role}
+                        title={teacher.jobTitle}
                         avatarUrl={teacher.photoUrl}
                         miniAvatarUrl={teacher.photoUrl}
                         handle={teacher.slug}

@@ -1,11 +1,22 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './AbroadEducation.css'
 import Breadcrumb from '../components/ui/Breadcrumb'
 import ScrollReveal from '../components/ui/ScrollReveal'
 import { useLanguage } from '../i18n/LanguageProvider'
+import { fetchSiteSettings } from '../services/contentService'
+
 function StudyAbroad() {
   const { t } = useLanguage()
   const [openFaq, setOpenFaq] = useState(null)
+  const [siteSettings, setSiteSettings] = useState(null)
+
+  useEffect(() => {
+    fetchSiteSettings().then(data => {
+      if (data) {
+        setSiteSettings(data)
+      }
+    })
+  }, [])
 
   const toggleFaq = (index) => {
     setOpenFaq(openFaq === index ? null : index)
@@ -66,7 +77,7 @@ function StudyAbroad() {
                 <div className="abroad-hero__placeholder">
                   <img
                     className="studyAbroad__image"
-                    src="/photos/studyAbroad.jpeg"
+                    src={siteSettings?.studyAbroadHero || "/photos/studyAbroad.jpeg"}
                     alt={t('studyAbroadComponent.imageAlt')}
                     loading="lazy"
                   />

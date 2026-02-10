@@ -1,12 +1,22 @@
 import { Link } from 'react-router-dom'
-import { getCourses, COURSE_CATEGORIES } from '../data/courses'
+import { COURSE_CATEGORIES } from '../constants'
+import { fetchAllCourses } from '../services/contentService'
 import ScrollReveal from '../components/ui/ScrollReveal'
 import Breadcrumb from '../components/ui/Breadcrumb'
 import { useLanguage } from '../i18n/LanguageProvider'
-import { useMemo } from 'react'
+import { useMemo, useState, useEffect } from 'react'
+
 function Courses() {
   const { t, lang } = useLanguage()
-  const allCourses = getCourses()
+  const [coursesData, setCoursesData] = useState([])
+
+  useEffect(() => {
+    fetchAllCourses().then(data => {
+      if (data && data.length > 0) {
+        setCoursesData(data)
+      }
+    })
+  }, [])
 
   // Map category keys to translated names
   const categoryTranslationMap = useMemo(() => ({
@@ -16,24 +26,35 @@ function Courses() {
   }), [t, lang])
 
   const coursesByCategory = useMemo(() => {
-    return allCourses.reduce((grouped, course) => {
+    return coursesData.reduce((grouped, course) => {
       const category = course.category
       const translatedCategory = categoryTranslationMap[category] || category
       if (!grouped[translatedCategory]) {
         grouped[translatedCategory] = []
       }
       const courseSlug = course.slug || course.id
+
+      // Use Sanity data if available, fallback to translations
+      const resolvedTitle = lang === 'en'
+        ? (course.title_en || t(`courseDetails.data.${courseSlug}.title`) || course.title)
+        : (course.title || t(`courseDetails.data.${courseSlug}.title`))
+
+      const resolvedDescription = lang === 'en'
+        ? (course.shortDescription_en || t(`courseDetails.data.${courseSlug}.shortDescription`) || course.shortDescription)
+        : (course.shortDescription || t(`courseDetails.data.${courseSlug}.shortDescription`))
+
       grouped[translatedCategory].push({
         ...course,
-        title: t(`courseDetails.data.${courseSlug}.title`),
-        shortDescription: t(`courseDetails.data.${courseSlug}.shortDescription`),
+        title: resolvedTitle,
+        shortDescription: resolvedDescription,
         href: courseSlug.startsWith('olympiad-')
           ? `/courses/olympiad/${courseSlug.replace('olympiad-', '')}`
           : `/courses/${courseSlug}`
       })
       return grouped
     }, {})
-  }, [allCourses, categoryTranslationMap, t, lang])
+  }, [coursesData, categoryTranslationMap, t, lang])
+
 
   return (
     <ScrollReveal

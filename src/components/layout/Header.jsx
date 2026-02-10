@@ -20,7 +20,7 @@ function Header() {
   const navItems = [
     { type: 'link', label: t('nav.home'), to: '/' },
     { type: 'link', label: t('nav.courses'), to: '/courses' },
-    { type: 'link', label: t('nav.teachers'), to: '/teachers' },
+    { type: 'link', label: t('nav.staff'), to: '/staff' },
     { type: 'link', label: t('nav.studyAbroad'), to: '/study-abroad' },
     { type: 'link', label: t('nav.achievements'), to: '/achievements' },
     { type: 'link', label: t('nav.about'), to: '/about' },
@@ -51,8 +51,8 @@ function Header() {
     if (to === '/courses' && location.pathname.startsWith('/courses')) {
       return 'nav__link nav__link--active'
     }
-    // Special handling for teachers link - should be active on all /teachers* routes (including query params)
-    if (to === '/teachers' && location.pathname.startsWith('/teachers')) {
+    // Special handling for staff link - should be active on all /staff* routes (including query params)
+    if (to === '/staff' && location.pathname.startsWith('/staff')) {
       return 'nav__link nav__link--active'
     }
     return isActive ? 'nav__link nav__link--active' : 'nav__link'

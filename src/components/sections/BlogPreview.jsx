@@ -1,23 +1,42 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { getBlogPosts } from "../../services/contentService";
+import { fetchAllPosts } from "../../services/contentService";
 import ScrollReveal from "../ui/ScrollReveal";
 import { useLanguage } from "../../i18n/LanguageProvider";
+
 export default function BlogPreview() {
   const { t, lang } = useLanguage()
-  const blogPostsData = getBlogPosts({ limit: 3 });
+  const [blogPostsData, setBlogPostsData] = React.useState([])
+
+  React.useEffect(() => {
+    fetchAllPosts().then(data => {
+      if (data) {
+        setBlogPostsData(data.slice(0, 3))
+      }
+    })
+  }, [])
 
   // Translate blog posts based on current language
   const blogPosts = React.useMemo(() => {
     return blogPostsData.map(post => {
-      const postSlug = post.slug || post.id
+      let title, excerpt
+      if (lang === 'en') {
+        title = post.title_en || post.title
+        excerpt = post.excerpt_en || post.excerpt
+      } else {
+        title = post.title || post.title_en
+        excerpt = post.excerpt || post.excerpt_en
+      }
+
       const categoryKey = post.category?.toLowerCase().replace(/\s+/g, '-') || ''
+      const translatedCategory = categoryKey ? (t(`blog.categories.${categoryKey}`) || post.category) : post.category
+
       return {
         ...post,
-        title: t(`blog.data.${postSlug}.title`) || post.title,
-        excerpt: t(`blog.data.${postSlug}.excerpt`) || post.excerpt,
-        date: t(`blog.data.${postSlug}.date`) || post.date,
-        category: categoryKey ? (t(`blog.categories.${categoryKey}`) || post.category) : post.category,
+        title,
+        excerpt,
+        category: translatedCategory,
+        coverImage: post.coverUrl
       }
     })
   }, [blogPostsData, t, lang])

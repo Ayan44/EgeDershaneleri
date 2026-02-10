@@ -2,51 +2,78 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import Modal from '../components/ui/Modal'
 import Breadcrumb from '../components/ui/Breadcrumb'
-import { getTeachers, getTeacherBySlug } from '../services/contentService'
-import { COURSE_CATEGORIES } from '../data/courses'
+import { fetchAllTeamMembers } from '../services/contentService'
+import { COURSE_CATEGORIES } from '../constants'
 import ScrollReveal from '../components/ui/ScrollReveal'
 import { useLanguage } from '../i18n/LanguageProvider'
-export default function Teachers() {
+export default function Staff() {
   const { t, lang } = useLanguage()
   const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate()
   const [searchTerm, setSearchTerm] = useState('')
+  const [selectedRole, setSelectedRole] = useState('all')
   const [selectedCategory, setSelectedCategory] = useState('')
 
-  const allTeachersData = getTeachers()
+  const [allTeachersData, setAllTeachersData] = useState([])
+
+  useEffect(() => {
+    fetchAllTeamMembers().then(data => {
+      if (data && data.length > 0) {
+        setAllTeachersData(data)
+      }
+    })
+  }, [])
 
   // Translate teacher data based on current language
   // Text content comes from locale files (az.js, en.js)
-  const allTeachers = allTeachersData.map(teacher => {
-    const translatedSpecialties = t(`teachers.data.${teacher.slug}.specialties`)
-    return {
-      ...teacher,
-      fullName: t(`teachers.data.${teacher.slug}.fullName`) || teacher.slug,
-      role: t(`teachers.data.${teacher.slug}.role`) || '',
-      bio: t(`teachers.data.${teacher.slug}.bio`) || '',
-      specialties: Array.isArray(translatedSpecialties) ? translatedSpecialties : [],
-    }
-  })
+  // Translate teacher data based on current language
+  // Text content comes from locale files (az.js, en.js)
+  // Translate teacher data based on current language
+  // Text content comes from locale files (az.js, en.js) or Sanity
+  const allTeachers = useMemo(() => {
+    return allTeachersData.map(teacher => {
+      // Logic:
+      // 1. If lang is 'en', try Sanity EN fields -> Translation EN -> Sanity AZ -> Translation AZ/Key
+      // 2. If lang is 'az', try Sanity AZ fields -> Translation AZ -> Key
+
+      let resolvedFullName, resolvedJobTitle, resolvedBio
+
+      if (lang === 'en') {
+        resolvedFullName = teacher.fullName_en || t(`teachers.data.${teacher.slug}.fullName`) || teacher.fullName || teacher.slug // Fallback to AZ name if EN missing
+        resolvedJobTitle = teacher.jobTitle_en || t(`teachers.data.${teacher.slug}.role`) || teacher.jobTitle || ''
+        resolvedBio = teacher.bio_en || t(`teachers.data.${teacher.slug}.bio`) || teacher.bio || ''
+      } else {
+        // AZ (Default)
+        resolvedFullName = teacher.fullName || t(`teachers.data.${teacher.slug}.fullName`) || teacher.slug
+        resolvedJobTitle = teacher.jobTitle || t(`teachers.data.${teacher.slug}.role`) || ''
+        resolvedBio = teacher.bio || t(`teachers.data.${teacher.slug}.bio`) || ''
+      }
+
+      // Process skills from Sanity (single source of truth for both cards and modal)
+      // Note: We've removed hardcoded locale fallbacks as requested.
+      const resolvedSpecialties = (teacher.skills || []).map(skill =>
+        lang === 'en' ? (skill.title_en || skill.title_az) : skill.title_az
+      )
+
+      return {
+        ...teacher,
+        fullName: resolvedFullName,
+        jobTitle: resolvedJobTitle,
+        role: teacher.roleType, // Keep for filtering
+        bio: resolvedBio,
+        specialties: resolvedSpecialties,
+      }
+    })
+  }, [allTeachersData, t, lang])
 
   // Get teacher from URL param and translate
   const selectedTeacher = useMemo(() => {
     const teacherSlug = searchParams.get('teacher')
     if (!teacherSlug) return null
 
-    const teacherData = getTeacherBySlug(teacherSlug)
-    if (!teacherData) return null
-
-    // Translate teacher data based on current language
-    // Text content comes from locale files (az.js, en.js)
-    const translatedSpecialties = t(`teachers.data.${teacherData.slug}.specialties`)
-    return {
-      ...teacherData,
-      fullName: t(`teachers.data.${teacherData.slug}.fullName`) || teacherData.slug,
-      role: t(`teachers.data.${teacherData.slug}.role`) || '',
-      bio: t(`teachers.data.${teacherData.slug}.bio`) || '',
-      specialties: Array.isArray(translatedSpecialties) ? translatedSpecialties : [],
-    }
-  }, [searchParams, t, lang])
+    // Find in the already processed allTeachers list
+    return allTeachers.find(t => t.slug === teacherSlug) || null
+  }, [searchParams, allTeachers])
 
   const isModalOpen = !!selectedTeacher
 
@@ -67,14 +94,16 @@ export default function Teachers() {
       const matchesSearch = teacher.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
         teacher.role.toLowerCase().includes(searchTerm.toLowerCase())
 
+      const matchesRole = selectedRole === 'all' || teacher.role === selectedRole
+
       const matchesCategory = !selectedCategory ||
         teacher.specialties.some(specialty =>
           specialty.toLowerCase().includes(selectedCategory.toLowerCase())
         )
 
-      return matchesSearch && matchesCategory
+      return matchesSearch && matchesCategory && matchesRole
     })
-  }, [allTeachers, searchTerm, selectedCategory])
+  }, [allTeachers, searchTerm, selectedCategory, selectedRole])
 
   const openTeacherModal = (teacher) => {
     setSearchParams({ teacher: teacher.slug })
@@ -107,6 +136,7 @@ export default function Teachers() {
 
   const resetFilters = () => {
     setSearchTerm('')
+    setSelectedRole('all')
     setSelectedCategory('')
   }
 
@@ -132,7 +162,7 @@ export default function Teachers() {
         <Breadcrumb
           items={[
             { href: '/', label: t('teachers.breadcrumb.home') },
-            { label: t('teachers.breadcrumb.teachers') }
+            { label: t('teachers.breadcrumb.staff') }
           ]}
         />
       </ScrollReveal>
@@ -144,7 +174,7 @@ export default function Teachers() {
           blurStrength={10}
         >
           <header className="pageHeader">
-            <h1>{t('teachers.page.title')}</h1>
+            <h1>{t('teachers.page.staffTitle')}</h1>
             <p className="pageIntro">
               {t('teachers.page.intro')}
             </p>
@@ -171,6 +201,18 @@ export default function Teachers() {
 
               <div className="teachers-filter">
                 <select
+                  value={selectedRole}
+                  onChange={(e) => setSelectedRole(e.target.value)}
+                  className="teachers-filter-select"
+                >
+                  <option value="all">{t('teachers.filter.role.all')}</option>
+                  <option value="teacher">{t('teachers.filter.role.teacher')}</option>
+                  <option value="staff">{t('teachers.filter.role.staff')}</option>
+                </select>
+              </div>
+
+              <div className="teachers-filter">
+                <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
                   className="teachers-filter-select"
@@ -182,7 +224,7 @@ export default function Teachers() {
                 </select>
               </div>
 
-              {(searchTerm || selectedCategory) && (
+              {(searchTerm || selectedCategory || selectedRole !== 'all') && (
                 <button
                   onClick={resetFilters}
                   className="button button--secondary teachers-reset"
@@ -217,7 +259,7 @@ export default function Teachers() {
 
                       <div className="teacher-card__content">
                         <h3 className="teacher-card__name">{teacher.fullName}</h3>
-                        <p className="teacher-card__role">{teacher.role}</p>
+                        <p className="teacher-card__role">{teacher.jobTitle}</p>
                         <p className="teacher-card__bio">{teacher.bio}</p>
 
                         <div className="teacher-card__specialties">
@@ -268,7 +310,7 @@ export default function Teachers() {
 
                     <div className="teacher-modal__info">
                       <h2 className="teacher-modal__name">{selectedTeacher.fullName}</h2>
-                      <p className="teacher-modal__role">{selectedTeacher.role}</p>
+                      <p className="teacher-modal__role">{selectedTeacher.jobTitle}</p>
                     </div>
                   </div>
 
@@ -281,8 +323,8 @@ export default function Teachers() {
                     <div className="teacher-modal__specialties">
                       <h3>{t('teachers.modal.specialtiesTitle')}</h3>
                       <div className="teacher-modal__specialty-list">
-                        {selectedTeacher.specialties.map(specialty => (
-                          <span key={specialty} className="teacher-modal__specialty">
+                        {(selectedTeacher.specialties || []).map((specialty, index) => (
+                          <span key={index} className="teacher-modal__specialty">
                             {specialty}
                           </span>
                         ))}

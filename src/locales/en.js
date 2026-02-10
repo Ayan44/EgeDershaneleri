@@ -4,6 +4,7 @@ export const en = {
     home: 'Home',
     courses: 'Courses',
     teachers: 'Teachers',
+    staff: 'Staff',
     studyAbroad: 'Study Abroad',
     achievements: 'Achievements',
     about: 'About',
@@ -348,9 +349,11 @@ export const en = {
     breadcrumb: {
       home: 'Home',
       teachers: 'Teachers',
+      staff: 'Staff',
     },
     page: {
       title: 'Teachers',
+      staffTitle: 'Our Staff',
       intro: 'With our team of experienced and professional teachers, we provide the best educational experience for our students.',
     },
     search: {
@@ -358,6 +361,11 @@ export const en = {
     },
     filter: {
       allSpecialties: 'All specialties',
+      role: {
+        all: 'All',
+        teacher: 'Teachers',
+        staff: 'Staff'
+      },
     },
     reset: 'Reset',
     empty: {
@@ -407,6 +415,34 @@ export const en = {
         role: 'SAT Mathematics',
         bio: 'Sakina Lazimova is an expert instructor specializing in SAT Mathematics preparation. She holds a degree in Mathematics Education from Azerbaijan State Pedagogical University and an additional degree in Information Technology (IT) from Azerbaijan State University of Economics, giving her a strong interdisciplinary academic background. Sakina has an in-depth understanding of international examination systems and applies SAT-specific strategies in her lessons. She prepares students for the real exam environment through practical exercises, topic-based tests, and full-length mock exams, with a strong focus on time management, exam strategy, and error analysis. With over 5 years of teaching experience, Sakina Lazimova has successfully guided many students toward high SAT Math scores and admission to international universities.',
         specialties: ['SAT Mathematics'],
+      },
+      'leyla-mirzeyeva': {
+        fullName: 'Leyla Mirzayeva',
+        role: 'Course Manager',
+        bio: 'Leyla Mirzayeva serves as the Course Manager at EGE Dershane. She is responsible for the effective management of daily operations, coordination between students and teaching staff, as well as maintaining relationships with parents. With 4 years of professional experience, Leyla brings expertise in solving operational issues and ensuring customer satisfaction in the education sector. Her key responsibilities include maintaining discipline, optimizing class schedules, and ensuring the smooth running of the educational process. Leyla Mirzayeva approaches every inquiry individually, promptly addressing questions from students and parents.',
+        specialties: ['Management', 'Parent Relations', 'Education Planning'],
+      },
+      'aysu-seferli': {
+        fullName: 'Aysu Safarli',
+        role: 'Receptionist',
+        bio: `As the Receptionist at our course, Aysu Safarli is responsible for welcoming daily inquiries, managing registration processes, and properly directing visitors. She acts as the first point of contact for students and parents applying to the course for the first time, contributing to a positive first impression with her clear, polite, and sincere communication.
+
+With 1 year of work experience in reception, Aysu Safarli has developed skills in customer-oriented approach, effective time management, and handling multiple inquiries simultaneously. She emphasizes attention and responsibility in her daily work process, ensuring that incoming requests are answered correctly and on time.
+
+Working coordinately within the team is one of Aysu's main advantages. Her organizational skills and responsible approach to work play an important role in increasing the general service quality of the course.`,
+        specialties: ['Customer Service', 'Registration', 'Communication'],
+      },
+      'vusale-memmedova': {
+        fullName: 'Vusala Mammadova',
+        role: 'Executive Director',
+        bio: `As the Executive Director of our course, Vusala Mammadova leads the strategic management of the organization and the determination of long-term development directions. She plays a key decision-making role in improving the quality of educational services, optimizing internal processes, and ensuring effective team operations.
+
+With over 15 years of professional experience, Vusala Mammadova has worked in leadership positions in various management and organizational structures and has participated in the successful implementation of educational and service-oriented projects. 
+
+As Executive Director, she pays special attention to ensuring coordination between the teaching staff, administrative employees, and management team. By forming a transparent communication, responsibility distribution, and collaborative work environment within the team, she ensures the systematic and stable continuity of the course's overall operations.
+
+Vusala Mammadova prioritizes analytical thinking, strategic vision, and people-oriented management principles in her leadership approach. She considers increasing student and parent satisfaction as well as strengthening the course's position as a reliable and professional educational center in the market as one of her main priorities.`,
+        specialties: ['Strategic Management', 'Leadership', 'Education Administration'],
       },
     },
   },
