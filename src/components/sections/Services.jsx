@@ -27,7 +27,7 @@ function Services() {
           : `/courses/${courseSlug}`
       }
     })
-  }, [t, lang])
+  }, [coursesData, t, lang])
 
   const displayedCourses = showAll ? coursesForGrid : coursesForGrid.slice(0, 6)
   const hasMoreCourses = coursesForGrid.length > 6

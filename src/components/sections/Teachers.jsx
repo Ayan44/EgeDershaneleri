@@ -82,7 +82,7 @@ export default function Teachers() {
               effect="slide"
               centeredSlides={true}
               grabCursor={true}
-              loop={true}
+              loop={teachers.length > 3}
               pagination={{ clickable: true }}
               autoplay={{
                 delay: 3000,

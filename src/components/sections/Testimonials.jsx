@@ -56,7 +56,7 @@ export default function Testimonials() {
               effect="slide"
               centeredSlides={true}
               grabCursor={true}
-              loop={true}
+              loop={testimonials.length > 3}
               pagination={{ clickable: true }}
               autoplay={{
                 delay: 3000,
