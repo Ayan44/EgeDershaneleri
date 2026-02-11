@@ -424,7 +424,7 @@ export const az = {
       },
       'aysu-seferli': {
         fullName: 'Aysu Səfərli',
-        role: 'Reception',
+        role: 'Menecer',
         bio: `Aysu Səfərli kursumuzun reception əməkdaşı olaraq gündəlik müraciətlərin qarşılanması, qeydiyyat proseslərinin idarə olunması və ziyarətçilərin düzgün şəkildə yönləndirilməsi ilə məşğuldur. O, kursa ilk dəfə müraciət edən tələbə və valideynlər üçün ilkin ünsiyyət nöqtəsi rolunu oynayır və təqdim etdiyi aydın, nəzakətli və səmimi kommunikasiya ilə müsbət ilk təəssüratın formalaşmasına töhfə verir.
 
 Reception sahəsində 1 illik iş təcrübəsi ərzində Aysu Səfərli müştəri yönümlü yanaşma, vaxtın effektiv idarə olunması və çoxsaylı müraciətlərlə paralel işləmək bacarıqlarını inkişaf etdirib. O, gündəlik iş prosesində diqqətlilik və məsuliyyət prinsiplərinə önəm verir, daxil olan sorğuların vaxtında və düzgün cavablandırılmasını təmin edir.
