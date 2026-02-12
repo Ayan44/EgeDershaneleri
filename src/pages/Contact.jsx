@@ -259,7 +259,14 @@ function Contact() {
                     </div>
                     <div className="contactInfoContent">
                       <h3>{t('contact.info.phone.label')}</h3>
-                      <p><a href={CONTACT_PHONE ? `tel:${CONTACT_PHONE}` : '#'} className="contactLink">{t('contact.info.phone.number')}</a></p>
+                      <p>
+                        <a
+                          href={`tel:${(CONTACT_PHONE || t('contact.info.phone.number')).replace(/\s/g, '')}`}
+                          className="contactLink"
+                        >
+                          {t('contact.info.phone.number')}
+                        </a>
+                      </p>
                     </div>
                   </div>
 
@@ -269,7 +276,14 @@ function Contact() {
                     </div>
                     <div className="contactInfoContent">
                       <h3>{t('contact.info.email.label')}</h3>
-                      <p><a href={CONTACT_EMAIL ? `mailto:${CONTACT_EMAIL}` : '#'} className="contactLink">{t('contact.info.email.address')}</a></p>
+                      <p>
+                        <a
+                          href={`mailto:${CONTACT_EMAIL || t('contact.info.email.address')}`}
+                          className="contactLink"
+                        >
+                          {t('contact.info.email.address')}
+                        </a>
+                      </p>
                     </div>
                   </div>
 
@@ -310,7 +324,7 @@ function Contact() {
                       <h3>{t('contact.info.whatsapp.label')}</h3>
                       <p>
                         <a
-                          href={CONTACT_PHONE ? `https://wa.me/${CONTACT_PHONE.replace(/[^0-9]/g, '')}` : '#'}
+                          href={`https://wa.me/${(CONTACT_PHONE || t('contact.info.whatsapp.number')).replace(/[^0-9]/g, '')}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="contactLink"
