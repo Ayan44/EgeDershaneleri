@@ -47,7 +47,7 @@ export const az = {
     email: 'Email',
     location: 'Ünvan',
     hours: 'Bazar ertəsi - Şənbə: 09:00–20:00',
-    copyright: '© 2025 EGE Dershane. Bütün hüquqlar qorunur.',
+    copyright: '© 2026 EGE Dershane. Bütün hüquqlar qorunur.',
     developedBy: 'Developed by',
     privacyPolicy: 'Məxfilik siyasəti',
     termsOfService: 'İstifadə şərtləri',

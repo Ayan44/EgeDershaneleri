@@ -47,7 +47,7 @@ export const en = {
     email: 'Email',
     location: 'Location',
     hours: 'Monday - Saturday: 09:00–20:00',
-    copyright: '© 2025 EGE Dershane. All rights reserved.',
+    copyright: '© 2026 EGE Dershane. All rights reserved.',
     developedBy: 'Developed by',
     privacyPolicy: 'Privacy Policy',
     termsOfService: 'Terms of Service',
