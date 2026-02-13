@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
 import Modal from '../components/ui/Modal'
 import Breadcrumb from '../components/ui/Breadcrumb'
 import { fetchAllPosts, fetchPostBySlug } from '../services/contentService'
@@ -153,9 +153,11 @@ export default function Blog() {
     })
   }, [lang, allCategoriesText, t, allPostsData, categoryKeyMap])
 
-  // Get post from URL param on mount and translate
+  // Get post from URL param or query param on mount and translate
+  const { postSlug: routeSlug } = useParams()
+
   useEffect(() => {
-    const postSlug = searchParams.get('post')
+    const postSlug = routeSlug || searchParams.get('post')
     if (postSlug) {
       fetchPostBySlug(postSlug).then(postData => {
         if (postData) {
@@ -218,9 +220,13 @@ export default function Blog() {
   const closePostModal = () => {
     setIsModalOpen(false)
     setSelectedPost(null)
-    const newSearchParams = new URLSearchParams(searchParams)
-    newSearchParams.delete('post')
-    setSearchParams(newSearchParams, { replace: true })
+    if (routeSlug) {
+      navigate('/blog', { replace: true })
+    } else {
+      const newSearchParams = new URLSearchParams(searchParams)
+      newSearchParams.delete('post')
+      setSearchParams(newSearchParams, { replace: true })
+    }
   }
 
   const resetFilters = () => {

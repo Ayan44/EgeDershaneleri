@@ -37,6 +37,7 @@ function App() {
         <Route path="/staff" element={<Staff />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:postSlug" element={<Blog />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-of-service" element={<TermsOfService />} />
